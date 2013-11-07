@@ -1,0 +1,45 @@
+{
+  "uuid": "4fb7ce3f-bdc8-45a6-8fcc-9475e091ae21",
+  "shortName": "Plex",
+  "longName": "Plex Remote",
+  "companyName": "Sawyer Pangborns",
+  "versionCode": 1,
+  "versionLabel": "1.0.0",
+  "watchapp": {
+    "watchface": false
+  },
+  "resources": {
+    "media": [
+        {
+          "type": "png",
+          "name": "IMAGE_NEXT",
+          "file": "images/next.png"
+        },
+        {
+          "type": "png",
+          "name": "IMAGE_NEXT_SELECTED",
+          "file": "images/next_selected.png"
+        },
+        {
+          "type": "png",
+          "name": "IMAGE_PLAYPAUSE",
+          "file": "images/playpause.png"
+        },
+        {
+          "type": "png",
+          "name": "IMAGE_PLAYPAUSE_SELECTED",
+          "file": "images/playpause.png"
+        },
+        {
+          "type": "png",
+          "name": "IMAGE_PREVIOUS",
+          "file": "images/previous.png"
+        },
+        {
+          "type": "png",
+          "name": "IMAGE_PREVIOUS_SELECTED",
+          "file": "images/previous_selected.png"
+        }
+    ]
+  }
+}
