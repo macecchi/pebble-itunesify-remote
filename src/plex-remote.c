@@ -12,6 +12,8 @@ static GBitmap *previous_selected_img;
 static GBitmap *playpause_selected_img;
 static GBitmap *next_selected_img;
 
+static uint32_t sleepTime = 500;
+
 static void send_message(char* message) {
 
   DictionaryIterator *iter;
@@ -25,20 +27,32 @@ static void send_message(char* message) {
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Play/pause clicked.");
+  
+  bitmap_layer_set_bitmap(playpause_layer, playpause_selected_img);	
+  psleep(sleepTime);
+  bitmap_layer_set_bitmap(playpause_layer, playpause_img);
+
   send_message("playpause");
-  //bitmap_layer_set_bitmap(playpause_layer, playpause_selected_img);
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Previous clicked.");
+  
+  bitmap_layer_set_bitmap(previous_layer, previous_selected_img);
+  psleep(sleepTime);
+  bitmap_layer_set_bitmap(previous_layer, previous_img);	
+  
   send_message("previous");
-  //bitmap_layer_set_bitmap(previous_layer, previous_selected_img);
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-  send_message("next");
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Next clicked.");
-  //bitmap_layer_set_bitmap(next_layer, next_selected_img);
+	
+  bitmap_layer_set_bitmap(next_layer, next_selected_img);
+  psleep(sleepTime);
+  bitmap_layer_set_bitmap(next_layer, next_img);
+
+  send_message("next");
 }
 
 static void click_config_provider(void *context) {
