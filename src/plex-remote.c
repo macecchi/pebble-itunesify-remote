@@ -12,29 +12,33 @@ static GBitmap *previous_selected_img;
 static GBitmap *playpause_selected_img;
 static GBitmap *next_selected_img;
 
-static void send_message(ClickRecognizerRef message) {
+static const uint32_t ACTION_KEY = 0xabbababe;
+
+static void send_message(char* message) {
+
   DictionaryIterator *iter;
   app_message_outbox_begin(&iter);
 
-  Tuplet value = TupletInteger("action", *message);
+  Tuplet value = TupletCString(ACTION_KEY, message);
+  dict_write_tuplet(iter, &value);
 
   app_message_outbox_send();
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Play/pause clicked.");
-  send_message(recognizer);
+  send_message("playpause");
   //bitmap_layer_set_bitmap(playpause_layer, playpause_selected_img);
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Previous clicked.");
-  send_message(recognizer);
+  send_message("previous");
   //bitmap_layer_set_bitmap(previous_layer, previous_selected_img);
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-  send_message(recognizer);
+  send_message("next");
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Next clicked.");
   //bitmap_layer_set_bitmap(next_layer, next_selected_img);
 }
