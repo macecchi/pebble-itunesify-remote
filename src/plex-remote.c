@@ -12,14 +12,12 @@ static GBitmap *previous_selected_img;
 static GBitmap *playpause_selected_img;
 static GBitmap *next_selected_img;
 
-static const uint32_t ACTION_KEY = 0xabbababe;
-
 static void send_message(char* message) {
 
   DictionaryIterator *iter;
   app_message_outbox_begin(&iter);
 
-  Tuplet value = TupletCString(ACTION_KEY, message);
+  Tuplet value = TupletCString(1, message);
   dict_write_tuplet(iter, &value);
 
   app_message_outbox_send();

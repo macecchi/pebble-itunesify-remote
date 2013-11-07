@@ -3,5 +3,5 @@ Pebble.addEventListener("ready", function(e) {
 });
 Pebble.addEventListener("appmessage", function(e) {
 	console.log("Received message: " + e.payload);
-	Pebble.showSimpleNotificationOnPebble("AppMessage", e.payload);
+	Pebble.showSimpleNotificationOnPebble("AppMessage", JSON.stringify(e.payload));
 });

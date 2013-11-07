@@ -1,11 +1,13 @@
 {
     "versionLabel": "1.0.0",
     "uuid": "4fb7ce3f-bdc8-45a6-8fcc-9475e091ae21",
-    "appKeys": {},
+    "appKeys": {
+        "action": 1
+    },
     "longName": "Plex Remote",
     "versionCode": 1,
-    "shortName": "Plex",
-    "companyName": "Sawyer Pangborns",
+    "shortName": "Plex Remote",
+    "companyName": "Sawyer Pangborn",
     "watchapp": {
         "watchface": false
     },
