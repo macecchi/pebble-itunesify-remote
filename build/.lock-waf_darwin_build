@@ -1,8 +1,0 @@
-argv = ['/Users/sawyer/pebble-dev/PebbleSDK-2.0-BETA1/Pebble/waf', 'configure', 'build']
-environ = {'TERM_SESSION_ID': '1AC76590-EB0A-4EDB-BF9B-4C3CD22C5E72', 'SSH_AUTH_SOCK': '/tmp/launch-9w1ZEk/Listeners', 'VERSIONER_PYTHON_PREFER_32_BIT': 'no', 'TERM_PROGRAM_VERSION': '326', 'SHELL': '/bin/bash', 'LOGNAME': 'sawyer', 'USER': 'sawyer', 'HOME': '/Users/sawyer', 'PATH': '/Users/sawyer/pebble-dev/PebbleSDK-2.0-BETA1/arm-cs-tools/bin:/Users/sawyer/pebble-dev/PebbleSDK-2.0-BETA1/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin', 'TMPDIR': '/var/folders/rm/gktkcrz54jb0jpg_56d1t11c0000gn/T/', 'TERM_PROGRAM': 'Apple_Terminal', 'LANG': 'en_US.UTF-8', 'PEBBLE_PHONE': '192.168.1.113', 'TERM': 'xterm-256color', 'Apple_PubSub_Socket_Render': '/tmp/launch-3T9TBB/Render', 'VERSIONER_PYTHON_VERSION': '2.7', 'SHLVL': '1', 'OLDPWD': '/Users/sawyer/pebble-dev', 'CLICOLOR': '1', '__CF_USER_TEXT_ENCODING': '0x1F5:0:0', 'PWD': '/Users/sawyer/pebble-dev/plex-remote', '_': '/Users/sawyer/pebble-dev/PebbleSDK-2.0-BETA1/bin/pebble', '__CHECKFIX1436934': '1', 'LSCOLORS': 'GxFxCxDxBxegedabagaced'}
-files = ['/Users/sawyer/pebble-dev/plex-remote/wscript']
-hash = 4672844372416070989
-options = {'files': '', 'jobs': 2, 'verbose': 0, 'nocache': False, 'progress_bar': 0, 'timestamp': None, 'distcheck_args': None, 'top': '', 'destdir': '', 'keep': 0, 'zones': '', 'debug': False, 'prefix': '/usr/local/', 'download': False, 'force': False, 'targets': '', 'out': ''}
-out_dir = '/Users/sawyer/pebble-dev/plex-remote/build'
-run_dir = '/Users/sawyer/pebble-dev/plex-remote'
-top_dir = '/Users/sawyer/pebble-dev/plex-remote'
