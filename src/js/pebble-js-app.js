@@ -5,7 +5,7 @@ if (!localStorage.getItem("plexServer")) localStorage.setItem("media-server");
 if (!localStorage.getItem("plexClient")) localStorage.setItem("192.168.1.145");
 plex.plexServer = localStorage.getItem("plexServer");
 plex.plexClient = localStorage.getItem("plexClient");
-plex.configureUrl = "http://eclipsemac/config/index.html";
+plex.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
 
 plex.doCommand = function (action) {
 	if (action == "next") {
