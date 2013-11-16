@@ -5,8 +5,9 @@ if (!localStorage.getItem("plexServer")) localStorage.setItem("media-server");
 if (!localStorage.getItem("plexClient")) localStorage.setItem("192.168.1.145");
 plex.plexServer = localStorage.getItem("plexServer");
 plex.plexClient = localStorage.getItem("plexClient");
-plex.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
-
+plex.clientlist = [];
+//plex.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
+plex.configureUrl = "http://eclipsemac/config/index.html";
 plex.doCommand = function (action) {
 	if (action == "next") {
 		if (plex.state == "fastForward") {
@@ -42,21 +43,24 @@ plex.doCommand = function (action) {
 
 plex.sendCommand = function  (command) {
 	var req = new XMLHttpRequest();
+	req.timeout = 2000;
 	req.open("GET", "http://" + plex.plexServer + ":32400/system/players/" + plex.plexClient + "/playback/" + command, true);
 	req.onreadystatechange = function (e) {
 		if (req.readyState === 4) {  
 			if (req.status === 200) {  
 				console.log(req.responseText)  
 		  	}
-		  	else {  
-		    	Pebble.showSimpleNotificationOnPebble("Plex", "Unable to reach Plex Server.");
-		  	}  
 		} 
+	};
+	req.onerror = function (e) {
+		Pebble.showSimpleNotificationOnPebble("Plex", "Unable to reach Plex Server.");
 	};
 	req.send(null);
 	
 };
+plex.getClients = function () {
 
+}
 Pebble.addEventListener("ready", function(e) {
 	console.log("Plex Remote is go.");
 });

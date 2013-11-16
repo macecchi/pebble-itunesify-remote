@@ -3,7 +3,11 @@
 <head>
 	<title>pebble-plex-remote config</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="css/bootstrap.css" rel="stylesheet">
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	
 </head>
@@ -15,10 +19,17 @@
         		<label for="plexServer">Plex Server</label>
         		<input type="text" id="plexServer" name="plexServer" class="form-control" placeholder="192.168.1.117"/>
 			</div>	
+			<p class="help-block">Enter a hostname or IP address of a Plex Server before selecting a Plex Client.</p>
+			<input class="btn btn-lg btn-info btn-block" id="getClients" value="Get Clients"/>
+			<br/>
 			<div class="form-group">
         		<label for="plexClient">Plex Client</label>
-        		<input type="text" id="plexClient" name="plexClient" class="form-control" placeholder="192.168.1.118"/>
+        		
+        		<select id="plexClient" name="plexClient" class="form-control">
+        			<option value="" selected>Select a Client</option>
+        		</select>
         	</div>
+        	
         	<input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save"/>
 
       </form>
@@ -27,9 +38,52 @@
     	<p><a href="http://github.com/spangborn/pebble-plex-remote">Plex Remote</a> by <a href="http://twitter.com/spangborn">Sawyer Pangborn</a></p>
     </div>
 	<script type="text/javascript">
+		var plex = {
+			"clients" : []
+		};
+
+		function getClients () {
+			var clientSelect = document.getElementById("plexClient");
+
+			var req = new XMLHttpRequest();
+			req.timeout = 2000;
+			req.open("GET", "http://" + document.getElementById("plexServer").value + ":32400/clients", true);
+			req.onreadystatechange = function (e) {
+				if (req.readyState === 4) { 
+					if (req.status === 200) {  
+						// We got a request back
+
+						while(clientSelect.firstChild) {
+    						clientSelect.removeChild(clientSelect.firstChild);
+						}
+						var root = req.responseXML.documentElement;
+						var clients = root.getElementsByTagName("Server");
+
+				        for (var i=0; i < clients.length; i++) {
+				        
+				        	var client = document.createElement("option");
+				        	client.value = clients[i].getAttribute("host");
+				        	client.innerHTML = clients[i].getAttribute("name") + " (" + clients[i].getAttribute("host") + ")";
+				        	clientSelect.appendChild(client);
+				        
+				        }
+				    }
+				} 
+			};
+			req.onerror = function (e) {
+				
+			};
+			req.send(null);
+		}
 
 		document.getElementById("plexServer").value = localStorage.getItem("plexServer");
-		document.getElementById("plexClient").value = localStorage.getItem("plexClient");
+		if (document.getElementById("plexClient").classList.contains("hidden")) {
+			document.getElementById("plexClientManual").value = localStorage.getItem("plexClient");	
+		}
+		else {
+			document.getElementById("plexClient").value = localStorage.getItem("plexClient");	
+		}
+		
 
 		document.getElementById("configure").onsubmit = function () {
 			var s = document.getElementById("plexServer").value;
@@ -48,6 +102,12 @@
 
 			return false;
 		};
+
+		document.getElementById("getClients").onclick = function () {
+			getClients();
+		};
+
+		
 	
 </script>
 </body>
