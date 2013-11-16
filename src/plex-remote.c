@@ -4,6 +4,7 @@ static Window *window;
 static BitmapLayer *previous_layer;
 static BitmapLayer *playpause_layer;
 static BitmapLayer *next_layer;
+static BitmapLayer *logo_layer;
 
 static GBitmap *previous_img;
 static GBitmap *playpause_img;
@@ -11,6 +12,8 @@ static GBitmap *next_img;
 static GBitmap *previous_selected_img;
 static GBitmap *playpause_selected_img;
 static GBitmap *next_selected_img;
+static GBitmap *logo_img;
+
 
 static uint32_t sleepTime = 500;
 
@@ -74,6 +77,8 @@ static void window_load(Window *window) {
   playpause_selected_img  = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_PLAYPAUSE_SELECTED);
   next_selected_img       = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_NEXT_SELECTED);
 
+  logo_img = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_PLEX_LOGO);
+
   previous_layer = bitmap_layer_create(GRect(114, 10, 30, 52));
   bitmap_layer_set_bitmap(previous_layer, previous_img);
   layer_add_child(window_layer, bitmap_layer_get_layer(previous_layer));
@@ -86,6 +91,11 @@ static void window_load(Window *window) {
   bitmap_layer_set_bitmap(next_layer, next_img);
   layer_add_child(window_layer, bitmap_layer_get_layer(next_layer));  
 
+  logo_layer = bitmap_layer_create(GRect(32,44,80,80));
+  bitmap_layer_set_bitmap(logo_layer, logo_img);
+  layer_add_child(window_layer, bitmap_layer_get_layer(logo_layer));
+
+
 }
 
 static void window_unload(Window *window) {
@@ -93,10 +103,12 @@ static void window_unload(Window *window) {
   bitmap_layer_destroy(previous_layer);
   bitmap_layer_destroy(playpause_layer);
   bitmap_layer_destroy(next_layer);
+  bitmap_layer_destroy(logo_layer);
 
   gbitmap_destroy(previous_img);
   gbitmap_destroy(playpause_img);
   gbitmap_destroy(next_img);
+  gbitmap_destroy(logo_img);
 
   gbitmap_destroy(previous_selected_img);
   gbitmap_destroy(playpause_selected_img);

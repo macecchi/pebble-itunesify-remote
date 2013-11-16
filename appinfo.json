@@ -11,8 +11,14 @@
     "watchapp": {
         "watchface": false
     },
+    "capabilities": [ "configurable" ],
     "resources": {
         "media": [
+            {
+                "type": "png",
+                "name": "IMAGE_PLEX_LOGO",
+                "file": "images/plex_logo.png"
+            },
             {
                 "type": "png",
                 "name": "IMAGE_PREVIOUS_SELECTED",
@@ -42,6 +48,12 @@
                 "type": "png",
                 "name": "IMAGE_NEXT",
                 "file": "images/next.png"
+            },
+            {
+                "menuIcon": true,
+                "type": "png",
+                "name": "MENU_ICON_PLEX",
+                "file": "images/menu_icon_plex.png"
             }
         ]
     }

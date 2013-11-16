@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pebble-plex-remote config</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	
+</head>
+<body>
+    <div class="container">
+		<h2 class="">Configure Plex Remote</h2>
+    	<form id="configure" class="form-configure well" action="#" method="POST">
+        	<div class="form-group">
+        		<label for="plexServer">Plex Server</label>
+        		<input type="text" id="plexServer" name="plexServer" class="form-control" placeholder="192.168.1.117"/>
+			</div>	
+			<div class="form-group">
+        		<label for="plexClient">Plex Client</label>
+        		<input type="text" id="plexClient" name="plexClient" class="form-control" placeholder="192.168.1.118"/>
+        	</div>
+        	<input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save"/>
+
+      </form>
+    </div>
+    <div class="footer container">
+    	<p><a href="http://github.com/spangborn/pebble-plex-remote">Plex Remote</a> by <a href="http://twitter.com/spangborn">Sawyer Pangborn</a></p>
+    </div>
+	<script type="text/javascript">
+
+		document.getElementById("plexServer").value = localStorage.getItem("plexServer");
+		document.getElementById("plexClient").value = localStorage.getItem("plexClient");
+
+		document.getElementById("configure").onsubmit = function () {
+			var s = document.getElementById("plexServer").value;
+			var c = document.getElementById("plexClient").value;
+
+			var j = {
+				plexServer : s,
+				plexClient : c
+			};
+
+    		localStorage.setItem("plexServer", s);  
+			localStorage.setItem("plexClient", c); 
+
+			var u = "pebblejs://close#" + JSON.stringify(j);
+			window.location.href = u;
+
+			return false;
+		};
+	
+</script>
+</body>
+</html>
