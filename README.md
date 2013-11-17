@@ -1,13 +1,13 @@
 pebble-plex-remote
 ==================
 
-#Plex Remote for Pebble
+##Plex Remote for Pebble
 
 - Uses PebbleKitJS from Pebble SDK 2.0
 - Configurable from Pebble's smartphone application
 
 
-##How to Use
+###How to Use
 
 1. Install pebble-plex-remote.pbw from [MyPebbleFaces](http://www.mypebblefaces.com/apps/1936/7371/).
 2. Tap "Plex Remote" in the Pebble app
@@ -17,7 +17,7 @@ pebble-plex-remote
 6. Tap "Save"
 7. Enjoy!
 
-##Roadmap
+###Roadmap
 1. Display currently playing media
 2. Enable navigation of on-screen menus
 3. Implement XBMC integration?
