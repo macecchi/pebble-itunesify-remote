@@ -1,12 +1,35 @@
 var plex = {};
 plex.state = "play";
 
-if (!localStorage.getItem("plexServer")) localStorage.setItem("media-server");
-if (!localStorage.getItem("plexClient")) localStorage.setItem("192.168.1.145");
 plex.plexServer = localStorage.getItem("plexServer");
 plex.plexClient = localStorage.getItem("plexClient");
 plex.clientlist = [];
 plex.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
+
+// This won't work without Plexpass, BAH.
+plex.getPlaying = function (command) {
+	var req1 = new XMLHttpRequest();
+	req1.timeout = 2000;
+	req1.setRequestHeader('X-Plex-Device', 'Web');
+	req1.setRequestHeader('X-Plex-Version', '1.1');
+	req1.setRequestHeader('X-Plex-Token', 'gXiKAPVGo9GqNzKY1q9t');
+	req1.setRequestHeader('X-Plex-Client-Platform', 'Web');
+	req1.setRequestHeader('X-Plex-Device-Name', 'Pebble')
+	req1.setRequestHeader('X-Plex-Model', 'V2R2');
+	req1.setRequestHeader('X-Plex-Platform', 'Web');
+	req1.setRequestHeader('X-Plex-Client-Identifier', 'pebble-plex-remote');
+	req1.setRequestHeader('X-Plex-Product', 'Pebble Plex Remote');
+	req1.setRequestHeader('X-Plex-Platform-Version', '2.0');
+	req1.setRequestHeader('X-Plex-Client-Capabilities', '');
+
+
+	req1.open("GET", "http://" + plex.plexServer + ":32400/status/sessions", true);
+	req1.onreadystatechange = function (e) {
+		if (req1.status == 403) {
+			console.log("You evidently don't have Plexpass.");
+		}
+	};
+}
 
 plex.doCommand = function (action) {
 	if (action == "next") {
@@ -39,6 +62,7 @@ plex.doCommand = function (action) {
 			plex.state = "rewind";
 		}
 	}
+	plex.getPlaying();
 };
 
 plex.sendCommand = function  (command) {
@@ -48,7 +72,7 @@ plex.sendCommand = function  (command) {
 	req.onreadystatechange = function (e) {
 		if (req.readyState === 4) {  
 			if (req.status === 200) {  
-				console.log(req.responseText)  
+				console.log("Message sent: " + command);  
 		  	}
 		} 
 	};
@@ -58,15 +82,12 @@ plex.sendCommand = function  (command) {
 	req.send(null);
 	
 };
-plex.getClients = function () {
-
-}
 Pebble.addEventListener("ready", function(e) {
 	console.log("Plex Remote is go.");
 });
 
 Pebble.addEventListener("appmessage", function(e) {
-	console.log("Received message: " + e.payload);
+	console.log("Received message: " + JSON.stringify(e.payload));
 	if (e.payload.action) {
 		plex.doCommand(e.payload.action);
 	}

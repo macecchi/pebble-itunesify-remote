@@ -29,6 +29,10 @@
         			<option value="" selected>Select a Client</option>
         		</select>
         	</div>
+        	<div class="form-group hide">
+        		<label for="plexToken">Plex Token</label>
+        		<input type="text" class="form-control" id="plexToken" name="plexToken" placeholder="gXiKAPVGo9GqNzKY1q9t" value="gXiKAPVGo9GqNzKY1q9t"/>
+        	</div>
         	
         	<input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save"/>
 
@@ -38,56 +42,37 @@
     	<p><a href="http://github.com/spangborn/pebble-plex-remote">Plex Remote</a> by <a href="http://twitter.com/spangborn">Sawyer Pangborn</a></p>
     </div>
 	<script type="text/javascript">
-		var plex = {
-			"clients" : []
-		};
+		$().ready(function () {
+			$("#getClients").click(function(){
+				$.ajax({
+					"url" : "http://" + $("#plexServer").val() + ":32400/clients",
+					"dataType" : "xml",
+					"type" : "GET",
+					"success" : function (data) {
+						$("#clientSelect").empty();
+						something = $(data).find("Server");
+						var $clients = $(data).find("Server");
+						$.each($clients, function (i,item) {
+							var client = $("<option>", {
+								"value" : $(item).attr("host"),
+								"html" : $(item).attr("name") + " (" + $(item).attr("host") +")"
+							}).appendTo($("#plexClient"));
+						});
+					},
+					"error" : {
 
-		function getClients () {
-			var clientSelect = document.getElementById("plexClient");
+					}
 
-			var req = new XMLHttpRequest();
-			req.timeout = 2000;
-			req.open("GET", "http://" + document.getElementById("plexServer").value + ":32400/clients", true);
-			req.onreadystatechange = function (e) {
-				if (req.readyState === 4) { 
-					if (req.status === 200) {  
-						// We got a request back
+				});
+			});
 
-						while(clientSelect.firstChild) {
-    						clientSelect.removeChild(clientSelect.firstChild);
-						}
-						var root = req.responseXML.documentElement;
-						var clients = root.getElementsByTagName("Server");
+		});
 
-				        for (var i=0; i < clients.length; i++) {
-				        
-				        	var client = document.createElement("option");
-				        	client.value = clients[i].getAttribute("host");
-				        	client.innerHTML = clients[i].getAttribute("name") + " (" + clients[i].getAttribute("host") + ")";
-				        	clientSelect.appendChild(client);
-				        
-				        }
-				    }
-				} 
-			};
-			req.onerror = function (e) {
-				
-			};
-			req.send(null);
-		}
-
-		document.getElementById("plexServer").value = localStorage.getItem("plexServer");
-		if (document.getElementById("plexClient").classList.contains("hidden")) {
-			document.getElementById("plexClientManual").value = localStorage.getItem("plexClient");	
-		}
-		else {
-			document.getElementById("plexClient").value = localStorage.getItem("plexClient");	
-		}
-		
-
-		document.getElementById("configure").onsubmit = function () {
-			var s = document.getElementById("plexServer").value;
-			var c = document.getElementById("plexClient").value;
+		$("#plexServer").val(localStorage.getItem("plexServer"));
+		$("#plexClient").val(localStorage.getItem("plexClient"));
+		$("#configure").submit(function(e) {
+			var s = $("#plexServer").val();
+			var c = $("#plexClient").val();
 
 			var j = {
 				plexServer : s,
@@ -97,17 +82,11 @@
     		localStorage.setItem("plexServer", s);  
 			localStorage.setItem("plexClient", c); 
 
-			var u = "pebblejs://close#" + JSON.stringify(j);
-			window.location.href = u;
+			window.location.href = "pebblejs://close#" + JSON.stringify(j);
 
-			return false;
-		};
+			e.preventDefault();
+		});	
 
-		document.getElementById("getClients").onclick = function () {
-			getClients();
-		};
-
-		
 	
 </script>
 </body>
