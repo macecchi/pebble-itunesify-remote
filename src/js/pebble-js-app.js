@@ -12,7 +12,7 @@ plex.getPlaying = function (command) {
 	req1.timeout = 2000;
 	req1.setRequestHeader('X-Plex-Device', 'Web');
 	req1.setRequestHeader('X-Plex-Version', '1.1');
-	req1.setRequestHeader('X-Plex-Token', 'gXiKAPVGo9GqNzKY1q9t');
+	req1.setRequestHeader('X-Plex-Token', 'PLEX TOKEN HERE');
 	req1.setRequestHeader('X-Plex-Client-Platform', 'Web');
 	req1.setRequestHeader('X-Plex-Device-Name', 'Pebble')
 	req1.setRequestHeader('X-Plex-Model', 'V2R2');
