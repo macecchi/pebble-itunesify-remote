@@ -77,7 +77,9 @@ plex.sendCommand = function  (command) {
 		} 
 	};
 	req.onerror = function (e) {
-		Pebble.showSimpleNotificationOnPebble("Plex", "Unable to reach Plex Server.");
+		setTimeout(function(){
+			Pebble.showSimpleNotificationOnPebble("Plex", "Unable to reach Plex Server.");	
+		}, 15000);
 	};
 	req.send(null);
 	
