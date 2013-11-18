@@ -18,7 +18,7 @@ pebble-plex-remote
 7. Enjoy!
 
 ###How to Install
-    $ export PEBBLE_PHONE=<YOUR PHONE\'S IP ADDRESS>
+    $ export PEBBLE_PHONE=<YOUR PHONE'S IP ADDRESS>
     $ pebble build && pebble install
     $ pebble logs
 
