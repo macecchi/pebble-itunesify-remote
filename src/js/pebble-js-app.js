@@ -3,8 +3,8 @@ plex.state = "play";
 
 plex.plexServer = localStorage.getItem("plexServer");
 plex.plexClient = localStorage.getItem("plexClient");
-//plex.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
-plex.configureUrl = "http://eclipsemac/config/index.html";
+plex.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
+
 // This won't work without Plexpass, BAH.
 plex.getPlaying = function (command) {
 	var req1 = new XMLHttpRequest();
