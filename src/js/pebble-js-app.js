@@ -3,9 +3,8 @@ plex.state = "play";
 
 plex.plexServer = localStorage.getItem("plexServer");
 plex.plexClient = localStorage.getItem("plexClient");
-plex.clientlist = [];
-plex.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
-
+//plex.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
+plex.configureUrl = "http://eclipsemac/config/index.html";
 // This won't work without Plexpass, BAH.
 plex.getPlaying = function (command) {
 	var req1 = new XMLHttpRequest();
@@ -68,6 +67,16 @@ plex.doCommand = function (action) {
 plex.sendCommand = function  (command) {
 	var req = new XMLHttpRequest();
 	req.timeout = 2000;
+	req.setRequestHeader("X-Plex-Token", localStorage.getItem("plexToken"));
+	req.setRequestHeader("X-Plex-Device", "Pebble");
+	req.setRequestHeader("X-Plex-Model", "V2R2");
+	req.setRequestHeader("X-Plex-Client-Identifier", "V2R2");
+	req.setRequestHeader("X-Plex-Device-Name", "pebble-plex-remote");
+	req.setRequestHeader("X-Plex-Platform", "PebbleOS");
+	req.setRequestHeader("X-Plex-Client-Platform", "PebbleOS");
+	req.setRequestHeader("X-Plex-Platform-Version", "2.0B2");
+	req.setRequestHeader("X-Plex-Product", "pebble-plex-remote");
+	req.setRequestHeader("X-Plex-Version", "1.0");
 	req.open("GET", "http://" + plex.plexServer + ":32400/system/players/" + plex.plexClient + "/playback/" + command, true);
 	req.onreadystatechange = function (e) {
 		if (req.readyState === 4) {  
@@ -107,9 +116,12 @@ Pebble.addEventListener("webviewclosed",
     	
     	console.log("Plex Server: " + configuration.plexServer);
     	console.log("Plex Client: " + configuration.plexClient);
+    	console.log("Plex Token: " + configuration.plexToken);
     	localStorage.setItem("plexServer", configuration.plexServer);  
 		localStorage.setItem("plexClient", configuration.plexClient); 
+		localStorage.setItem("plexToken", configuration.plexToken); 
 
+		plex.plexToken = configuration.plexToken;
 		plex.plexServer = configuration.plexServer;
 		plex.plexClient = configuration.plexClient;
 	}

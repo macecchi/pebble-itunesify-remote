@@ -79,6 +79,7 @@
 						401: function() {
 							$("#configure-form").addClass("hide");
 							$("#login-form").removeClass("hide");
+							$("#username").focus();
 						}
 					},
 					"beforeSend": function (xhr) {
@@ -103,6 +104,7 @@
 								"html" : $(item).attr("name") + " (" + $(item).attr("host") +")"
 							}).appendTo($("#plexClient"));
 						});
+						$("#clientSelect").focus();
 					},
 					"error" : function (jqXHR, textStatus, errorThrown) {
 
