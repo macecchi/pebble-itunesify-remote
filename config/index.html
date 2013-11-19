@@ -12,41 +12,87 @@
 </head>
 <body>
     <div class="container">
-		<h2 class="">Configure Plex Remote</h2>
-    	<form id="configure" class="form-configure well" action="#" method="POST">
-        	<div class="form-group">
-        		<label for="plexServer">Plex Server</label>
-        		<input type="text" id="plexServer" name="plexServer" class="form-control" placeholder="192.168.1.117"/>
-			</div>	
-			<p class="help-block">Enter a hostname or IP address of a Plex Server before selecting a Plex Client.</p>
-			<input class="btn btn-lg btn-info btn-block" id="getClients" value="Get Clients"/>
-			<br/>
+		<div class="configure">
+			<h2>Configure</h2>
+	    	<form id="configure-form" class="form-configure well" action="#" method="POST">
+	    		<h3>Server</h3>
+	        	<div class="form-group">
+	        		<label for="plexServer">Plex Server</label>
+	        		<input type="text" id="plexServer" name="plexServer" class="form-control" placeholder="192.168.1.117"/>
+				</div>	
+				<p class="help-block">Enter a hostname or IP address of a Plex Server before selecting a Plex Client.</p>
+				<input class="btn btn-lg btn-info btn-block" id="getClients" value="Get Clients"/>
+				<br/>
+				<div class="form-group">
+	        		<label for="plexClient">Plex Client</label>
+	        		
+	        		<select id="plexClient" name="plexClient" class="form-control">
+	        			<option value="" selected>Select a Client</option>
+	        		</select>
+	        	</div>
+	        	<div class="form-group hide">
+	        		<label for="plexToken">Plex Token</label>
+	        		<input type="text" class="form-control" id="plexToken" name="plexToken" placeholder=""/>
+	        	</div>
+	        	
+	        	<input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save"/>
+	      </form>
+	  </div>
+	  <div id="login">
+		<form id="login-form" method="post" class="well hide" action="#">
+			<h3>MyPlex Login</h3>
+			<p class="help-block">Your Plex Server requires authentication.</p>
 			<div class="form-group">
-        		<label for="plexClient">Plex Client</label>
-        		
-        		<select id="plexClient" name="plexClient" class="form-control">
-        			<option value="" selected>Select a Client</option>
-        		</select>
-        	</div>
-        	<div class="form-group hide">
-        		<label for="plexToken">Plex Token</label>
-        		<input type="text" class="form-control" id="plexToken" name="plexToken" placeholder=""/>
-        	</div>
-        	
-        	<input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save"/>
+				<label for="username">Username</label>
+				<input type="text" name="username" id="username" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" class="form-control"/>
+				<p class="help-block">Your password will not be stored and is transmitted over HTTPS.</p>
+			</div>
+			<div class="form-group">
+				<input type="submit" name="sub" value="Submit" class="btn btn-lg btn-primary btn-block"/>
+			</div>
 
-      </form>
+		</form>
+	  </div>
+
     </div>
     <div class="footer container">
     	<p><a href="http://github.com/spangborn/pebble-plex-remote">Plex Remote</a> by <a href="http://twitter.com/spangborn">Sawyer Pangborn</a></p>
     </div>
 	<script type="text/javascript">
+		function make_base_auth(user, password) {
+  			var tok = user + ':' + password;
+  			var hash = btoa(tok);
+  			
+  			return "Basic " + hash;
+		}
 		$().ready(function () {
 			$("#getClients").click(function(){
 				$.ajax({
 					"url" : "http://" + $("#plexServer").val() + ":32400/clients",
 					"dataType" : "xml",
 					"type" : "GET",
+					"statusCode": {
+						401: function() {
+							$("#configure-form").addClass("hide");
+							$("#login-form").removeClass("hide");
+						}
+					},
+					"beforeSend": function (xhr) {
+	  			  		xhr.setRequestHeader("X-Plex-Token", localStorage.getItem("plexToken"));
+						xhr.setRequestHeader("X-Plex-Device", "Pebble");
+						xhr.setRequestHeader("X-Plex-Model", "V2R2");
+						xhr.setRequestHeader("X-Plex-Client-Identifier", "V2R2");
+						xhr.setRequestHeader("X-Plex-Device-Name", "pebble-plex-remote");
+						xhr.setRequestHeader("X-Plex-Platform", "PebbleOS");
+						xhr.setRequestHeader("X-Plex-Client-Platform", "PebbleOS");
+						xhr.setRequestHeader("X-Plex-Platform-Version", "2.0B2");
+						xhr.setRequestHeader("X-Plex-Product", "pebble-plex-remote");
+						xhr.setRequestHeader("X-Plex-Version", "1.0");
+					},
 					"success" : function (data) {
 						$("#clientSelect").empty();
 						something = $(data).find("Server");
@@ -58,7 +104,7 @@
 							}).appendTo($("#plexClient"));
 						});
 					},
-					"error" : {
+					"error" : function (jqXHR, textStatus, errorThrown) {
 
 					}
 
@@ -69,7 +115,7 @@
 
 		$("#plexServer").val(localStorage.getItem("plexServer"));
 		$("#plexClient").val(localStorage.getItem("plexClient"));
-		$("#configure").submit(function(e) {
+		$("#configure-form").submit(function(e) {
 			var s = $("#plexServer").val();
 			var c = $("#plexClient").val();
 
@@ -78,13 +124,50 @@
 				plexClient : c
 			};
 
+			if (localStorage.getItem("plexToken")) {
+				j.plexToken = localStorage.getItem("plexToken");
+			}
+
     		localStorage.setItem("plexServer", s);  
 			localStorage.setItem("plexClient", c); 
 
 			window.location.href = "pebblejs://close#" + JSON.stringify(j);
 
 			e.preventDefault();
-		});	
+		});
+		$("#login-form").submit(function(e) {
+			var username = $("#username").val();
+			var password = $("#password").val();
+			e.preventDefault();
+			$.ajax({
+				"url" : "https://my.plexapp.com/users/sign_in.xml",
+				"type" : "POST",
+				"dataType" : "xml",
+				"beforeSend": function (xhr) {
+  			  		xhr.setRequestHeader("Authorization", make_base_auth(username,password));
+					xhr.setRequestHeader("X-Plex-Device", "Pebble");
+					xhr.setRequestHeader("X-Plex-Model", "V2R2");
+					xhr.setRequestHeader("X-Plex-Client-Identifier", "V2R2");
+					xhr.setRequestHeader("X-Plex-Device-Name", "pebble-plex-remote");
+					xhr.setRequestHeader("X-Plex-Platform", "PebbleOS");
+					xhr.setRequestHeader("X-Plex-Client-Platform", "PebbleOS");
+					xhr.setRequestHeader("X-Plex-Platform-Version", "2.0B2");
+					xhr.setRequestHeader("X-Plex-Product", "pebble-plex-remote");
+					xhr.setRequestHeader("X-Plex-Version", "1.0");
+				},
+				"success" : function (data) {
+					var token = $(data).find("authentication-token").text();
+					console.log("Setting Plex Token: " + token)
+					localStorage.setItem("plexToken", token);
+
+					$("#login-form").addClass("hide");
+					$("#configure-form").removeClass("hide");
+					$("#getClients").click();
+				}
+			});
+
+			
+		});
 
 	
 </script>
