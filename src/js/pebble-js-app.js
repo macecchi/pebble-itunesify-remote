@@ -34,11 +34,18 @@ plex.doCommand = function (action) {
 	if (action == "next") {
 		plex.sendCommand("stepForward");
 	}
-	if (action == "playpause") {
-		plex.sendCommand("pause");
-	}
 	if (action == "previous") {
 		plex.sendCommand("stepBack");
+	}
+	if (action == "playpause") {
+		if (plex.state == "play") {
+			plex.sendCommand("pause");
+			plex.state = "pause";
+		}
+		else {
+			plex.sendCommand("play");
+			plex.state = "play";
+		}
 	}
 	plex.getPlaying();
 };

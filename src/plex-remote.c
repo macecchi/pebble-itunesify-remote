@@ -60,7 +60,7 @@ static void window_load(Window *window) {
 
   // Window
   Layer *window_layer = window_get_root_layer(window);
-  GRect bounds = layer_get_bounds(window_layer);
+  //GRect bounds = layer_get_bounds(window_layer);
 
   // Resources
   logo_img = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_PLEX_LOGO);
