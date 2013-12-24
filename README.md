@@ -8,6 +8,7 @@ pebble-plex-remote
 - Uses PebbleKitJS from Pebble SDK 2.0
 - Configurable from Pebble's smartphone application
 
+##[Demo Video](http://www.youtube.com/watch?v=zWCBPYqwQMY)
 
 ###How to Use
 
