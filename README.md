@@ -14,10 +14,8 @@ pebble-plex-remote
 1. Install pebble-plex-remote.pbw from [MyPebbleFaces](http://www.mypebblefaces.com/apps/1936/7371/).
 2. Tap "Plex Remote" in the Pebble app
 3. Enter a Plex Server hostname or IP address (192.168.x.x, or plex-server).
-
 4. Tap "Get Clients"
 5. Select a Plex Client to control from the dropdown list.
-
 6. Tap "Save"
 7. Enjoy!
 
