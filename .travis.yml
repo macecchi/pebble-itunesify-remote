@@ -1,0 +1,6 @@
+language: c
+
+env: PEBBLE_SDK=postgres
+
+before_install:
+ - ./before_install.sh
