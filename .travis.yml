@@ -1,6 +1,6 @@
 language: c
-
-env: PEBBLESDK=PebbleSDK-2.0-BETA4
+ 
+env: PEBBLE_SDK=PebbleSDK-2.0-BETA4 PEBBLE_PROJECT_PATH=~/pebble-dev/pebble-plex-remote
 
 before_install:
  - bash ci/before_install.sh
