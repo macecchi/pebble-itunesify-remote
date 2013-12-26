@@ -4,3 +4,6 @@ env: PEBBLESDK=PebbleSDK-2.0-BETA4
 
 before_install:
  - bash ci/before_install.sh
+
+install:
+ - bash ci/build.sh
