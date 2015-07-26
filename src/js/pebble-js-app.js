@@ -1,96 +1,77 @@
-var plex = {};
-plex.state = "play";
+var iTunes = {};
+iTunes.state = "playing";
 
-plex.plexServer = localStorage.getItem("plexServer");
-plex.plexClient = localStorage.getItem("plexClient");
-plex.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
+iTunes.iTunesServer = localStorage.getItem("iTunesServer");
+iTunes.iTunesClient = localStorage.getItem("iTunesClient");
+iTunes.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
 
 // This won't work without Plexpass, BAH.
-plex.getPlaying = function (command) {
+iTunes.getPlaying = function (command) {
 	var req1 = new XMLHttpRequest();
 	req1.timeout = 2000;
-	req1.setRequestHeader('X-Plex-Device', 'Web');
-	req1.setRequestHeader('X-Plex-Version', '1.1');
-	req1.setRequestHeader('X-Plex-Token', 'PLEX TOKEN HERE');
-	req1.setRequestHeader('X-Plex-Client-Platform', 'Web');
-	req1.setRequestHeader('X-Plex-Device-Name', 'Pebble')
-	req1.setRequestHeader('X-Plex-Model', 'V2R2');
-	req1.setRequestHeader('X-Plex-Platform', 'Web');
-	req1.setRequestHeader('X-Plex-Client-Identifier', 'pebble-plex-remote');
-	req1.setRequestHeader('X-Plex-Product', 'Pebble Plex Remote');
-	req1.setRequestHeader('X-Plex-Platform-Version', '2.0');
-	req1.setRequestHeader('X-Plex-Client-Capabilities', '');
 
-
-	req1.open("GET", "http://" + plex.plexServer + ":32400/status/sessions", true);
+	req1.open("GET", "http://" + iTunes.iTunesServer + ":8080/status", true);
 	req1.onreadystatechange = function (e) {
-		if (req1.status == 403) {
-			console.log("You evidently don't have Plexpass.");
+		if (req1.status != 200) {
+			console.log("Error communicating to server. Response code was " + req1.status);
 		}
 	};
 }
 
-plex.doCommand = function (action) {
+iTunes.doCommand = function (action) {
 	if (action == "next") {
-		plex.sendCommand("stepForward");
+		iTunes.sendCommand("stepForward");
 	}
 	if (action == "previous") {
-		plex.sendCommand("stepBack");
+		iTunes.sendCommand("stepBack");
 	}
 	if (action == "playpause") {
-		if (plex.state == "play") {
-			plex.sendCommand("pause");
-			plex.state = "pause";
+		if (iTunes.state == "playing") {
+			iTunes.sendCommand("pause");
+			iTunes.state = "paused";
 		}
 		else {
-			plex.sendCommand("play");
-			plex.state = "play";
+			iTunes.sendCommand("play");
+			iTunes.state = "playing";
 		}
 	}
-	plex.getPlaying();
+	iTunes.getPlaying();
 };
 
-plex.sendCommand = function  (command) {
+iTunes.sendCommand = function  (command) {
 	var req = new XMLHttpRequest();
 	req.timeout = 2000;
-	req.setRequestHeader("X-Plex-Token", localStorage.getItem("plexToken"));
-	req.setRequestHeader("X-Plex-Device", "Pebble");
-	req.setRequestHeader("X-Plex-Model", "V2R2");
-	req.setRequestHeader("X-Plex-Client-Identifier", "V2R2");
-	req.setRequestHeader("X-Plex-Device-Name", "pebble-plex-remote");
-	req.setRequestHeader("X-Plex-Platform", "PebbleOS");
-	req.setRequestHeader("X-Plex-Client-Platform", "PebbleOS");
-	req.setRequestHeader("X-Plex-Platform-Version", "2.0B2");
-	req.setRequestHeader("X-Plex-Product", "pebble-plex-remote");
-	req.setRequestHeader("X-Plex-Version", "1.0");
-	req.open("GET", "http://" + plex.plexServer + ":32400/system/players/" + plex.plexClient + "/playback/" + command, true);
+	req.open("GET", "http://" + iTunes.iTunesServer + ":8080/" + command, true);
 	req.onreadystatechange = function (e) {
 		if (req.readyState === 4) {  
 			if (req.status === 200) {  
-				console.log("Message sent: " + command);  
+				console.log("Request sent: " + command);  
+		  	}
+		  	else {
+		  		console.log("Request failed with status " + req.status);
 		  	}
 		} 
 	};
 	req.onerror = function (e) {
 		setTimeout(function(){
-			Pebble.showSimpleNotificationOnPebble("Plex", "Unable to reach Plex Server.");	
-		}, 15000);
+			Pebble.showSimpleNotificationOnPebble("iTunes", "Unable to reach iTunes.");	
+		}, 1000);
 	};
 	req.send(null);
 	
 };
 Pebble.addEventListener("ready", function(e) {
-	console.log("Plex Remote is go.");
+	console.log("iTunes Remote is go.");
 });
 
 Pebble.addEventListener("appmessage", function(e) {
 	console.log("Received message: " + JSON.stringify(e.payload));
 	if (e.payload.action) {
-		plex.doCommand(e.payload.action);
+		iTunes.doCommand(e.payload.action);
 	}
 });
 Pebble.addEventListener("showConfiguration", function(e) {
-	Pebble.openURL(plex.configureUrl);
+	Pebble.openURL(iTunes.configureUrl);
 });
 Pebble.addEventListener("webviewclosed",
   function(e) {
@@ -100,16 +81,16 @@ Pebble.addEventListener("webviewclosed",
     	var configuration = JSON.parse(e.response);
     	console.log("Configuration window returned: " + JSON.stringify(configuration));
     	
-    	console.log("Plex Server: " + configuration.plexServer);
-    	console.log("Plex Client: " + configuration.plexClient);
-    	console.log("Plex Token: " + configuration.plexToken);
-    	localStorage.setItem("plexServer", configuration.plexServer);  
-		localStorage.setItem("plexClient", configuration.plexClient); 
-		localStorage.setItem("plexToken", configuration.plexToken); 
+    	console.log("iTunes Server: " + configuration.iTunesServer);
+    	console.log("iTunes Client: " + configuration.iTunesClient);
+    	console.log("iTunes Token: " + configuration.iTunesToken);
+    	localStorage.setItem("iTunesServer", configuration.iTunesServer);  
+		localStorage.setItem("iTunesClient", configuration.iTunesClient); 
+		localStorage.setItem("iTunesToken", configuration.iTunesToken); 
 
-		plex.plexToken = configuration.plexToken;
-		plex.plexServer = configuration.plexServer;
-		plex.plexClient = configuration.plexClient;
+		iTunes.iTunesToken = configuration.iTunesToken;
+		iTunes.iTunesServer = configuration.iTunesServer;
+		iTunes.iTunesClient = configuration.iTunesClient;
 	}
   }
 );

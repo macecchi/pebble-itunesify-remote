@@ -1,9 +1,7 @@
 #include <pebble.h>
 
 static Window *window;
-static BitmapLayer *logo_layer;
 
-static GBitmap *logo_img;
 static ActionBarLayer *action_bar;
 
 static GBitmap *action_icon_previous;
@@ -62,18 +60,10 @@ static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   //GRect bounds = layer_get_bounds(window_layer);
 
-  // Resources
-  logo_img = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_PLEX_LOGO);
-  logo_layer = bitmap_layer_create(GRect(32,34,80,80));
-  bitmap_layer_set_bitmap(logo_layer, logo_img);
-  layer_add_child(window_layer, bitmap_layer_get_layer(logo_layer));
-
 }
 
 static void window_unload(Window *window) {
-
-  bitmap_layer_destroy(logo_layer);
-  gbitmap_destroy(logo_img);
+  
   action_bar_layer_destroy(action_bar);
 }
 
