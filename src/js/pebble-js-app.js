@@ -1,8 +1,7 @@
 var iTunes = {};
 iTunes.state = "playing";
 
-iTunes.iTunesServer = localStorage.getItem("iTunesServer");
-iTunes.iTunesClient = localStorage.getItem("iTunesClient");
+iTunes.iTunesServer = localStorage.getItem("server");
 iTunes.configureUrl = "http://spangborn.github.io/pebble-plex-remote/index.html";
 
 // This won't work without Plexpass, BAH.

@@ -18,7 +18,7 @@
 	    		<h3>Server</h3>
 	        	<div class="form-group">
 	        		<label for="iTunesServer">iTunes Server</label>
-	        		<input type="text" id="iTunesServer" name="iTunesServer" class="form-control" placeholder="192.168.1.117"/>
+	        		<input type="text" id="server" name="server" class="form-control" placeholder="192.168.1.117"/>
 				</div>	
 	        	
 	        	<input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save"/>
@@ -37,15 +37,15 @@
   			return "Basic " + hash;
 		}
 		
-		$("#iTunesServer").val(localStorage.getItem("iTunesServer"));
+		$("#server").val(localStorage.getItem("server"));
 		$("#configure-form").submit(function(e) {
-			var s = $("#iTunesServer").val();
+			var s = $("#server").val();
 
 			var j = {
-				iTunesServer : s
+				server : s
 			};
 
-    		localStorage.setItem("iTunesServer", s);  
+    		localStorage.setItem("server", s);  
 
 			window.location.href = "pebblejs://close#" + JSON.stringify(j);
 
