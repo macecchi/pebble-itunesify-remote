@@ -10,10 +10,23 @@ iTunes.getPlaying = function(command) {
 
 	req1.open("GET", "http://" + iTunes.server + ":8080/status", true);
 	req1.onreadystatechange = function(e) {
-		if (req1.status != 200) {
-			console.log("Error communicating to server. Response code was " + req1.status);
+		if (req1.readyState === 4) {  
+			if (req1.status != 200) {
+				console.log("Error communicating to server. Response code was " + req1.status);
+			}
+			else if (req1.responseText != '') {
+				var resObj = JSON.parse(req1.responseText);
+				console.log('playback = ' + resObj.state);
+				iTunes.state = resObj.state;
+			}
 		}
 	};
+	req1.onerror = function(e) {
+		setTimeout(function(){
+			Pebble.showSimpleNotificationOnPebble("iTunes Remote", "Unable to reach iTunes. Check the settings and status of iTunes API.");	
+		}, 1000);
+	};
+	req1.send(null);
 }
 
 iTunes.doCommand = function(action) {
@@ -33,7 +46,6 @@ iTunes.doCommand = function(action) {
 			iTunes.state = "playing";
 		}
 	}
-	iTunes.getPlaying();
 };
 
 iTunes.sendCommand = function(command) {
@@ -55,13 +67,14 @@ iTunes.sendCommand = function(command) {
 	req.onerror = function(e) {
 		setTimeout(function(){
 			Pebble.showSimpleNotificationOnPebble("iTunes Remote", "Unable to reach iTunes. Check the settings and status of iTunes API.");	
-		}, 3000);
+		}, 2000);
 	};
 	req.send(null);
 };
 
 Pebble.addEventListener("ready", function(e) {
 	console.log("iTunes Remote is go.");
+	iTunes.getPlaying();
 });
 
 Pebble.addEventListener("appmessage", function(e) {
