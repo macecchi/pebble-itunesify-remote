@@ -74,7 +74,13 @@ iTunes.sendCommand = function(command) {
 
 Pebble.addEventListener("ready", function(e) {
 	console.log("iTunes Remote is go.");
-	iTunes.getPlaying();
+
+	if (localStorage.getItem("server") === null || iTunes.server == '') {
+		Pebble.showSimpleNotificationOnPebble("Almost there!", "Please configure iTunes Remote through the Pebble app.");	
+	}
+	else {
+		iTunes.getPlaying();
+	}
 });
 
 Pebble.addEventListener("appmessage", function(e) {
@@ -97,5 +103,6 @@ Pebble.addEventListener("webviewclosed", function(e) {
 		localStorage.setItem("server", configuration.server);  
 
 		iTunes.server = configuration.server;
+		iTunes.getPlaying();
 	}
 });
