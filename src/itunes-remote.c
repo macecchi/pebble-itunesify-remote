@@ -9,7 +9,6 @@ static GBitmap *action_icon_next;
 static GBitmap *action_icon_playpause;
 
 static void send_message(char* message) {
-
   DictionaryIterator *iter;
   app_message_outbox_begin(&iter);
 
@@ -18,7 +17,6 @@ static void send_message(char* message) {
 
   app_message_outbox_send();
 }
-
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Previous clicked.");
@@ -35,7 +33,6 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
   send_message("playpause");
 }
 
-
 static void click_config_provider(void *context) {
   window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
   window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
@@ -43,10 +40,7 @@ static void click_config_provider(void *context) {
   
 }
 
-
-
 static void window_load(Window *window) {
-
   // Action Bar
   action_bar = action_bar_layer_create();
   action_bar_layer_add_to_window(action_bar, window);
@@ -59,21 +53,16 @@ static void window_load(Window *window) {
   // Window
   Layer *window_layer = window_get_root_layer(window);
   //GRect bounds = layer_get_bounds(window_layer);
-
 }
 
 static void window_unload(Window *window) {
-  
   action_bar_layer_destroy(action_bar);
 }
 
 static void init(void) {
-  
-
   action_icon_previous = gbitmap_create_with_resource(RESOURCE_ID_ICON_PREVIOUS);
   action_icon_next = gbitmap_create_with_resource(RESOURCE_ID_ICON_NEXT);
   action_icon_playpause = gbitmap_create_with_resource(RESOURCE_ID_ICON_PLAYPAUSE);
-
 
   window = window_create();
   window_set_click_config_provider(window, click_config_provider);

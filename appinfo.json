@@ -1,4 +1,9 @@
 {
+    "sdkVersion": "3",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
     "versionLabel": "1.0",
     "uuid": "da6a6eac-4aa3-44f3-91be-6f4682a8b48b",
     "appKeys": {
