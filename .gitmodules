@@ -1,0 +1,3 @@
+[submodule "itunes-control-api"]
+	path = itunes-control-api
+	url = https://github.com/macecchi/itunes-control-api.git
