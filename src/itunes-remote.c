@@ -1,9 +1,9 @@
 #include <pebble.h>
 
 static Window *window;
-
 static ActionBarLayer *action_bar;
-
+static Layer *logo_layer;
+static GBitmap *logo_img;
 static GBitmap *action_icon_previous;
 static GBitmap *action_icon_next;
 static GBitmap *action_icon_playpause;
@@ -37,7 +37,11 @@ static void click_config_provider(void *context) {
   window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
   window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
   window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
-  
+}
+
+static void logo_layer_update_callback(Layer *layer, GContext *ctx) {
+  graphics_context_set_compositing_mode(ctx, GCompOpSet);
+  graphics_draw_bitmap_in_rect(ctx, logo_img, layer_get_bounds(layer));
 }
 
 static void window_load(Window *window) {
@@ -53,9 +57,19 @@ static void window_load(Window *window) {
   // Window
   Layer *window_layer = window_get_root_layer(window);
   //GRect bounds = layer_get_bounds(window_layer);
+
+  // Resources
+  logo_img = gbitmap_create_with_resource(RESOURCE_ID_LOGO);
+  logo_layer = layer_create(GRect(18,45,80,80));
+  layer_set_update_proc(logo_layer, logo_layer_update_callback);
+
+  // bitmap_layer_set_bitmap(logo_layer, logo_img);
+  layer_add_child(window_layer, logo_layer);
 }
 
 static void window_unload(Window *window) {
+  layer_destroy(logo_layer);
+  gbitmap_destroy(logo_img);
   action_bar_layer_destroy(action_bar);
 }
 

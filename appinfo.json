@@ -42,6 +42,11 @@
                 "type": "png",
                 "name": "ICON_PREVIOUS",
                 "file": "images/actionbar_previous.png"
+            },
+            {
+                "type": "png",
+                "name": "LOGO",
+                "file": "images/itunes_logo.png"
             }
         ]
     }
