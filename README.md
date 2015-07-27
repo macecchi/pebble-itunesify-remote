@@ -1,40 +1,29 @@
-pebble-plex-remote
+iTunes Remote for Pebble
 ==================
 
-![](https://raw.github.com/spangborn/pebble-plex-remote/master/screenshot.png)
+Control your iTunes playback (play/pause/next/prev) from your Pebble watch!
 
-##Plex Remote for Pebble
-
+- Uses [iTunes Control API](https://github.com/macecchi/itunes-control-api) on machine running iTunes (OS X only)
 - Uses PebbleKitJS from Pebble SDK 2.0
 - Configurable from Pebble's smartphone application
 
-##[Demo Video](http://www.youtube.com/watch?v=zWCBPYqwQMY)
 
-###How to Use
+### How to Use
 
-1. Install pebble-plex-remote.pbw from [MyPebbleFaces](http://www.mypebblefaces.com/apps/1936/7371/).
-2. Tap "Plex Remote" in the Pebble app
-3. Enter a Plex Server hostname or IP address (192.168.x.x, or plex-server).
-4. Tap "Get Clients"
-5. Select a Plex Client to control from the dropdown list.
-6. Tap "Save"
-7. Enjoy!
-
-###Setup Screenshots
-
-####Selecting a Plex Server
-![](http://i.imgur.com/3sDZdg5.png)
-
-####Selecting a Plex Client
-![](http://i.imgur.com/0AJyotG.png)
+1. Install iTunes Remote from Pebble App Store
+2. Tap "iTunes Remote" in the Pebble app
+3. Enter hostname or IP address of machine running iTunes Control API (eg. 192.168.x.x)
+4. Tap "Save"
+5. Enjoy!
 
 
-###How to Install
-    $ export PEBBLE_PHONE=<YOUR PHONE'S IP ADDRESS>
-    $ pebble build && pebble install
-    $ pebble logs
+### How to Install
 
-###Roadmap
-1. Display currently playing media
-2. Enable navigation of on-screen menus
-3. Implement XBMC integration?
+	$ export PEBBLE_PHONE=<YOUR PHONE'S IP ADDRESS>
+	$ pebble build && pebble install
+	$ pebble logs
+	
+
+### Credits
+
+This project was originally forked from [pebble-plex-remote](https://github.com/spangborn/pebble-plex-remote) by [spangborn](https://github.com/spangborn/).
