@@ -13,7 +13,7 @@ require('dns').lookup(require('os').hostname(), function (err, add, fam) {
 })
 
 var tray = new gui.Tray({
-    icon: 'bar_icon.png'
+    icon: 'resources/images/bar_icon.png'
 });
 
 var menu = new gui.Menu();

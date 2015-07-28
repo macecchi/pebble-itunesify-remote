@@ -1,9 +1,41 @@
 {
-  "name": "nw-demo",
-  "version": "0.0.1",
+  "name": "pebble-itunes-remote-osx",
+  "version": "1.0.0",
   "main": "index.html",
+  "single-instance": true,
   "window": {
+    "name": "iTunes Remote for Pebble",
     "show": false,
-  	"show_in_taskbar": false
-  }
+    "show_in_taskbar": false
+  },
+  "description": "Control iTunes playback (play/pause/next/prev) from your Pebble watch!",
+  "dependencies": {
+    "itunes-control-api": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macecchi/pebble-itunes-remote-osx.git"
+  },
+  "keywords": [
+    "itunes",
+    "pebble",
+    "itunes",
+    "remote",
+    "remote",
+    "control",
+    "os",
+    "x",
+    "remote",
+    "smartwatch"
+  ],
+  "author": "Mario Cecchi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/macecchi/pebble-itunes-remote-osx/issues"
+  },
+  "homepage": "https://github.com/macecchi/pebble-itunes-remote-osx#readme"
 }
