@@ -25,8 +25,8 @@
             {
                 "menuIcon": true,
                 "type": "png",
-                "name": "MENU_ICON_PLEX",
-                "file": "images/menu_icon_plex.png"
+                "name": "MENU_ICON",
+                "file": "images/menu_icon.png"
             },
             {
                 "type": "png",
