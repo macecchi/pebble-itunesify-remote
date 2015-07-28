@@ -14,7 +14,7 @@ This app was built using:
 
 ## How to Use
 
-1. **Download** OS X app
+1. [**Download** OS X app](https://github.com/macecchi/pebble-itunes-remote-osx/releases/)
 - *(Optional)* Drag app to **Applications** folder
 - **Double click** to open
 - Click on the **status bar** icon and take note of the IP address shown
@@ -26,9 +26,20 @@ This app was built using:
 
 ## Manual compiling
 
+To manually compile you just need to `npm init` the dependencies and run nw-builder to generate the app.
+
 ```bash
-$ cd pebble-itunes-remote-osx
-$ npm install
-$ npm install -g node-webkit nw-builder
-$ nwbuild -p osx64 .
+cd pebble-itunes-remote-osx
+npm install
+npm install -g nw-builder
+nwbuild -p osx64 .
+```
+
+Alternatively, you can also install node-webkit directly and run without exporting the OS X app.
+
+```bash
+cd pebble-itunes-remote-osx
+npm install
+npm install -g node-webkit
+/PATH/TO/INSTALLED/NWJS .
 ```
