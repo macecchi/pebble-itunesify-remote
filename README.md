@@ -19,7 +19,7 @@ This app was built using:
 - **Double click** to open
 - Click on the **status bar** icon and take note of the IP address shown
 
-	![image](resources/images/statusbar_help.png)
+	![image](https://raw.githubusercontent.com/macecchi/pebble-itunes-remote-osx/master/resources/images/statusbar_help.png)
 - Go to the **Pebble app** on your phone and type the IP address inside 'iTunes Remote' configurations
 - Enjoy!
 
