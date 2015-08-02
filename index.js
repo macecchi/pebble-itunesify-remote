@@ -82,6 +82,11 @@ app.get('/playpause', function(req, res){
     res.end();
 });
 
+app.get('/current_app', function(req, res){
+    console.log("[GET] /current_app");
+    res.send(activePlayer);
+});
+
 app.get('/previous', function(req, res){
     console.log("[GET] /previous");
     if (activePlayer == 'itunes') {
