@@ -4,18 +4,18 @@
         "aplite",
         "basalt"
     ],
-    "versionLabel": "1.0",
+    "versionLabel": "1.1",
     "uuid": "da6a6eac-4aa3-44f3-91be-6f4682a8b48b",
     "appKeys": {
         "action": 1
     },
-    "longName": "iTunes Remote",
+    "longName": "iTunesify Remote",
     "versionCode": 5,
     "capabilities": [
         "location",
         "configurable"
     ],
-    "shortName": "iTunes Remote",
+    "shortName": "iTunesify Remote",
     "companyName": "Mario Cecchi",
     "watchapp": {
         "watchface": false

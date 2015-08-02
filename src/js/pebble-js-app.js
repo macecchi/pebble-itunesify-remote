@@ -1,8 +1,7 @@
 var iTunes = {};
-iTunes.state = "playing";
 
 iTunes.server = localStorage.getItem("server");
-iTunes.configureUrl = "https://macecchi.github.io/pebble-itunes-remote/index.html";
+iTunes.configureUrl = "https://macecchi.github.io/pebble-itunesify-remote/index.html";
 
 iTunes.getPlaying = function(command) {
 	var req1 = new XMLHttpRequest();
@@ -15,15 +14,13 @@ iTunes.getPlaying = function(command) {
 				console.log("Error communicating to server. Response code was " + req1.status);
 			}
 			else if (req1.responseText != '') {
-				var resObj = JSON.parse(req1.responseText);
-				console.log('playback = ' + resObj.state);
-				iTunes.state = resObj.state;
+
 			}
 		}
 	};
 	req1.onerror = function(e) {
 		setTimeout(function(){
-			Pebble.showSimpleNotificationOnPebble("iTunes Remote", "Unable to reach iTunes. Check the settings and status of iTunes API.");	
+			Pebble.showSimpleNotificationOnPebble("iTunesify Remote", "Unable to connect. Check the connection and configuration.");	
 		}, 1000);
 	};
 	req1.send(null);
@@ -37,14 +34,7 @@ iTunes.doCommand = function(action) {
 		iTunes.sendCommand("previous");
 	}
 	if (action == "playpause") {
-		if (iTunes.state == "playing") {
-			iTunes.sendCommand("pause");
-			iTunes.state = "paused";
-		}
-		else {
-			iTunes.sendCommand("play");
-			iTunes.state = "playing";
-		}
+		iTunes.sendCommand("playpause");
 	}
 };
 
@@ -66,7 +56,7 @@ iTunes.sendCommand = function(command) {
 	};
 	req.onerror = function(e) {
 		setTimeout(function(){
-			Pebble.showSimpleNotificationOnPebble("iTunes Remote", "Unable to reach iTunes. Check the settings and status of iTunes API.");	
+			Pebble.showSimpleNotificationOnPebble("iTunesify Remote", "Unable to connect. Check the connection and configuration.");	
 		}, 2000);
 	};
 	req.send(null);
@@ -76,7 +66,7 @@ Pebble.addEventListener("ready", function(e) {
 	console.log("iTunes Remote is go.");
 
 	if (localStorage.getItem("server") === null || iTunes.server == '') {
-		Pebble.showSimpleNotificationOnPebble("Almost there!", "Please configure iTunes Remote through the Pebble app.");	
+		Pebble.showSimpleNotificationOnPebble("Almost there!", "Please configure iTunesify Remote on the Pebble app.");	
 	}
 	else {
 		iTunes.getPlaying();
