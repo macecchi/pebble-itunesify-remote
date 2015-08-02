@@ -1,28 +1,29 @@
 {
-  "name": "pebble-itunes-remote-osx",
-  "version": "1.1.1",
+  "name": "pebble-itunesify-remote-osx",
+  "version": "1.1.2",
   "main": "index.html",
   "single-instance": true,
   "window": {
-    "name": "iTunes Remote for Pebble",
+    "name": "iTunesify Remote for Pebble",
     "show": false,
     "show_in_taskbar": false
   },
-  "description": "Control iTunes playback (play/pause/next/prev) from your Pebble watch!",
+  "description": "Control iTunes and Spotify playback (play/pause/next/prev) from your Pebble watch!",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/macecchi/pebble-itunes-remote-osx.git"
+    "url": "git+https://github.com/macecchi/pebble-itunesify-remote-osx.git"
   },
   "keywords": [
     "itunes",
     "pebble",
-    "itunes",
+    "spotify",
     "remote",
-    "remote",
+    "itunesify",
+    "spotitunes",
     "control",
     "os",
     "x",
@@ -32,9 +33,9 @@
   "author": "Mario Cecchi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/macecchi/pebble-itunes-remote-osx/issues"
+    "url": "https://github.com/macecchi/pebble-itunesify-remote-osx/issues"
   },
-  "homepage": "https://github.com/macecchi/pebble-itunes-remote-osx#readme",
+  "homepage": "https://github.com/macecchi/pebble-itunesify-remote-osx#readme",
   "dependencies": {
     "local-itunes": "^0.3.0",
     "spotify-node-applescript": "^0.2.2",
