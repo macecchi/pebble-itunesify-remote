@@ -11,6 +11,7 @@ This app was built using:
 - **[spotify-node-applescript](https://github.com/andrehaveman/spotify-node-applescript)** for Spotify control using Node.js
 - **[NW.js](https://github.com/nwjs/nw.js)** (former *node-webkit*) for GUI 
 - **[nw-builder](https://github.com/nwjs/nw-builder)** to export Node.js as OS X app
+- [iTunesify Custom icon](https://github.com/macecchi/pebble-itunesify-remote-osx/blob/master/resources/images/iTunesify.png) by Sean Porter
 
 \* previously *iTunes Remote for Pebble*
 
@@ -36,10 +37,10 @@ To manually compile you just need to `npm install` the dependencies and run `nw-
 cd pebble-itunesify-remote-osx
 npm install
 npm install -g nw-builder
-nwbuild -p osx64 .
+nwbuild -p osx64 --macIcns resources/iTunesify.icns .
 ```
 
-Alternatively, you can also install node-webkit directly and run without exporting the OS X app.
+Alternatively, you can install node-webkit directly and run iTunesify without exporting the OS X app (useful for debugging).
 
 ```bash
 cd pebble-itunesify-remote-osx
