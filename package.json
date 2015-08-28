@@ -11,7 +11,8 @@
   "description": "Control iTunes and Spotify playback (play/pause/next/prev) from your Pebble watch!",
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nw"
   },
   "repository": {
     "type": "git",

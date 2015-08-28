@@ -4,6 +4,7 @@ var app = express();
 var iTunes = require('local-itunes');
 var spotify = require('spotify-node-applescript');
 var storage = require('node-persist');
+var volume = require('osx-wifi-volume-remote');
 
 var port = 8080;
 var server;
@@ -128,6 +129,35 @@ app.get('/next', function(req, res){
     }
     res.end();
 });
+
+app.get('/volume/', function(req, res){
+    console.log("[GET] /volume");
+    volume.get(function(err, volume, muted) {
+        res.json({ volume: volume, muted: muted, err: err });
+    });
+});
+
+app.get('/volume/:vol', function(req, res){
+    console.log("[GET] /volume/" + req.params.vol);
+
+    if (req.params.vol === 'up') {
+        volume.fadeBy(function(err, volume, muted) {
+            res.json({ volume: volume, muted: muted, err: err });
+        }, 10, 1.0);
+    } 
+    else if (req.params.vol === 'down') {
+        volume.fadeBy(function(err, volume, muted) {
+            res.json({ volume: volume, muted: muted, err: err });
+        }, -10, 1.0);
+    }
+    else if (!isNaN(req.params.vol)) {
+        volume.set(function(err, volume, muted) {
+            res.json({ volume: volume, muted: muted, err: err });
+        }, req.params.vol);
+    }
+    
+});
+
 
 server = app.listen(port);
 console.log('Pebble iTunes Remote Server started on port ' + port);

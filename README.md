@@ -1,6 +1,6 @@
 # iTunesify Remote for Pebble* (OS X App)
 
-Control iTunes and Spotify playback (play/pause/next/prev) from your Pebble watch!
+Control iTunes and Spotify playback (play/pause/next/prev) and Mac volume level from your Pebble watch!
 
 **(To be used with [Pebble iTunesify Remote](https://github.com/macecchi/pebble-itunesify-remote) for Pebble)**
 
@@ -40,11 +40,11 @@ npm install -g nw-builder
 nwbuild -p osx64 --macIcns resources/iTunesify.icns .
 ```
 
-Alternatively, you can install node-webkit directly and run iTunesify without exporting the OS X app (useful for debugging).
+Alternatively, you can install node-webkit (nw) directly and run iTunesify without exporting the OS X app (useful for debugging).
 
 ```bash
 cd pebble-itunesify-remote-osx
 npm install
-npm install -g node-webkit
-/PATH/TO/INSTALLED/NWJS .
+npm install -g nw
+npm start
 ```
