@@ -104,6 +104,30 @@ app.get('/current_app', function(req, res){
     res.send(activePlayer);
 });
 
+app.get('/current_app/:app', function(req, res){
+    console.log("[GET] /current_app/" + req.params.app);
+
+    if (req.params.app === 'spotify') {
+        console.log('Switching to Spotify control');
+        activePlayer = 'spotify';
+        storage.setItem('activePlayer','spotify');
+        iTunesMenuItem.checked = false;
+        spotifyMenuItem.checked = true;
+        res.send(activePlayer);
+    }
+    else if (req.params.app === 'itunes') {
+        console.log('Switching to iTunes control');
+        activePlayer = 'itunes';
+        storage.setItem('activePlayer','itunes');
+        iTunesMenuItem.checked = true;
+        spotifyMenuItem.checked = false;
+        res.send(activePlayer);
+    }
+    else {
+        res.send('err');
+    }
+});
+
 app.get('/previous', function(req, res){
     console.log("[GET] /previous");
     if (activePlayer == 'itunes') {
