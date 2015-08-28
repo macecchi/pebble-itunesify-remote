@@ -9,6 +9,7 @@ This app was built using:
 
 - **[local-itunes](https://github.com/airtoxin/local-itunes)** for iTunes  control using Node.js
 - **[spotify-node-applescript](https://github.com/andrehaveman/spotify-node-applescript)** for Spotify control using Node.js
+- **[osx-wifi-volume-remote](https://github.com/coolaj86/osx-wifi-volume-remote)** for OS X volume control using Node.js
 - **[NW.js](https://github.com/nwjs/nw.js)** (former *node-webkit*) for GUI 
 - **[nw-builder](https://github.com/nwjs/nw-builder)** to export Node.js as OS X app
 - [iTunesify Custom icon](https://github.com/macecchi/pebble-itunesify-remote-osx/blob/master/resources/images/iTunesify.png) by Sean Porter
