@@ -32,13 +32,13 @@ This app was built using:
 
 ## Manual compiling
 
-To manually compile you just need to `npm install` the dependencies and run `nw-builder` to generate the app.
+To manually compile you just need to `npm install` the dependencies and run `nw-builder` to generate the app. The .app will be exported to the folder `build`.
 
 ```bash
 cd pebble-itunesify-remote-osx
 npm install
 npm install -g nw-builder
-nwbuild -p osx64 --macIcns resources/iTunesify.icns .
+npm run archive
 ```
 
 Alternatively, you can install node-webkit (nw) directly and run iTunesify without exporting the OS X app (useful for debugging).

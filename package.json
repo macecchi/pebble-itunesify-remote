@@ -12,7 +12,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nw"
+    "start": "nw",
+    "archive": "nwbuild -p osx64 --macIcns resources/iTunesify.icns -v 0.12.3 . && cd build/pebble-itunesify-remote-osx/osx64/ && mv pebble-itunesify-remote-osx.app iTunesify\\ Remote.app"
   },
   "repository": {
     "type": "git",
