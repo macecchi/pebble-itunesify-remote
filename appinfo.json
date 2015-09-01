@@ -4,9 +4,10 @@
         "aplite",
         "basalt"
     ],
-    "versionLabel": "1.1",
+    "versionLabel": "1.2",
     "uuid": "da6a6eac-4aa3-44f3-91be-6f4682a8b48b",
     "appKeys": {
+        "player": 0,
         "action": 1
     },
     "longName": "iTunesify Remote",

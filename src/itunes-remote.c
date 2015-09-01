@@ -1,6 +1,18 @@
 #include <pebble.h>
 
-typedef enum {APP_MODE_PLAYBACK, APP_MODE_VOLUME} AppMode;
+typedef enum {
+	APP_MODE_PLAYBACK,
+	APP_MODE_VOLUME
+} AppMode;
+
+typedef enum {
+	APP_PLAYER_ITUNES,
+	APP_PLAYER_SPOTIFY
+} AppPlayer;
+
+enum {
+  APP_KEY_PLAYER
+};
 
 static AppMode appMode;
 static Window *window;
@@ -14,6 +26,12 @@ static GBitmap *action_icon_ellipsis;
 static GBitmap *action_icon_volume_up;
 static GBitmap *action_icon_volume_down;
 
+#ifdef PBL_COLOR
+	static StatusBarLayer *status_bar;
+	static ActionMenu *s_action_menu;
+	static ActionMenuLevel *s_root_level;
+#endif
+
 static void send_message(char* message) {
 	DictionaryIterator *iter;
 	app_message_outbox_begin(&iter);
@@ -22,6 +40,17 @@ static void send_message(char* message) {
 	dict_write_tuplet(iter, &value);
 
 	app_message_outbox_send();
+}
+
+static void in_received_handler(DictionaryIterator *iter, void *context) {
+	Tuple *tuple;
+
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "Received some message.");
+
+	tuple = dict_find(iter, APP_KEY_PLAYER);
+	if (tuple) {
+		// text_layer_set_text(text_player_layer, tuple->value->cstring);
+	}
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
@@ -45,8 +74,31 @@ static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "Play/pause clicked.");
-	send_message("playpause");
+	if (appMode == APP_MODE_PLAYBACK) {
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Play/pause clicked.");
+		send_message("playpause");
+	} else {
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Ellipsis clicked.");
+		#ifdef PBL_COLOR
+		// Configure the ActionMenu Window about to be shown
+		ActionMenuConfig config = (ActionMenuConfig) {
+		  .root_level = s_root_level,
+		  .colors = {
+		    .background = GColorGreen,
+		    .foreground = GColorBlack,
+		  },
+		  .align = ActionMenuAlignCenter
+		};
+
+		// Show the ActionMenu
+		s_action_menu = action_menu_open(&config);
+		#else
+		appMode = APP_MODE_PLAYBACK;
+		action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT, action_icon_playpause);
+		action_bar_layer_set_icon(action_bar, BUTTON_ID_UP, action_icon_previous);
+		action_bar_layer_set_icon(action_bar, BUTTON_ID_DOWN, action_icon_next);
+		#endif
+	}
 }
 
 static void long_select_click_handler(ClickRecognizerRef recognizer, void *context) {
@@ -54,11 +106,13 @@ static void long_select_click_handler(ClickRecognizerRef recognizer, void *conte
 
 	if (appMode == APP_MODE_PLAYBACK) {
 		appMode = APP_MODE_VOLUME;
+		action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT, action_icon_ellipsis);
 		action_bar_layer_set_icon(action_bar, BUTTON_ID_UP, action_icon_volume_up);
 		action_bar_layer_set_icon(action_bar, BUTTON_ID_DOWN, action_icon_volume_down);
 	}
 	else {
 		appMode = APP_MODE_PLAYBACK;
+		action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT, action_icon_playpause);
 		action_bar_layer_set_icon(action_bar, BUTTON_ID_UP, action_icon_previous);
 		action_bar_layer_set_icon(action_bar, BUTTON_ID_DOWN, action_icon_next);
 	}
@@ -76,21 +130,50 @@ static void logo_layer_update_callback(Layer *layer, GContext *ctx) {
 	graphics_draw_bitmap_in_rect(ctx, logo_img, layer_get_bounds(layer));
 }
 
+#ifdef PBL_COLOR
+static void action_performed_callback(ActionMenu *action_menu, const ActionMenuItem *action, void *action_data) {
+	AppPlayer player = (AppPlayer)action_menu_item_get_action_data(action);
+
+	if (player == APP_PLAYER_ITUNES) {
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Selected iTunes control.");
+		send_message("control_itunes");
+	}
+	else if (player == APP_PLAYER_SPOTIFY) {
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Selected Spotify control.");
+		send_message("control_spotify");
+	}
+}
+#endif
+
 static void window_load(Window *window) {
   // Action Bar
 	action_bar = action_bar_layer_create();
 	action_bar_layer_add_to_window(action_bar, window);
 	action_bar_layer_set_click_config_provider(action_bar, click_config_provider);
 
-	action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT, action_icon_playpause);
-
 	appMode = APP_MODE_PLAYBACK;
+	action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT, action_icon_playpause);
 	action_bar_layer_set_icon(action_bar, BUTTON_ID_UP, action_icon_previous);
 	action_bar_layer_set_icon(action_bar, BUTTON_ID_DOWN, action_icon_next);
 
   // Window
 	Layer *window_layer = window_get_root_layer(window);
-  //GRect bounds = layer_get_bounds(window_layer);
+
+	#ifdef PBL_COLOR
+		status_bar = status_bar_layer_create();
+		status_bar_layer_set_colors(status_bar, GColorWhite, GColorBlack);
+		status_bar_layer_set_separator_mode(status_bar, StatusBarLayerSeparatorModeNone);
+		// Change the status bar width to make space for the action bar
+		int16_t width = layer_get_bounds(window_layer).size.w - ACTION_BAR_WIDTH;
+		GRect frame = GRect(0, 0, width, STATUS_BAR_LAYER_HEIGHT);
+		layer_set_frame(status_bar_layer_get_layer(status_bar), frame);
+		layer_add_child(window_layer, status_bar_layer_get_layer(status_bar));
+
+		// Create the root level
+		s_root_level = action_menu_level_create(2);
+		action_menu_level_add_action(s_root_level, "Control iTunes", action_performed_callback, (void *)APP_PLAYER_ITUNES);
+		action_menu_level_add_action(s_root_level, "Control Spotify", action_performed_callback, (void *)APP_PLAYER_SPOTIFY);
+	#endif
 
   // Resources
 	logo_img = gbitmap_create_with_resource(RESOURCE_ID_LOGO);
@@ -105,6 +188,10 @@ static void window_unload(Window *window) {
 	layer_destroy(logo_layer);
 	gbitmap_destroy(logo_img);
 	action_bar_layer_destroy(action_bar);
+
+	#ifdef PBL_COLOR
+		status_bar_layer_destroy(status_bar);
+	#endif
 }
 
 static void init(void) {
@@ -123,6 +210,11 @@ static void init(void) {
 	});
 	const bool animated = true;
 	window_stack_push(window, animated);
+
+	app_message_register_inbox_received(in_received_handler);
+	app_message_open(256, 256);
+
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "Done initializing, pushed window: %p", window);
 }
 
 static void deinit(void) {
@@ -131,13 +223,6 @@ static void deinit(void) {
 
 int main(void) {
 	init();
-
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "Done initializing, pushed window: %p", window);
-
-	const uint32_t inbound_size = 64;
-	const uint32_t outbound_size = 64;
-	app_message_open(inbound_size, outbound_size);
-
 	app_event_loop();
 	deinit();
 }
