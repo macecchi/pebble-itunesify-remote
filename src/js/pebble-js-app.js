@@ -30,11 +30,17 @@ iTunes.doCommand = function(action) {
 	if (action == "next") {
 		iTunes.sendCommand("next");
 	}
-	if (action == "previous") {
+	else if (action == "previous") {
 		iTunes.sendCommand("previous");
 	}
-	if (action == "playpause") {
+	else if (action == "playpause") {
 		iTunes.sendCommand("playpause");
+	}
+	else if (action == "volume_up") {
+		iTunes.sendCommand("volume/up");
+	}
+	else if (action == "volume_down") {
+		iTunes.sendCommand("volume/down");
 	}
 };
 
