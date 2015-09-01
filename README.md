@@ -1,13 +1,12 @@
 iTunesify Remote for Pebble
 ==================
 
-Control your iTunes and Spotify playback (play/pause/next/prev) from your Pebble watch!
+Control your iTunes and Spotify playback (play/pause/next/prev/volume) from your Pebble watch!
 
 - Requires [OS X companion app running on the same network](https://github.com/macecchi/pebble-itunesify-remote-osx/blob/master/README.md)
 - Compatible with Pebble and Pebble Time (aplite/basalt)
-- Configurable from Pebble's smartphone application
+- Configurable from Pebble iOS/Android app
 
-\* previously *iTunes Remote for Pebble*
 
 ### How to Use
 
@@ -29,3 +28,6 @@ Control your iTunes and Spotify playback (play/pause/next/prev) from your Pebble
 ### Credits
 
 This project was originally forked from [pebble-plex-remote](https://github.com/spangborn/pebble-plex-remote) by [spangborn](https://github.com/spangborn/).
+
+
+\* iTunesify Remote was previously *iTunes Remote for Pebble*
