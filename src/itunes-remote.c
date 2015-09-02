@@ -18,7 +18,7 @@ static AppMode appMode = APP_PLAYER_ITUNES;
 static AppPlayer appPlayer;
 static Window *window;
 static ActionBarLayer *action_bar;
-static Layer *player_layer;
+static BitmapLayer *player_layer;
 static GBitmap *itunes_img;
 static GBitmap *spotify_img;
 static GBitmap *action_icon_previous;
@@ -53,13 +53,20 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 		if (strcmp(tuple->value->cstring, "spotify") == 0) {
 			APP_LOG(APP_LOG_LEVEL_DEBUG, "Current player is Spotify.");
 			appPlayer = APP_PLAYER_SPOTIFY;
+			bitmap_layer_set_bitmap(player_layer, spotify_img);
 		}
 		else if (strcmp(tuple->value->cstring, "itunes") == 0) {
 			APP_LOG(APP_LOG_LEVEL_DEBUG, "Current player is iTunes.");
 			appPlayer = APP_PLAYER_ITUNES;
+			bitmap_layer_set_bitmap(player_layer, itunes_img);
 		}
-		layer_remove_from_parent(player_layer);
-		layer_add_child(window_get_root_layer(window), player_layer);
+		#ifdef PBL_PLATFORM_APLITE
+		  bitmap_layer_set_compositing_mode(player_layer, GCompOpAssignInverted);
+		#elif PBL_PLATFORM_BASALT
+		  bitmap_layer_set_compositing_mode(player_layer, GCompOpSet);
+		#endif
+		layer_remove_from_parent(bitmap_layer_get_layer(player_layer));
+		layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(player_layer));
 	}
 }
 
@@ -135,16 +142,6 @@ static void click_config_provider(void *context) {
 	window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 }
 
-static void player_layer_update_callback(Layer *layer, GContext *ctx) {
-	graphics_context_set_compositing_mode(ctx, GCompOpSet);
-	if (appPlayer == APP_PLAYER_ITUNES) {
-		graphics_draw_bitmap_in_rect(ctx, itunes_img, layer_get_bounds(layer));
-	}
-	else {
-		graphics_draw_bitmap_in_rect(ctx, spotify_img, layer_get_bounds(layer));
-	}
-}
-
 #ifdef PBL_COLOR
 static void action_performed_callback(ActionMenu *action_menu, const ActionMenuItem *action, void *action_data) {
 	AppPlayer player = (AppPlayer)action_menu_item_get_action_data(action);
@@ -193,14 +190,16 @@ static void window_load(Window *window) {
   // Resources
 	itunes_img = gbitmap_create_with_resource(RESOURCE_ID_ITUNES_FACE);
 	spotify_img = gbitmap_create_with_resource(RESOURCE_ID_SPOTIFY_FACE);
-	player_layer = layer_create(GRect(18,45,80,80));
-	layer_set_update_proc(player_layer, player_layer_update_callback);
 
-	//layer_add_child(window_layer, player_layer);
+	#ifdef PBL_PLATFORM_APLITE
+		player_layer = bitmap_layer_create(GRect(25,38,80,80));
+	#elif PBL_PLATFORM_BASALT
+		player_layer = bitmap_layer_create(GRect(18,45,80,80));
+	#endif
 }
 
 static void window_unload(Window *window) {
-	layer_destroy(player_layer);
+	bitmap_layer_destroy(player_layer);
 	gbitmap_destroy(itunes_img);
 	gbitmap_destroy(spotify_img);
 	action_bar_layer_destroy(action_bar);
