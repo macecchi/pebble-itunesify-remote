@@ -22,17 +22,21 @@ iTunes.doCommand = function(action) {
 	else if (action == "control_itunes") {
 		iTunes.sendCommand("current_app/itunes");
 		localStorage.setItem("player", "itunes");
-    	Pebble.sendAppMessage({player: 'iTunes'});
+    	Pebble.sendAppMessage({player: 'itunes'});
 	}
 	else if (action == "control_spotify") {
 		iTunes.sendCommand("current_app/spotify");
 		localStorage.setItem("player", "spotify");
-    	Pebble.sendAppMessage({player: 'Spotify'});
+    	Pebble.sendAppMessage({player: 'spotify'});
 	}
 };
 
 iTunes.sendCommand = function(command) {
 	console.log("Sending command to http://" + iTunes.server + ":8080/" + command);
+
+				if (command === 'current_app') {
+					console.log('sending current app');
+				}
 
 	var req = new XMLHttpRequest();
 	req.timeout = 2000;
@@ -41,6 +45,12 @@ iTunes.sendCommand = function(command) {
 		if (req.readyState === 4) {  
 			if (req.status === 200) {
 				console.log("Response OK for command: " + command);
+
+				if (command === 'current_app') {
+					var current_player = req.responseText;
+					console.log('Current player: ' + current_player);
+    				Pebble.sendAppMessage({player: current_player});
+				}
 			}
 			else {
 				console.log("Request failed with status " + req.status);
@@ -64,6 +74,9 @@ Pebble.addEventListener("ready", function(e) {
 	if (localStorage.getItem("server") === null || iTunes.server == '') {
 		Pebble.showSimpleNotificationOnPebble("Almost there!", "Please configure iTunesify Remote on the Pebble app.");	
 	}
+	else {
+		iTunes.sendCommand('current_app');
+	}
 });
 
 Pebble.addEventListener("appmessage", function(e) {
@@ -86,5 +99,7 @@ Pebble.addEventListener("webviewclosed", function(e) {
 		localStorage.setItem("server", configuration.server);
 
 		iTunes.server = configuration.server;
+
+		iTunes.sendCommand('current_app');
 	}
 });

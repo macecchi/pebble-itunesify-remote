@@ -14,11 +14,13 @@ enum {
   APP_KEY_PLAYER
 };
 
-static AppMode appMode;
+static AppMode appMode = APP_PLAYER_ITUNES;
+static AppPlayer appPlayer;
 static Window *window;
 static ActionBarLayer *action_bar;
-static Layer *logo_layer;
-static GBitmap *logo_img;
+static Layer *player_layer;
+static GBitmap *itunes_img;
+static GBitmap *spotify_img;
 static GBitmap *action_icon_previous;
 static GBitmap *action_icon_next;
 static GBitmap *action_icon_playpause;
@@ -45,11 +47,19 @@ static void send_message(char* message) {
 static void in_received_handler(DictionaryIterator *iter, void *context) {
 	Tuple *tuple;
 
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "Received some message.");
 
 	tuple = dict_find(iter, APP_KEY_PLAYER);
 	if (tuple) {
-		// text_layer_set_text(text_player_layer, tuple->value->cstring);
+		if (strcmp(tuple->value->cstring, "spotify") == 0) {
+			APP_LOG(APP_LOG_LEVEL_DEBUG, "Current player is Spotify.");
+			appPlayer = APP_PLAYER_SPOTIFY;
+		}
+		else if (strcmp(tuple->value->cstring, "itunes") == 0) {
+			APP_LOG(APP_LOG_LEVEL_DEBUG, "Current player is iTunes.");
+			appPlayer = APP_PLAYER_ITUNES;
+		}
+		layer_remove_from_parent(player_layer);
+		layer_add_child(window_get_root_layer(window), player_layer);
 	}
 }
 
@@ -125,9 +135,14 @@ static void click_config_provider(void *context) {
 	window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 }
 
-static void logo_layer_update_callback(Layer *layer, GContext *ctx) {
+static void player_layer_update_callback(Layer *layer, GContext *ctx) {
 	graphics_context_set_compositing_mode(ctx, GCompOpSet);
-	graphics_draw_bitmap_in_rect(ctx, logo_img, layer_get_bounds(layer));
+	if (appPlayer == APP_PLAYER_ITUNES) {
+		graphics_draw_bitmap_in_rect(ctx, itunes_img, layer_get_bounds(layer));
+	}
+	else {
+		graphics_draw_bitmap_in_rect(ctx, spotify_img, layer_get_bounds(layer));
+	}
 }
 
 #ifdef PBL_COLOR
@@ -176,17 +191,18 @@ static void window_load(Window *window) {
 	#endif
 
   // Resources
-	logo_img = gbitmap_create_with_resource(RESOURCE_ID_LOGO);
-	logo_layer = layer_create(GRect(18,45,80,80));
-	layer_set_update_proc(logo_layer, logo_layer_update_callback);
+	itunes_img = gbitmap_create_with_resource(RESOURCE_ID_ITUNES_FACE);
+	spotify_img = gbitmap_create_with_resource(RESOURCE_ID_SPOTIFY_FACE);
+	player_layer = layer_create(GRect(18,45,80,80));
+	layer_set_update_proc(player_layer, player_layer_update_callback);
 
-  // bitmap_layer_set_bitmap(logo_layer, logo_img);
-	layer_add_child(window_layer, logo_layer);
+	//layer_add_child(window_layer, player_layer);
 }
 
 static void window_unload(Window *window) {
-	layer_destroy(logo_layer);
-	gbitmap_destroy(logo_img);
+	layer_destroy(player_layer);
+	gbitmap_destroy(itunes_img);
+	gbitmap_destroy(spotify_img);
 	action_bar_layer_destroy(action_bar);
 
 	#ifdef PBL_COLOR

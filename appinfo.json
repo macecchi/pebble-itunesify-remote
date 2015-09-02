@@ -4,7 +4,7 @@
         "aplite",
         "basalt"
     ],
-    "versionLabel": "1.2",
+    "versionLabel": "1.3",
     "uuid": "da6a6eac-4aa3-44f3-91be-6f4682a8b48b",
     "appKeys": {
         "player": 0,
@@ -61,8 +61,13 @@
             },
             {
                 "type": "png",
-                "name": "LOGO",
-                "file": "images/itunes_logo.png"
+                "name": "ITUNES_FACE",
+                "file": "images/sp-itunes_logo.png"
+            },
+            {
+                "type": "png",
+                "name": "SPOTIFY_FACE",
+                "file": "images/sp-spotify_logo.png"
             }
         ]
     }
