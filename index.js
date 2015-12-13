@@ -83,6 +83,21 @@ menu.append(new gui.MenuItem({
 
 // Playback control
 
+app.get('/', function(req, res){
+    console.log("[GET] /");
+    if (activePlayer == 'itunes') {
+        iTunes.currentTrack(function(error, data){
+            var track = data;
+            iTunes.playerState(function(error, state){
+                res.send({ track: { name: track.name, artist: track.artist, album: track.album }, state: state });
+            });
+        });
+    }
+    else if (activePlayer == 'spotify') {
+        res.send({});
+    }
+});
+
 app.get('/playpause', function(req, res){
     console.log("[GET] /playpause");
     if (activePlayer == 'itunes') {
