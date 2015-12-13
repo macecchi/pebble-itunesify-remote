@@ -82,21 +82,54 @@ menu.append(new gui.MenuItem({
 }));
 
 // Playback control
+function getiTunesTrackAndState(callback) {
+    iTunes.currentTrack(function(error, track){
+        var trackShort = track ? { name: track.name, artist: track.artist, album: track.album } : {};
+        iTunes.playerState(function(error, state){
+            callback({ track: trackShort, state: state });
+        });
+    });
+}
+
+function getSpotifyTrackAndState(callback) {
+    spotify.getTrack(function(error, track){
+        var trackShort = track ? { name: track.name, artist: track.artist, album: track.album } : {};
+        spotify.getState(function(error, state){
+           callback({ track: trackShort, state: state.state });
+        });
+    });
+}
+
+app.get('/', function(req, res){
+    console.log("[GET] /");
+    if (activePlayer == 'itunes') {
+        getiTunesTrackAndState(function(data){
+            res.json(data);
+        });
+    }
+    else if (activePlayer == 'spotify') {
+        getSpotifyTrackAndState(function(data){
+            res.json(data);
+        });
+    }
+});
 
 app.get('/playpause', function(req, res){
     console.log("[GET] /playpause");
     if (activePlayer == 'itunes') {
-        iTunes.playpause();
-        iTunes.playerState(function(error, state){
-          // res.json({ state: state });
+        iTunes.playpause(function(error) {
+            getiTunesTrackAndState(function(data){
+                res.json(data);
+            });
         });
     }
     else if (activePlayer == 'spotify') {
         spotify.playPause(function(error, state){
-            // res.json({ state: state.state });
+            getSpotifyTrackAndState(function(data){
+                res.json(data);
+            });
         });
     }
-    res.end();
 });
 
 app.get('/current_app', function(req, res){
@@ -131,27 +164,37 @@ app.get('/current_app/:app', function(req, res){
 app.get('/previous', function(req, res){
     console.log("[GET] /previous");
     if (activePlayer == 'itunes') {
-        iTunes.previous();
+        iTunes.previous(function(error){
+            getiTunesTrackAndState(function(data){
+                res.json(data);
+            });
+        });
     }
     else if (activePlayer == 'spotify') {
         spotify.previous(function(error, state){
-            // res.json({ state: state.state });
+            getSpotifyTrackAndState(function(data){
+                res.json(data);
+            })
         });
     }
-    res.end();
 });
 
 app.get('/next', function(req, res){
     console.log("[GET] /next");
     if (activePlayer == 'itunes') {
-        iTunes.next();
+        iTunes.next(function(error){
+            getiTunesTrackAndState(function(data){
+                res.json(data);
+            });
+        });
     }
     else if (activePlayer == 'spotify') {
         spotify.next(function(error, state){
-            // res.json({ state: state.state });
+            getSpotifyTrackAndState(function(data){
+                res.json(data);
+            })
         });
     }
-    res.end();
 });
 
 app.get('/volume/', function(req, res){
@@ -184,4 +227,4 @@ app.get('/volume/:vol', function(req, res){
 
 
 server = app.listen(port);
-console.log('Pebble iTunes Remote Server started on port ' + port);
+console.log('iTunesify Remote started on port ' + port);
