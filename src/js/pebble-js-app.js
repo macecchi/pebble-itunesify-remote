@@ -37,12 +37,14 @@ iTunes.sendCommand = function(command) {
 
 	var req = new XMLHttpRequest();
 	req.timeout = 2000;
+	
 	req.onload = function() {
 		if (req.status === 200) {
 			console.log("Response OK for command: " + command);
 			
-			var responseObj = JSON.parse(req.responseText);
-			if (responseObj) {
+			try {
+				var responseObj = JSON.parse(req.responseText);
+			
 				var pebbleMsg = {};
 				
 				if (responseObj.player) {
@@ -55,11 +57,17 @@ iTunes.sendCommand = function(command) {
 					console.log('Found track info');
 					pebbleMsg.trackName = responseObj.track.name;
 					pebbleMsg.trackArtist = responseObj.track.artist;
+					
+					// Request track info again after a while
+					setTimeout(function() {
+						iTunes.sendCommand('');
+					}, 30000);
 				}
 			
 				Pebble.sendAppMessage(pebbleMsg);
+			} catch (error) {
+				console.log('Could not decode JSON');
 			}
-			
 		}
 		else {
 			console.log("Request to " + url + " failed with status " + req.status + " Response: " + req.responseText);
@@ -69,11 +77,11 @@ iTunes.sendCommand = function(command) {
 			}
 		}
 	};
+	
 	req.onerror = function(e) {
-		setTimeout(function(){
-			Pebble.showSimpleNotificationOnPebble("iTunesify Remote", "Unable to connect. Check the connection and configuration.");	
-		}, 2000);
+		Pebble.showSimpleNotificationOnPebble("iTunesify Remote", "Unable to connect. Check the connection and configuration.");
 	};
+	
 	req.open("GET", url, true);
 	req.send();
 };

@@ -11,6 +11,7 @@ typedef enum {
 } AppPlayer;
 
 enum {
+	APP_KEY_ACTION = 0,
 	APP_KEY_PLAYER = 1,
 	APP_KEY_TRACK_NAME = 2,
 	APP_KEY_TRACK_ARTIST = 3
@@ -181,7 +182,7 @@ static void action_performed_callback(ActionMenu *action_menu, const ActionMenuI
 #endif
 
 static void window_load(Window *window) {
-  // Action Bar
+	// Action Bar
 	action_bar = action_bar_layer_create();
 	action_bar_layer_add_to_window(action_bar, window);
 	action_bar_layer_set_click_config_provider(action_bar, click_config_provider);
@@ -191,7 +192,7 @@ static void window_load(Window *window) {
 	action_bar_layer_set_icon(action_bar, BUTTON_ID_UP, action_icon_previous);
 	action_bar_layer_set_icon(action_bar, BUTTON_ID_DOWN, action_icon_next);
 
-  // Window
+	// Window
 	Layer *window_layer = window_get_root_layer(window);
 	int16_t width = layer_get_bounds(window_layer).size.w;
 
@@ -211,19 +212,17 @@ static void window_load(Window *window) {
 		action_menu_level_add_action(s_root_level, "Control Spotify", action_performed_callback, (void *)APP_PLAYER_SPOTIFY);
 	#endif
 	
-  // Resources
+	// Resources
 	itunes_img = gbitmap_create_with_resource(RESOURCE_ID_ITUNES_FACE);
 	spotify_img = gbitmap_create_with_resource(RESOURCE_ID_SPOTIFY_FACE);
+	player_layer = bitmap_layer_create(GRect(10,115,40,40));
 
-	#ifdef PBL_PLATFORM_APLITE
-		player_layer = bitmap_layer_create(GRect(25,38,80,80));
-	#elif PBL_PLATFORM_BASALT
-		player_layer = bitmap_layer_create(GRect(18,45,80,80));
-	#endif
 	
-  // Texts
+	// Texts
 	track_artist_layer = text_layer_create(GRect(10, 25, width-15, 30));
 	text_layer_set_font(track_artist_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+	text_layer_set_text(track_artist_layer, "Loading...");
+	layer_add_child(window_layer, text_layer_get_layer(track_artist_layer));
 	
 	track_name_layer = text_layer_create(GRect(10, 45, width-15, 60));
 	text_layer_set_overflow_mode(track_name_layer, GTextOverflowModeWordWrap);
