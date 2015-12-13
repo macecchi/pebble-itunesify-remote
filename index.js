@@ -89,7 +89,7 @@ menu.append(new gui.MenuItem({
 
 // Playback control
 function getiTunesTrackAndState(callback) {
-    iTunes.currentTrack(function(error, track){
+    iTunes.currentTrackMini(function(error, track){
         var trackShort = track ? { name: track.name, artist: track.artist, album: track.album } : {};
         iTunes.playerState(function(error, state){
             callback({ track: trackShort, state: state });

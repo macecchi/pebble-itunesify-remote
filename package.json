@@ -40,7 +40,7 @@
   "homepage": "https://github.com/macecchi/pebble-itunesify-remote-osx#readme",
   "dependencies": {
     "express": "^4.13.2",
-    "local-itunes": "^0.3.0",
+    "local-itunes": "https://github.com/macecchi/local-itunes",
     "node-persist": "^0.0.6",
     "spotify-node-applescript": "^0.2.2",
     "osx-wifi-volume-remote": "^1.0.2"
