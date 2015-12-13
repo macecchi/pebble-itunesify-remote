@@ -3,10 +3,8 @@
 <head>
 	<title>iTunesify Remote Configuration</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
-
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	
 </head>
@@ -18,10 +16,10 @@
 	    		<h3>Server</h3>
 	        	<div class="form-group">
 	        		<label for="iTunesServer">iTunes Server</label>
-	        		<input type="text" id="server" name="server" class="form-control" placeholder="192.168.1.117"/>
+	        		<input type="text" id="server" name="server" class="form-control" placeholder="192.168.1.117">
 				</div>	
 	        	
-	        	<input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save"/>
+	        	<input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save">
 	      </form>
 	  </div>
 
@@ -30,13 +28,6 @@
     	<p><a href="http://github.com/macecchi/pebble-itunesify-remote">iTunesify Remote</a></p>
     </div>
 	<script type="text/javascript">
-		function make_base_auth(user, password) {
-  			var tok = user + ':' + password;
-  			var hash = btoa(tok);
-  			
-  			return "Basic " + hash;
-		}
-
 		// Get query variables
 		function getQueryParam(variable, defaultValue) {
 		  // Find all URL parameters
@@ -56,9 +47,11 @@
 		$("#server").val(localStorage.getItem("server"));
 		$("#configure-form").submit(function(e) {
 			var settings = {
-				server: ("#server").val()
+				server: $("#server").val()
 			};
-    		localStorage.setItem("server", ("#server").val());  
+    		localStorage.setItem("server", $("#server").val());  
+
+    		console.log('teste');
 
 			// Set the return URL depending on the runtime environment
 			var return_to = getQueryParam('return_to', 'pebblejs://close#');
