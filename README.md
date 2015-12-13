@@ -19,6 +19,7 @@ iTunes control compatible with OS X 10.10 (Yosemite) or newer. Spotify control w
 
 	![image](https://raw.githubusercontent.com/macecchi/pebble-itunesify-remote-osx/master/resources/images/statusbar_help.png)
 - Go to the **Pebble app** on your phone and type the IP address inside 'iTunesify Remote' configurations
+- To run automatically when you log in, open **System Preferences > Users & Groups > Login Items** and drag & drop the app to the list.
 - Enjoy!
 
 
@@ -34,7 +35,7 @@ This app was built using:
 - **[nw-builder](https://github.com/nwjs/nw-builder)** to export Node.js as OS X app
 
 
-## Manual compiling
+## Manual compile
 
 To manually compile you just need to `npm install` the dependencies and run `nw-builder` to generate the app. The .app will be exported to the folder `build`.
 
