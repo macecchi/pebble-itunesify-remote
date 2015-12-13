@@ -140,7 +140,18 @@ app.get('/playpause', function(req, res){
 
 app.get('/current_app', function(req, res){
     console.log("[GET] /current_app");
-    res.send(activePlayer);
+    if (activePlayer == 'itunes') {
+        getiTunesTrackAndState(function(data){
+            data.player = 'itunes';
+            res.json(data);
+        });
+    }
+    else if (activePlayer == 'spotify') {
+        getSpotifyTrackAndState(function(data){
+            data.player = 'spotify';
+            res.json(data);
+        });
+    }
 });
 
 app.get('/current_app/:app', function(req, res){
