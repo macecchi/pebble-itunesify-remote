@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>pebble-plex-remote config</title>
+	<title>iTunesify Remote Configuration</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 
     </div>
     <div class="footer container">
-    	<p><a href="http://github.com/macecchi/pebble-itunes-remote">iTunes Remote</a></p>
+    	<p><a href="http://github.com/macecchi/pebble-itunesify-remote">iTunesify Remote</a></p>
     </div>
 	<script type="text/javascript">
 		function make_base_auth(user, password) {
@@ -36,18 +36,33 @@
   			
   			return "Basic " + hash;
 		}
+
+		// Get query variables
+		function getQueryParam(variable, defaultValue) {
+		  // Find all URL parameters
+		  var query = location.search.substring(1);
+		  var vars = query.split('&');
+		  for (var i = 0; i < vars.length; i++) {
+		    var pair = vars[i].split('=');
+
+		    // If the query variable parameter is found, decode it to use and return it for use
+		    if (pair[0] === variable) {
+		      return decodeURIComponent(pair[1]);
+		    }
+		  }
+		  return defaultValue || false;
+		}
 		
 		$("#server").val(localStorage.getItem("server"));
 		$("#configure-form").submit(function(e) {
-			var s = $("#server").val();
-
-			var j = {
-				server : s
+			var settings = {
+				server: ("#server").val()
 			};
+    		localStorage.setItem("server", ("#server").val());  
 
-    		localStorage.setItem("server", s);  
-
-			window.location.href = "pebblejs://close#" + JSON.stringify(j);
+			// Set the return URL depending on the runtime environment
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+			document.location = return_to + encodeURIComponent(JSON.stringify(settings));
 
 			e.preventDefault();
 		});	
