@@ -32,40 +32,50 @@ iTunes.doCommand = function(action) {
 };
 
 iTunes.sendCommand = function(command) {
-	console.log("Sending command to http://" + iTunes.server + ":8080/" + command);
-
-				if (command === 'current_app') {
-					console.log('sending current app');
-				}
+	var url = "http://" + iTunes.server + ":8080/" + command;
+	console.log("Sending command to " + url);
 
 	var req = new XMLHttpRequest();
 	req.timeout = 2000;
-	req.open("GET", "http://" + iTunes.server + ":8080/" + command, true);
-	req.onreadystatechange = function(e) {
-		if (req.readyState === 4) {  
-			if (req.status === 200) {
-				console.log("Response OK for command: " + command);
-
-				if (command === 'current_app') {
-					var current_player = req.responseText;
+	req.onload = function() {
+		if (req.status === 200) {
+			console.log("Response OK for command: " + command);
+			
+			var responseObj = JSON.parse(req.responseText);
+			if (responseObj) {
+				var pebbleMsg = {};
+				
+				if (responseObj.player) {
+					var current_player = responseObj.player;
 					console.log('Current player: ' + current_player);
-    				Pebble.sendAppMessage({player: current_player});
+					pebbleMsg.player = current_player;
 				}
-			}
-			else {
-				console.log("Request failed with status " + req.status);
-				if (req.status == 404) {
-					Pebble.showSimpleNotificationOnPebble("iTunesify Error", "You are running an old version of the Mac app. Please update it on bit.ly/itunesify-update.");	
+			
+				if (responseObj.track) {
+					console.log('Found track info');
+					pebbleMsg.trackName = responseObj.track.name;
+					pebbleMsg.trackArtist = responseObj.track.artist;
 				}
+			
+				Pebble.sendAppMessage(pebbleMsg);
 			}
-		} 
+			
+		}
+		else {
+			console.log("Request to " + url + " failed with status " + req.status + " Response: " + req.responseText);
+			
+			if (req.status == 404) {
+				Pebble.showSimpleNotificationOnPebble("iTunesify Error", "You are running an outdated version of the Mac app. Please update it on bit.ly/itunesify-update.");	
+			}
+		}
 	};
 	req.onerror = function(e) {
 		setTimeout(function(){
 			Pebble.showSimpleNotificationOnPebble("iTunesify Remote", "Unable to connect. Check the connection and configuration.");	
 		}, 2000);
 	};
-	req.send(null);
+	req.open("GET", url, true);
+	req.send();
 };
 
 Pebble.addEventListener("ready", function(e) {

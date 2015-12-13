@@ -11,7 +11,9 @@ typedef enum {
 } AppPlayer;
 
 enum {
-  APP_KEY_PLAYER
+	APP_KEY_PLAYER = 1,
+	APP_KEY_TRACK_NAME = 2,
+	APP_KEY_TRACK_ARTIST = 3
 };
 
 static AppMode appMode = APP_PLAYER_ITUNES;
@@ -19,6 +21,8 @@ static AppPlayer appPlayer;
 static Window *window;
 static ActionBarLayer *action_bar;
 static BitmapLayer *player_layer;
+static TextLayer *track_name_layer;
+static TextLayer *track_artist_layer;
 static GBitmap *itunes_img;
 static GBitmap *spotify_img;
 static GBitmap *action_icon_previous;
@@ -38,24 +42,22 @@ static void send_message(char* message) {
 	DictionaryIterator *iter;
 	app_message_outbox_begin(&iter);
 
-	Tuplet value = TupletCString(1, message);
+	Tuplet value = TupletCString(0, message);
 	dict_write_tuplet(iter, &value);
 
 	app_message_outbox_send();
 }
 
 static void in_received_handler(DictionaryIterator *iter, void *context) {
-	Tuple *tuple;
+	Layer *window_layer = window_get_root_layer(window);
 
-
-	tuple = dict_find(iter, APP_KEY_PLAYER);
-	if (tuple) {
-		if (strcmp(tuple->value->cstring, "spotify") == 0) {
+	Tuple *player = dict_find(iter, APP_KEY_PLAYER);
+	if (player) {
+		if (strcmp(player->value->cstring, "spotify") == 0) {
 			APP_LOG(APP_LOG_LEVEL_DEBUG, "Current player is Spotify.");
 			appPlayer = APP_PLAYER_SPOTIFY;
 			bitmap_layer_set_bitmap(player_layer, spotify_img);
-		}
-		else if (strcmp(tuple->value->cstring, "itunes") == 0) {
+		} else if (strcmp(player->value->cstring, "itunes") == 0) {
 			APP_LOG(APP_LOG_LEVEL_DEBUG, "Current player is iTunes.");
 			appPlayer = APP_PLAYER_ITUNES;
 			bitmap_layer_set_bitmap(player_layer, itunes_img);
@@ -65,9 +67,30 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 		#elif PBL_PLATFORM_BASALT
 		  bitmap_layer_set_compositing_mode(player_layer, GCompOpSet);
 		#endif
+		
+		// Re-add image
 		layer_remove_from_parent(bitmap_layer_get_layer(player_layer));
-		layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(player_layer));
+		layer_add_child(window_layer, bitmap_layer_get_layer(player_layer));
+		
 	}
+	
+	Tuple *track_name = dict_find(iter, APP_KEY_TRACK_NAME);
+	if (track_name) {
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Received track name info.");
+		text_layer_set_text(track_name_layer, track_name->value->cstring);
+	}
+	
+	Tuple *track_artist = dict_find(iter, APP_KEY_TRACK_ARTIST);
+	if (track_artist) {
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Received track artist info.");
+		text_layer_set_text(track_artist_layer, track_artist->value->cstring);
+	}
+	
+	// Re-add text layers
+	layer_remove_from_parent(text_layer_get_layer(track_artist_layer));
+	layer_remove_from_parent(text_layer_get_layer(track_name_layer));
+	layer_add_child(window_layer, text_layer_get_layer(track_artist_layer));
+	layer_add_child(window_layer, text_layer_get_layer(track_name_layer));
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
@@ -170,13 +193,14 @@ static void window_load(Window *window) {
 
   // Window
 	Layer *window_layer = window_get_root_layer(window);
+	int16_t width = layer_get_bounds(window_layer).size.w;
 
 	#ifdef PBL_COLOR
 		status_bar = status_bar_layer_create();
 		status_bar_layer_set_colors(status_bar, GColorWhite, GColorBlack);
 		status_bar_layer_set_separator_mode(status_bar, StatusBarLayerSeparatorModeNone);
 		// Change the status bar width to make space for the action bar
-		int16_t width = layer_get_bounds(window_layer).size.w - ACTION_BAR_WIDTH;
+		width = width - ACTION_BAR_WIDTH;
 		GRect frame = GRect(0, 0, width, STATUS_BAR_LAYER_HEIGHT);
 		layer_set_frame(status_bar_layer_get_layer(status_bar), frame);
 		layer_add_child(window_layer, status_bar_layer_get_layer(status_bar));
@@ -186,7 +210,7 @@ static void window_load(Window *window) {
 		action_menu_level_add_action(s_root_level, "Control iTunes", action_performed_callback, (void *)APP_PLAYER_ITUNES);
 		action_menu_level_add_action(s_root_level, "Control Spotify", action_performed_callback, (void *)APP_PLAYER_SPOTIFY);
 	#endif
-
+	
   // Resources
 	itunes_img = gbitmap_create_with_resource(RESOURCE_ID_ITUNES_FACE);
 	spotify_img = gbitmap_create_with_resource(RESOURCE_ID_SPOTIFY_FACE);
@@ -196,6 +220,14 @@ static void window_load(Window *window) {
 	#elif PBL_PLATFORM_BASALT
 		player_layer = bitmap_layer_create(GRect(18,45,80,80));
 	#endif
+	
+  // Texts
+	track_artist_layer = text_layer_create(GRect(10, 25, width-15, 30));
+	text_layer_set_font(track_artist_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+	
+	track_name_layer = text_layer_create(GRect(10, 45, width-15, 60));
+	text_layer_set_overflow_mode(track_name_layer, GTextOverflowModeWordWrap);
+	text_layer_set_font(track_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
 }
 
 static void window_unload(Window *window) {
