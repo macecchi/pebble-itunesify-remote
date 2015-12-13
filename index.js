@@ -90,7 +90,7 @@ menu.append(new gui.MenuItem({
 // Playback control
 function getiTunesTrackAndState(callback) {
     iTunes.currentTrackMini(function(error, track){
-        var trackShort = track ? { name: track.name, artist: track.artist, album: track.album } : {};
+        var trackShort = track ? { name: track.name, artist: track.artist } : {};
         iTunes.playerState(function(error, state){
             callback({ track: trackShort, state: state });
         });
@@ -99,7 +99,7 @@ function getiTunesTrackAndState(callback) {
 
 function getSpotifyTrackAndState(callback) {
     spotify.getTrack(function(error, track){
-        var trackShort = track ? { name: track.name, artist: track.artist, album: track.album } : {};
+        var trackShort = track ? { name: track.name, artist: track.artist } : {};
         spotify.getState(function(error, state){
            callback({ track: trackShort, state: state.state });
         });
@@ -108,38 +108,6 @@ function getSpotifyTrackAndState(callback) {
 
 app.get('/', function(req, res){
     console.log("[GET] /");
-    if (activePlayer == 'itunes') {
-        getiTunesTrackAndState(function(data){
-            res.json(data);
-        });
-    }
-    else if (activePlayer == 'spotify') {
-        getSpotifyTrackAndState(function(data){
-            res.json(data);
-        });
-    }
-});
-
-app.get('/playpause', function(req, res){
-    console.log("[GET] /playpause");
-    if (activePlayer == 'itunes') {
-        iTunes.playpause(function(error) {
-            getiTunesTrackAndState(function(data){
-                res.json(data);
-            });
-        });
-    }
-    else if (activePlayer == 'spotify') {
-        spotify.playPause(function(error, state){
-            getSpotifyTrackAndState(function(data){
-                res.json(data);
-            });
-        });
-    }
-});
-
-app.get('/current_app', function(req, res){
-    console.log("[GET] /current_app");
     if (activePlayer == 'itunes') {
         getiTunesTrackAndState(function(data){
             data.player = 'itunes';
@@ -163,7 +131,10 @@ app.get('/current_app/:app', function(req, res){
         storage.setItem('activePlayer','spotify');
         iTunesMenuItem.checked = false;
         spotifyMenuItem.checked = true;
-        res.send(activePlayer);
+        getSpotifyTrackAndState(function(data){
+            data.player = 'spotify';
+            res.json(data);
+        });
     }
     else if (req.params.app === 'itunes') {
         console.log('Switching to iTunes control');
@@ -171,10 +142,31 @@ app.get('/current_app/:app', function(req, res){
         storage.setItem('activePlayer','itunes');
         iTunesMenuItem.checked = true;
         spotifyMenuItem.checked = false;
-        res.send(activePlayer);
+        getiTunesTrackAndState(function(data){
+            data.player = 'itunes';
+            res.json(data);
+        });
     }
     else {
         res.send('err');
+    }
+});
+
+app.get('/playpause', function(req, res){
+    console.log("[GET] /playpause");
+    if (activePlayer == 'itunes') {
+        iTunes.playpause(function(error) {
+            getiTunesTrackAndState(function(data){
+                res.json(data);
+            });
+        });
+    }
+    else if (activePlayer == 'spotify') {
+        spotify.playPause(function(error, state){
+            getSpotifyTrackAndState(function(data){
+                res.json(data);
+            });
+        });
     }
 });
 
