@@ -1,26 +1,27 @@
 {
+    "uuid": "da6a6eac-4aa3-44f3-91be-6f4682a8b48b",
+    "shortName": "iTunesify Remote",
+    "longName": "iTunesify Remote",
+    "companyName": "Mario Cecchi",
+    "versionLabel": "1.3",
     "sdkVersion": "3",
     "targetPlatforms": [
         "aplite",
         "basalt"
     ],
-    "versionLabel": "1.3",
-    "uuid": "da6a6eac-4aa3-44f3-91be-6f4682a8b48b",
+    "watchapp": {
+        "watchface": false
+    },
     "appKeys": {
         "player": 0,
-        "action": 1
+        "trackName": 1,
+        "trackArtist": 2
     },
-    "longName": "iTunesify Remote",
     "versionCode": 5,
     "capabilities": [
         "location",
         "configurable"
     ],
-    "shortName": "iTunesify Remote",
-    "companyName": "Mario Cecchi",
-    "watchapp": {
-        "watchface": false
-    },
     "resources": {
         "media": [
             {
