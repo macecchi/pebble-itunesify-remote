@@ -65,7 +65,7 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 		}
 		#ifdef PBL_PLATFORM_APLITE
 		  bitmap_layer_set_compositing_mode(player_layer, GCompOpAssignInverted);
-		#elif PBL_PLATFORM_BASALT
+		#elif PBL_PLATFORM_BASALT || PBL_PLATFORM_CHALK
 		  bitmap_layer_set_compositing_mode(player_layer, GCompOpSet);
 		#endif
 		
@@ -201,7 +201,12 @@ static void window_load(Window *window) {
 		status_bar_layer_set_colors(status_bar, GColorWhite, GColorBlack);
 		status_bar_layer_set_separator_mode(status_bar, StatusBarLayerSeparatorModeNone);
 		// Change the status bar width to make space for the action bar
-		GRect frame = GRect(0, 0, width, STATUS_BAR_LAYER_HEIGHT);
+		#ifdef PBL_PLATFORM_BASALT
+			GRect frame = GRect(0, 0, width, STATUS_BAR_LAYER_HEIGHT);
+		#elif PBL_PLATFORM_CHALK
+			GRect frame = GRect(0, 0, layer_get_bounds(window_layer).size.w, STATUS_BAR_LAYER_HEIGHT);
+		#endif
+		
 		layer_set_frame(status_bar_layer_get_layer(status_bar), frame);
 		layer_add_child(window_layer, status_bar_layer_get_layer(status_bar));
 
@@ -219,23 +224,35 @@ static void window_load(Window *window) {
 		player_layer = bitmap_layer_create(GRect(10,105,40,40));
 	#elif PBL_PLATFORM_BASALT
 		player_layer = bitmap_layer_create(GRect(10,115,40,40));
+	#elif PBL_PLATFORM_CHALK
+		player_layer = bitmap_layer_create(GRect(70,130,40,40));
 	#endif
 	
 	
 	// Texts
 	#ifdef PBL_PLATFORM_APLITE
 		int track_info_y = 15;
+		int track_info_w = width - 15;
 	#elif PBL_PLATFORM_BASALT
 		int track_info_y = 25;
+		int track_info_w = width - 15;
+	#elif PBL_PLATFORM_CHALK
+		int track_info_y = 40;
+		int track_info_w = width - 20;
 	#endif
-	track_artist_layer = text_layer_create(GRect(10, track_info_y, width-15, 20));
+	track_artist_layer = text_layer_create(GRect(10, track_info_y, track_info_w, 20));
 	text_layer_set_font(track_artist_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
 	text_layer_set_text(track_artist_layer, "Loading...");
 	layer_add_child(window_layer, text_layer_get_layer(track_artist_layer));
 	
-	track_name_layer = text_layer_create(GRect(10, track_info_y+20, width-15, 50));
+	track_name_layer = text_layer_create(GRect(10, track_info_y+20,track_info_w, 53));
 	text_layer_set_overflow_mode(track_name_layer, GTextOverflowModeWordWrap);
 	text_layer_set_font(track_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+	
+	#if PBL_PLATFORM_CHALK
+		text_layer_set_text_alignment(track_name_layer, GTextAlignmentRight);
+		text_layer_set_text_alignment(track_artist_layer, GTextAlignmentRight);
+	#endif
 }
 
 static void window_unload(Window *window) {

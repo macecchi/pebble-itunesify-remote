@@ -1,6 +1,5 @@
 /* global Pebble; */
 var iTunes = {};
-
 iTunes.server = localStorage.getItem("server");
 iTunes.configureUrl = "https://macecchi.github.io/pebble-itunesify-remote/index.html";
 
@@ -110,7 +109,7 @@ Pebble.addEventListener("showConfiguration", function(e) {
 
 Pebble.addEventListener("webviewclosed", function(e) {
 	if (e.response) {
-		var configuration = JSON.parse(e.response);
+		var configuration = JSON.parse(decodeURIComponent(e.response));
 		console.log("Configuration window returned: " + JSON.stringify(configuration));
 
 		console.log("iTunes Server: " + configuration.server);
