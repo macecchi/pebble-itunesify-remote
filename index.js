@@ -1,3 +1,4 @@
+var pjson = require('./package.json');
 var gui = require('nw.gui');
 var express = require('express');
 var app = express();
@@ -73,7 +74,12 @@ menu.append(new gui.MenuItem({
 }));
 
 menu.append(new gui.MenuItem({
-    label: 'Exit',
+    label: 'iTunesify Remote v' + pjson.version,
+	enabled: false
+}));
+
+menu.append(new gui.MenuItem({
+    label: 'Quit',
     click: function() { 
     	console.log('Clicked exit menu');
         server.close();
@@ -192,7 +198,7 @@ app.get('/next', function(req, res){
         spotify.next(function(error, state){
             getSpotifyTrackAndState(function(data){
                 res.json(data);
-            })
+            })  	
         });
     }
 });
