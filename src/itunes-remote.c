@@ -240,7 +240,7 @@ static void window_load(Window *window) {
 		int track_info_y = 40;
 		int track_info_w = width - 20;
 	#endif
-	track_artist_layer = text_layer_create(GRect(10, track_info_y, track_info_w, 20));
+	track_artist_layer = text_layer_create(GRect(10, track_info_y, track_info_w, 25));
 	text_layer_set_font(track_artist_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
 	text_layer_set_text(track_artist_layer, "Loading...");
 	layer_add_child(window_layer, text_layer_get_layer(track_artist_layer));
