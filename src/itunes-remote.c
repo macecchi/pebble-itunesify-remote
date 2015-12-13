@@ -194,14 +194,13 @@ static void window_load(Window *window) {
 
 	// Window
 	Layer *window_layer = window_get_root_layer(window);
-	int16_t width = layer_get_bounds(window_layer).size.w;
+	int16_t width = layer_get_bounds(window_layer).size.w - ACTION_BAR_WIDTH;
 
 	#ifdef PBL_COLOR
 		status_bar = status_bar_layer_create();
 		status_bar_layer_set_colors(status_bar, GColorWhite, GColorBlack);
 		status_bar_layer_set_separator_mode(status_bar, StatusBarLayerSeparatorModeNone);
 		// Change the status bar width to make space for the action bar
-		width = width - ACTION_BAR_WIDTH;
 		GRect frame = GRect(0, 0, width, STATUS_BAR_LAYER_HEIGHT);
 		layer_set_frame(status_bar_layer_get_layer(status_bar), frame);
 		layer_add_child(window_layer, status_bar_layer_get_layer(status_bar));
@@ -215,16 +214,26 @@ static void window_load(Window *window) {
 	// Resources
 	itunes_img = gbitmap_create_with_resource(RESOURCE_ID_ITUNES_FACE);
 	spotify_img = gbitmap_create_with_resource(RESOURCE_ID_SPOTIFY_FACE);
-	player_layer = bitmap_layer_create(GRect(10,115,40,40));
-
+	
+	#ifdef PBL_PLATFORM_APLITE
+		player_layer = bitmap_layer_create(GRect(10,105,40,40));
+	#elif PBL_PLATFORM_BASALT
+		player_layer = bitmap_layer_create(GRect(10,115,40,40));
+	#endif
+	
 	
 	// Texts
-	track_artist_layer = text_layer_create(GRect(10, 25, width-15, 30));
+	#ifdef PBL_PLATFORM_APLITE
+		int track_info_y = 15;
+	#elif PBL_PLATFORM_BASALT
+		int track_info_y = 25;
+	#endif
+	track_artist_layer = text_layer_create(GRect(10, track_info_y, width-15, 20));
 	text_layer_set_font(track_artist_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
 	text_layer_set_text(track_artist_layer, "Loading...");
 	layer_add_child(window_layer, text_layer_get_layer(track_artist_layer));
 	
-	track_name_layer = text_layer_create(GRect(10, 45, width-15, 60));
+	track_name_layer = text_layer_create(GRect(10, track_info_y+20, width-15, 50));
 	text_layer_set_overflow_mode(track_name_layer, GTextOverflowModeWordWrap);
 	text_layer_set_font(track_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
 }

@@ -1,3 +1,4 @@
+/* global Pebble; */
 var iTunes = {};
 
 iTunes.server = localStorage.getItem("server");
@@ -44,7 +45,6 @@ iTunes.sendCommand = function(command) {
 			
 			try {
 				var responseObj = JSON.parse(req.responseText);
-			
 				var pebbleMsg = {};
 				
 				if (responseObj.player) {
@@ -93,7 +93,7 @@ Pebble.addEventListener("ready", function(e) {
 		Pebble.showSimpleNotificationOnPebble("Almost there!", "Please configure iTunesify Remote on the Pebble app.");	
 	}
 	else {
-		iTunes.sendCommand('current_app');
+		iTunes.sendCommand('');
 	}
 });
 
@@ -118,6 +118,6 @@ Pebble.addEventListener("webviewclosed", function(e) {
 
 		iTunes.server = configuration.server;
 
-		iTunes.sendCommand('current_app');
+		iTunes.sendCommand('');
 	}
 });
