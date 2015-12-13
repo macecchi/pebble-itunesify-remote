@@ -86,15 +86,20 @@ menu.append(new gui.MenuItem({
 app.get('/', function(req, res){
     console.log("[GET] /");
     if (activePlayer == 'itunes') {
-        iTunes.currentTrack(function(error, data){
-            var track = data;
+        iTunes.currentTrack(function(error, track){
+            var trackShort = track ? { name: track.name, artist: track.artist, album: track.album } : {};
             iTunes.playerState(function(error, state){
-                res.send({ track: { name: track.name, artist: track.artist, album: track.album }, state: state });
+                res.send({ track: trackShort, state: state });
             });
         });
     }
     else if (activePlayer == 'spotify') {
-        res.send({});
+        spotify.getTrack(function(error, track){
+            var trackShort = track ? { name: track.name, artist: track.artist, album: track.album } : {};
+            spotify.getState(function(error, state){
+                res.send({ track: trackShort, state: state.state });
+            });
+        });
     }
 });
 
