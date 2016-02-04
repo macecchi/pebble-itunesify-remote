@@ -55,5 +55,7 @@ npm install -g nw
 npm start
 ```
 
+## License
 
-\* previously *iTunes Remote for Pebble*
+This code is licensed under the terms of the [GNU General Public License v3](http://choosealicense.com/licenses/gpl-3.0/). The GPL is a copyleft license that requires anyone who distributes this code or a derivative work to make the source available under the same terms. 
+
