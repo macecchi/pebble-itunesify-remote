@@ -20,14 +20,17 @@ Control your iTunes and Spotify playback (play/pause/next/prev/volume) from your
 
 ### How to Install
 
-	$ export PEBBLE_PHONE=<YOUR PHONE'S IP ADDRESS>
-	$ pebble build && pebble install
-	$ pebble logs
+```
+$ pebble build && pebble install
+```
 	
 
 ### Credits
 
 This project was originally forked from [pebble-plex-remote](https://github.com/spangborn/pebble-plex-remote) by [spangborn](https://github.com/spangborn/).
 
+## License
 
-\* iTunesify Remote was previously *iTunes Remote for Pebble*
+This code is licensed under the terms of the [GNU General Public License v3](http://choosealicense.com/licenses/gpl-3.0/). The GPL is a copyleft license that requires anyone who distributes this code or a derivative work to make the source available under the same terms. 
+
+
