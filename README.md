@@ -14,7 +14,7 @@ Control your iTunes and Spotify playback (play/pause/next/prev/volume) from your
 - _(Optional)_ Drag app to **Applications** folder
 - **Double click** to open
 - Click on the **status bar** icon and take note of the IP address shown
-<img src="https://raw.githubusercontent.com/macecchi/pebble-itunesify-remote/master/statusbar_help.png" width=300">
+<img src="https://raw.githubusercontent.com/macecchi/pebble-itunesify-remote/master/statusbar_help.png">
 - On your **Pebble** app, install iTunesify Remote from Pebble Appstore ([link](https://apps.getpebble.com/en_US/application/55b5bdfe5e07169f58000022))
 - Still on the Pebble app, type the IP address you took note inside _iTunesify Remote_ configurations
 - _(Optional)_ To run automatically when you log in, open **System Preferences > Users & Groups > Login Items** and drag & drop the app to the list.
