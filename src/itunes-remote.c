@@ -43,7 +43,7 @@ static void send_message(char* message) {
 	DictionaryIterator *iter;
 	app_message_outbox_begin(&iter);
 
-	Tuplet value = TupletCString(0, message);
+	Tuplet value = TupletCString(APP_KEY_ACTION, message);
 	dict_write_tuplet(iter, &value);
 
 	app_message_outbox_send();
