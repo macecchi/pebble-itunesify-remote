@@ -72,7 +72,7 @@ iTunes.sendCommand = function(command) {
 			console.log("Request to " + url + " failed with status " + req.status + " Response: " + req.responseText);
 			
 			if (req.status == 404) {
-				Pebble.showSimpleNotificationOnPebble("iTunesify Error", "You are running an outdated version of the Mac app. Please update it on bit.ly/itunesify-update.");	
+				Pebble.showSimpleNotificationOnPebble("iTunesify Error", "You are running an outdated version of the Mac app. Please update it on bit.ly/itfy-update.");	
 			}
 		}
 	};
