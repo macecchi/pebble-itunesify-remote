@@ -9,10 +9,13 @@
     "show_in_taskbar": false
   },
   "description": "Control iTunes and Spotify playback (play/pause/next/prev/volume) from your Pebble watch!",
-  "devDependencies": {},
+  "devDependencies": {
+    "nw": "^0.15.4",
+    "nw-builder": "^2.2.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nw",
+    "start": "./node_modules/.bin/nw --enable-logging=stderr",
     "archive": "nwbuild -p osx64 --macIcns resources/iTunesify.icns -v 0.12.3 . && cd build/pebble-itunesify-remote-osx/osx64/ && mv pebble-itunesify-remote-osx.app iTunesify\\ Remote.app"
   },
   "repository": {
