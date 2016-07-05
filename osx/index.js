@@ -231,6 +231,9 @@ app.get('/volume/:vol', function(req, res){
             res.json({ volume: volume, muted: muted, err: err });
         }, req.params.vol);
     }
+    else {
+        res.status(400).send({ error: 'Bad Request' });
+    }
     
 });
 
