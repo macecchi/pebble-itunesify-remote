@@ -10,15 +10,23 @@ var volume = require('osx-wifi-volume-remote');
 var port = 8080;
 var server;
 
+
 // Load preferences
 
 storage.initSync();
 
 if (typeof storage.getItem('activePlayer') === 'undefined') {
-    storage.setItem('activePlayer','itunes');
+    storage.setItem('activePlayer', 'itunes');
 }
 var activePlayer = storage.getItem('activePlayer');
 console.log("Starting with active player: " + activePlayer);
+
+if (typeof storage.getItem('controlGlobalVolume') === 'undefined') {
+    storage.setItem('controlGlobalVolume', true);
+}
+var controlGlobalVolume = storage.getItem('controlGlobalVolume');
+console.log("Controls global volume: " + controlGlobalVolume);
+
 
 // GUI
 
@@ -50,7 +58,7 @@ var iTunesMenuItem = new gui.MenuItem({
     click: function() { 
         console.log('Switching to iTunes control');
         activePlayer = 'itunes';
-        storage.setItem('activePlayer','itunes');
+        storage.setItem('activePlayer', 'itunes');
         spotifyMenuItem.checked = false;
     }
 });
@@ -63,11 +71,32 @@ var spotifyMenuItem = new gui.MenuItem({
     click: function() { 
         console.log('Switching to Spotify control');
         activePlayer = 'spotify';
-        storage.setItem('activePlayer','spotify');
+        storage.setItem('activePlayer', 'spotify');
         iTunesMenuItem.checked = false;
     }
 });
 menu.append(spotifyMenuItem);
+
+menu.append(new gui.MenuItem({
+    type: 'separator'
+}));
+
+var globalVolumeMenuItem = new gui.MenuItem({
+    label: 'Control system volume',
+    type: 'checkbox',
+    checked: controlGlobalVolume,
+    click: function() { 
+        controlGlobalVolume = !controlGlobalVolume;
+        if (controlGlobalVolume) {
+            console.log('Controlling system volume');
+        } else {
+            console.log('Controlling player volume')
+        }
+        storage.setItem('controlGlobalVolume', controlGlobalVolume);
+        globalVolumeMenuItem.checked = controlGlobalVolume;
+    }
+});
+menu.append(globalVolumeMenuItem);
 
 menu.append(new gui.MenuItem({
     type: 'separator'
@@ -216,23 +245,56 @@ app.get('/volume/', function(req, res){
 app.get('/volume/:vol', function(req, res){
     console.log("[GET] /volume/" + req.params.vol);
 
-    if (req.params.vol === 'up') {
+        var delta;
+        if (req.params.vol === 'up') {
+            delta = 10;
+        } 
+        else if (req.params.vol === 'down') {
+            delta = -10;
+        }
+        else {
+            res.status(400).send({ error: 'Bad Request' });
+            return;
+        }
+        
+    // Control global volume
+    if (controlGlobalVolume) {
         volume.fadeBy(function(err, volume, muted) {
-            res.json({ volume: volume, muted: muted, err: err });
-        }, 10, 1.0);
-    } 
-    else if (req.params.vol === 'down') {
-        volume.fadeBy(function(err, volume, muted) {
-            res.json({ volume: volume, muted: muted, err: err });
-        }, -10, 1.0);
+            if (err) {
+                res.status(500).send({ error: err });
+                return;
+            }
+
+            res.json({ volume: volume });
+        }, delta, 1.0);
+
+        return;
     }
-    else if (!isNaN(req.params.vol)) {
-        volume.set(function(err, volume, muted) {
-            res.json({ volume: volume, muted: muted, err: err });
-        }, req.params.vol);
+
+    // Control player volume
+    if (activePlayer == 'itunes') {
+        iTunes.fadeVolumeBy(delta, function(err, volume) {
+            if (err) {
+                res.status(500).send({ error: err });
+                return;
+            }
+
+            res.json({ volume: volume });
+        });
     }
-    else {
-        res.status(400).send({ error: 'Bad Request' });
+    else if (activePlayer == 'spotify') {
+        var action = delta > 0 ? spotify.volumeUp : spotify.volumeDown;
+        action(function(err, state) {
+            if (err) {
+                res.status(500).send({ error: err });
+                return;
+            }
+            
+            spotify.getState(function(err, state){
+                res.json({ volume: state.volume });
+            });
+        });
+
     }
     
 });
