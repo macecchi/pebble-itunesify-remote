@@ -78,7 +78,9 @@ iTunes.sendCommand = function(command) {
 	};
 	
 	req.onerror = function(e) {
+		console.log("Request to " + url + " failed.");
 		Pebble.showSimpleNotificationOnPebble("iTunesify Remote", "Unable to connect. Check the connection and configuration.");
+		Pebble.sendAppMessage({ alert: "failed" });
 	};
 	
 	req.open("GET", url, true);
@@ -86,11 +88,11 @@ iTunes.sendCommand = function(command) {
 };
 
 Pebble.addEventListener("ready", function(e) {
-	console.log("iTunes Remote is go.");
+	console.log("iTunes Remote is ready.");
 
 	if (localStorage.getItem("server") === null || iTunes.server == '') {
 		Pebble.showSimpleNotificationOnPebble("Almost there!", "Please configure iTunesify Remote on the Pebble app.");
-		Pebble.sendAppMessage({ error: "not configured" });
+		Pebble.sendAppMessage({ alert: "not configured" });
 	}
 	else {
 		iTunes.sendCommand('');

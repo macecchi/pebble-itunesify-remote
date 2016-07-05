@@ -15,7 +15,7 @@ enum {
 	APP_KEY_PLAYER = 1,
 	APP_KEY_TRACK_NAME = 2,
 	APP_KEY_TRACK_ARTIST = 3,
-	APP_KEY_ERROR = 4
+	APP_KEY_ALERT = 4
 };
 
 static AppMode appMode = APP_PLAYER_ITUNES;
@@ -53,13 +53,17 @@ static void send_message(char* message) {
 static void in_received_handler(DictionaryIterator *iter, void *context) {
 	Layer *window_layer = window_get_root_layer(window);
 
-	// Error message
-	Tuple *error = dict_find(iter, APP_KEY_ERROR);
-	if (error) {
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Received error message (%s).", error->value->cstring);
-		if (strcmp(error->value->cstring, "not configured") == 0) {
+	// Alert message
+	Tuple *alert = dict_find(iter, APP_KEY_ALERT);
+	if (alert) {
+		char *alertType = alert->value->cstring;
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Received alert message (%s).", alertType);
+		if (strcmp(alertType, "not configured") == 0) {
 			text_layer_set_text(track_artist_layer, "Error");
-			text_layer_set_text(track_name_layer, "iTunesify not configured");
+			text_layer_set_text(track_name_layer, "iTunesify not configured.");
+		} else if (strcmp(alertType, "failed") == 0) {
+			text_layer_set_text(track_artist_layer, "Error");
+			text_layer_set_text(track_name_layer, "Could not connect.");
 		}
 	}
 
@@ -132,7 +136,7 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 		APP_LOG(APP_LOG_LEVEL_DEBUG, "Play/pause clicked.");
 		send_message("playpause");
 	} else {
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Ellipsis clicked.");
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Options clicked.");
 		#ifdef PBL_COLOR
 		// Configure the ActionMenu Window about to be shown
 		ActionMenuConfig config = (ActionMenuConfig) {
@@ -258,7 +262,7 @@ static void window_load(Window *window) {
 	text_layer_set_text(track_artist_layer, "Loading...");
 	layer_add_child(window_layer, text_layer_get_layer(track_artist_layer));
 	
-	track_name_layer = text_layer_create(GRect(10, track_info_y+20,track_info_w, 53));
+	track_name_layer = text_layer_create(GRect(10, track_info_y+20, track_info_w, 53));
 	text_layer_set_overflow_mode(track_name_layer, GTextOverflowModeWordWrap);
 	text_layer_set_font(track_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
 	
