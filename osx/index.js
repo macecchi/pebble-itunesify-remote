@@ -5,6 +5,7 @@ const open = require('open');
 const pjson = require('./package.json');
 const spotify = require('spotify-node-applescript');
 const storage = require('node-persist');
+const update = require('./update');
 const volume = require('osx-wifi-volume-remote');
 
 const ITUNESIFY_RELEASES_PAGE = 'https://github.com/macecchi/pebble-itunesify-remote/releases/';
@@ -134,7 +135,21 @@ menu.append(new gui.MenuItem({
 menu.append(new gui.MenuItem({
     label: 'Check for updates...',
     click: function () {
-        open(ITUNESIFY_RELEASES_PAGE);
+        update.checkForUpdates( (err, needsUpdate, releasePage) => {
+            if (err) {
+                alert('An error occurred while checking for updates.');
+                return;
+            }
+            
+            if (needsUpdate) {
+                var update = confirm('An update is available for iTunesify Remote. Click OK to open the download page.');
+                if (update) {
+                    open(releasePage);
+                }
+            } else {
+                alert('No updates available. You already have the latest version of iTunesify Remote. Thanks!');
+            }
+        });
     }
 }));
 
