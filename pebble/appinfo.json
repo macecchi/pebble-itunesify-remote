@@ -3,7 +3,7 @@
     "shortName": "iTunesify Remote",
     "longName": "iTunesify Remote",
     "companyName": "Mario Cecchi",
-    "versionLabel": "1.4",
+    "versionLabel": "1.5",
     "sdkVersion": "3",
     "targetPlatforms": [
         "aplite",
@@ -18,7 +18,7 @@
         "player": 1,
         "trackName": 2,
         "trackArtist": 3,
-        "error": 4
+        "alert": 4
     },
     "versionCode": 5,
     "capabilities": [
