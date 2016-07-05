@@ -1,13 +1,14 @@
-var pjson = require('./package.json');
-var gui = require('nw.gui');
-var express = require('express');
-var app = express();
-var iTunes = require('local-itunes');
-var spotify = require('spotify-node-applescript');
-var storage = require('node-persist');
-var volume = require('osx-wifi-volume-remote');
+const app = require('express')();
+const gui = require('nw.gui');
+const iTunes = require('local-itunes');
+const open = require('open');
+const pjson = require('./package.json');
+const spotify = require('spotify-node-applescript');
+const storage = require('node-persist');
+const volume = require('osx-wifi-volume-remote');
 
-var port = 8080;
+const ITUNESIFY_RELEASES_PAGE = 'https://github.com/macecchi/pebble-itunesify-remote/releases/';
+const port = 8080;
 var server;
 
 
@@ -128,6 +129,13 @@ menu.append(new gui.MenuItem({ type: 'separator' }));
 menu.append(new gui.MenuItem({
     label: 'iTunesify Remote v' + pjson.version,
 	enabled: false
+}));
+
+menu.append(new gui.MenuItem({
+    label: 'Check for updates...',
+    click: function () {
+        open(ITUNESIFY_RELEASES_PAGE);
+    }
 }));
 
 menu.append(new gui.MenuItem({
