@@ -51,8 +51,15 @@ menu.append(new gui.MenuItem({
     type: 'separator'
 }));
 
+// GUI player options
+
+menu.append(new gui.MenuItem({
+    label: 'Player',
+	enabled: false
+}));
+
 var iTunesMenuItem = new gui.MenuItem({
-    label: 'Control iTunes',
+    label: 'iTunes',
     type: 'checkbox',
     checked: (activePlayer === 'itunes'),
     click: function() { 
@@ -65,7 +72,7 @@ var iTunesMenuItem = new gui.MenuItem({
 menu.append(iTunesMenuItem);
 
 var spotifyMenuItem = new gui.MenuItem({
-    label: 'Control Spotify',
+    label: 'Spotify',
     type: 'checkbox',
     checked: (activePlayer === 'spotify'),
     click: function() { 
@@ -77,30 +84,46 @@ var spotifyMenuItem = new gui.MenuItem({
 });
 menu.append(spotifyMenuItem);
 
+menu.append(new gui.MenuItem({ type: 'separator' }));
+
+// GUI volume options
+
 menu.append(new gui.MenuItem({
-    type: 'separator'
+    label: 'Volume',
+	enabled: false
 }));
 
 var globalVolumeMenuItem = new gui.MenuItem({
-    label: 'Control system volume',
+    label: 'Global volume',
     type: 'checkbox',
     checked: controlGlobalVolume,
     click: function() { 
-        controlGlobalVolume = !controlGlobalVolume;
-        if (controlGlobalVolume) {
-            console.log('Controlling system volume');
-        } else {
-            console.log('Controlling player volume')
-        }
-        storage.setItem('controlGlobalVolume', controlGlobalVolume);
-        globalVolumeMenuItem.checked = controlGlobalVolume;
+        controlGlobalVolume = true;
+        console.log('Controlling system volume');
+        storage.setItem('controlGlobalVolume', true);
+        globalVolumeMenuItem.checked = true;
+        playerVolumeMenuItem.checked = false;
     }
 });
 menu.append(globalVolumeMenuItem);
 
-menu.append(new gui.MenuItem({
-    type: 'separator'
-}));
+var playerVolumeMenuItem = new gui.MenuItem({
+    label: 'Player volume',
+    type: 'checkbox',
+    checked: !controlGlobalVolume,
+    click: function() { 
+        controlGlobalVolume = false;
+        console.log('Controlling player volume')
+        storage.setItem('controlGlobalVolume', false);
+        globalVolumeMenuItem.checked = false;
+        playerVolumeMenuItem.checked = true;
+    }
+});
+menu.append(playerVolumeMenuItem);
+
+menu.append(new gui.MenuItem({ type: 'separator' }));
+
+// GUI info
 
 menu.append(new gui.MenuItem({
     label: 'iTunesify Remote v' + pjson.version,
