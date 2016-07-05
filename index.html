@@ -1,64 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>iTunesify Remote Configuration</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	
+    <meta charset="UTF-8">
+    <title>iTunesify Remote Settings</title>
+    <link rel='stylesheet' type='text/css' href='css/slate.min.css'>
 </head>
+
 <body>
-    <div class="container">
-		<div class="configure">
-			<h2>Configure</h2>
-	    	<form id="configure-form" class="form-configure well" action="#" method="POST">
-	    		<h3>Server</h3>
-	        	<div class="form-group">
-	        		<label for="iTunesServer">iTunes Server</label>
-	        		<input type="text" id="server" name="server" class="form-control" placeholder="192.168.1.117">
-				</div>	
-	        	
-	        	<input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save">
-	      </form>
-	  </div>
-
+    <div class='item-container'>
+        <div class='item-container-content'>
+            <div class='item'>
+                Tell iTunesify Remote how to find your Mac on your network. You can find the correct settings on your Mac by clicking the iTunesify Remote app from the top status bar.
+            </div>
+        </div>
     </div>
-    <div class="footer container">
-    	<p><a href="http://github.com/macecchi/pebble-itunesify-remote">iTunesify Remote</a></p>
+
+    <div class="item-container">
+        <div class="item-container-header">Server IP Address</div>
+        <div class="item-container-content">
+            <label class="item">
+                <div class="item-input-wrapper">
+                    <input type="text" class="item-input" name="server" id="server_input" placeholder="e.g.: 192.168.0.101">
+                </div>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            This is the address for your Mac on your local network. You can find the correct value on the iTunesify Remote Mac app on your status
+            bar.
+        </div>
     </div>
-	<script type="text/javascript">
-		// Get query variables
-		function getQueryParam(variable, defaultValue) {
-		  // Find all URL parameters
-		  var query = location.search.substring(1);
-		  var vars = query.split('&');
-		  for (var i = 0; i < vars.length; i++) {
-		    var pair = vars[i].split('=');
 
-		    // If the query variable parameter is found, decode it to use and return it for use
-		    if (pair[0] === variable) {
-		      return decodeURIComponent(pair[1]);
-		    }
-		  }
-		  return defaultValue || false;
-		}
-		
-		$("#server").val(localStorage.getItem("server"));
-		$("#configure-form").submit(function(e) {
-			var settings = {
-				server: $("#server").val()
-			};
-    		localStorage.setItem("server", $("#server").val());  
+    <div class='item-container'>
+        <div class='button-container'>
+            <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+        </div>
+    </div>
 
-    		console.log('teste');
-
-			// Set the return URL depending on the runtime environment
-			var return_to = getQueryParam('return_to', 'pebblejs://close#');
-			document.location = return_to + encodeURIComponent(JSON.stringify(settings));
-
-			e.preventDefault();
-		});	
-</script>
+    <script src='js/slate.min.js'></script>
+    <script>
+        function getConfigData() {
+            var serverInput = document.getElementById('server_input');
+        
+            var options = {
+                'server': serverInput.value
+            };
+            // Save for next launch
+            localStorage['server'] = options['server'];
+            console.log('Got options: ' + JSON.stringify(options));
+            return options;
+        }
+        function getQueryParam(variable, defaultValue) {
+            var query = location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (pair[0] === variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return defaultValue || false;
+        }
+        
+        var submitButton = document.getElementById('submit_button');
+        submitButton.addEventListener('click', function() {
+            console.log('Submit');
+            // Set the return URL depending on the runtime environment
+            var return_to = getQueryParam('return_to', 'pebblejs://close#');
+            document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+        });
+        (function() {
+            var serverInput = document.getElementById('server_input');
+            // Load any previously saved configuration, if available
+            if(localStorage['server']) {
+                serverInput.value = localStorage['server'];
+            }
+        })();
+    </script>
 </body>
+
 </html>
