@@ -17,7 +17,8 @@
         "action": 0,
         "player": 1,
         "trackName": 2,
-        "trackArtist": 3
+        "trackArtist": 3,
+        "error": 4
     },
     "versionCode": 5,
     "capabilities": [

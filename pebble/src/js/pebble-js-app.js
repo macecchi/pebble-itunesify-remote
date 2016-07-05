@@ -89,7 +89,8 @@ Pebble.addEventListener("ready", function(e) {
 	console.log("iTunes Remote is go.");
 
 	if (localStorage.getItem("server") === null || iTunes.server == '') {
-		Pebble.showSimpleNotificationOnPebble("Almost there!", "Please configure iTunesify Remote on the Pebble app.");	
+		Pebble.showSimpleNotificationOnPebble("Almost there!", "Please configure iTunesify Remote on the Pebble app.");
+		Pebble.sendAppMessage({ error: "not configured" });
 	}
 	else {
 		iTunes.sendCommand('');

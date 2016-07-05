@@ -14,7 +14,8 @@ enum {
 	APP_KEY_ACTION = 0,
 	APP_KEY_PLAYER = 1,
 	APP_KEY_TRACK_NAME = 2,
-	APP_KEY_TRACK_ARTIST = 3
+	APP_KEY_TRACK_ARTIST = 3,
+	APP_KEY_ERROR = 4
 };
 
 static AppMode appMode = APP_PLAYER_ITUNES;
@@ -52,6 +53,17 @@ static void send_message(char* message) {
 static void in_received_handler(DictionaryIterator *iter, void *context) {
 	Layer *window_layer = window_get_root_layer(window);
 
+	// Error message
+	Tuple *error = dict_find(iter, APP_KEY_ERROR);
+	if (error) {
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Received error message (%s).", error->value->cstring);
+		if (strcmp(error->value->cstring, "not configured") == 0) {
+			text_layer_set_text(track_artist_layer, "Error");
+			text_layer_set_text(track_name_layer, "iTunesify not configured");
+		}
+	}
+
+	// Player message
 	Tuple *player = dict_find(iter, APP_KEY_PLAYER);
 	if (player) {
 		if (strcmp(player->value->cstring, "spotify") == 0) {
@@ -72,15 +84,16 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 		// Re-add image
 		layer_remove_from_parent(bitmap_layer_get_layer(player_layer));
 		layer_add_child(window_layer, bitmap_layer_get_layer(player_layer));
-		
 	}
 	
+	// Track name message
 	Tuple *track_name = dict_find(iter, APP_KEY_TRACK_NAME);
 	if (track_name) {
 		APP_LOG(APP_LOG_LEVEL_DEBUG, "Received track name info.");
 		text_layer_set_text(track_name_layer, track_name->value->cstring);
 	}
 	
+	// Track artist message
 	Tuple *track_artist = dict_find(iter, APP_KEY_TRACK_ARTIST);
 	if (track_artist) {
 		APP_LOG(APP_LOG_LEVEL_DEBUG, "Received track artist info.");
