@@ -1,5 +1,6 @@
-const app = require('express')();
-const gui = require('nw.gui');
+const {app, Menu, MenuItem, Tray} = require('electron')
+
+const server = require('express')();
 const iTunes = require('local-itunes');
 const open = require('open');
 const pjson = require('./package.json');
@@ -8,14 +9,20 @@ const storage = require('node-persist');
 const update = require('./update');
 const volume = require('osx-wifi-volume-remote');
 
-const ITUNESIFY_RELEASES_PAGE = 'https://github.com/macecchi/pebble-itunesify-remote/releases/';
-const port = 8080;
-var server;
+const port = 8080
 
+let tray = null, menu = null
+let serverInstance = null
+
+app.on('ready', () => {
+    app.dock.hide()
+    tray = new Tray('images/TrayIconTemplate.png')
+    tray.setToolTip('iTunesify Remote v' + pjson.version)
+    loadMenu()
+})
 
 // Load preferences
-
-storage.initSync();
+storage.initSync()
 
 if (typeof storage.getItem('activePlayer') === 'undefined') {
     storage.setItem('activePlayer', 'itunes');
@@ -32,135 +39,141 @@ console.log("Controls global volume: " + controlGlobalVolume);
 
 // GUI
 
-var localIP;
+function loadMenu() {
+    menu = new Menu()
 
-require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-  localIP = add;
-	menu.insert(new gui.MenuItem({
-	    label: 'Server running on ' + localIP,
-	    enabled: false
-	}), 0);
-})
+    menu.append(new MenuItem({
+        label: 'Detecting IP...',
+        enabled: false,
+        visible: false
+    }))
 
-var tray = new gui.Tray({
-    icon: 'resources/images/bar_icon.png'
-});
+    menu.append(new MenuItem({
+        type: 'separator'
+    }));
 
-var menu = new gui.Menu();
-tray.menu = menu;
+    // GUI player options
 
-menu.append(new gui.MenuItem({
-    type: 'separator'
-}));
+    menu.append(new MenuItem({
+        label: 'Player',
+        enabled: false
+    }));
 
-// GUI player options
+    var iTunesMenuItem = new MenuItem({
+        label: 'iTunes',
+        type: 'checkbox',
+        checked: (activePlayer === 'itunes'),
+        click: function() { 
+            console.log('Switching to iTunes control');
+            activePlayer = 'itunes';
+            storage.setItem('activePlayer', 'itunes');
+            spotifyMenuItem.checked = false;
+        }
+    });
+    menu.append(iTunesMenuItem);
 
-menu.append(new gui.MenuItem({
-    label: 'Player',
-	enabled: false
-}));
+    var spotifyMenuItem = new MenuItem({
+        label: 'Spotify',
+        type: 'checkbox',
+        checked: (activePlayer === 'spotify'),
+        click: function() { 
+            console.log('Switching to Spotify control');
+            activePlayer = 'spotify';
+            storage.setItem('activePlayer', 'spotify');
+            iTunesMenuItem.checked = false;
+        }
+    });
+    menu.append(spotifyMenuItem);
 
-var iTunesMenuItem = new gui.MenuItem({
-    label: 'iTunes',
-    type: 'checkbox',
-    checked: (activePlayer === 'itunes'),
-    click: function() { 
-        console.log('Switching to iTunes control');
-        activePlayer = 'itunes';
-        storage.setItem('activePlayer', 'itunes');
-        spotifyMenuItem.checked = false;
-    }
-});
-menu.append(iTunesMenuItem);
+    menu.append(new MenuItem({ type: 'separator' }));
 
-var spotifyMenuItem = new gui.MenuItem({
-    label: 'Spotify',
-    type: 'checkbox',
-    checked: (activePlayer === 'spotify'),
-    click: function() { 
-        console.log('Switching to Spotify control');
-        activePlayer = 'spotify';
-        storage.setItem('activePlayer', 'spotify');
-        iTunesMenuItem.checked = false;
-    }
-});
-menu.append(spotifyMenuItem);
+    // GUI volume options
 
-menu.append(new gui.MenuItem({ type: 'separator' }));
+    menu.append(new MenuItem({
+        label: 'Volume',
+        enabled: false
+    }));
 
-// GUI volume options
+    var globalVolumeMenuItem = new MenuItem({
+        label: 'Global volume',
+        type: 'checkbox',
+        checked: controlGlobalVolume,
+        click: function() { 
+            controlGlobalVolume = true;
+            console.log('Controlling system volume');
+            storage.setItem('controlGlobalVolume', true);
+            globalVolumeMenuItem.checked = true;
+            playerVolumeMenuItem.checked = false;
+        }
+    });
+    menu.append(globalVolumeMenuItem);
 
-menu.append(new gui.MenuItem({
-    label: 'Volume',
-	enabled: false
-}));
+    var playerVolumeMenuItem = new MenuItem({
+        label: 'Player volume',
+        type: 'checkbox',
+        checked: !controlGlobalVolume,
+        click: function() { 
+            controlGlobalVolume = false;
+            console.log('Controlling player volume')
+            storage.setItem('controlGlobalVolume', false);
+            globalVolumeMenuItem.checked = false;
+            playerVolumeMenuItem.checked = true;
+        }
+    });
+    menu.append(playerVolumeMenuItem);
 
-var globalVolumeMenuItem = new gui.MenuItem({
-    label: 'Global volume',
-    type: 'checkbox',
-    checked: controlGlobalVolume,
-    click: function() { 
-        controlGlobalVolume = true;
-        console.log('Controlling system volume');
-        storage.setItem('controlGlobalVolume', true);
-        globalVolumeMenuItem.checked = true;
-        playerVolumeMenuItem.checked = false;
-    }
-});
-menu.append(globalVolumeMenuItem);
+    menu.append(new MenuItem({ type: 'separator' }));
 
-var playerVolumeMenuItem = new gui.MenuItem({
-    label: 'Player volume',
-    type: 'checkbox',
-    checked: !controlGlobalVolume,
-    click: function() { 
-        controlGlobalVolume = false;
-        console.log('Controlling player volume')
-        storage.setItem('controlGlobalVolume', false);
-        globalVolumeMenuItem.checked = false;
-        playerVolumeMenuItem.checked = true;
-    }
-});
-menu.append(playerVolumeMenuItem);
+    // GUI info
 
-menu.append(new gui.MenuItem({ type: 'separator' }));
+    menu.append(new MenuItem({
+        label: 'iTunesify Remote v' + pjson.version,
+        enabled: false
+    }));
 
-// GUI info
-
-menu.append(new gui.MenuItem({
-    label: 'iTunesify Remote v' + pjson.version,
-	enabled: false
-}));
-
-menu.append(new gui.MenuItem({
-    label: 'Check for updates...',
-    click: function () {
-        update.checkForUpdates( (err, needsUpdate, releasePage) => {
-            if (err) {
-                alert('An error occurred while checking for updates.');
-                return;
-            }
-            
-            if (needsUpdate) {
-                var update = confirm('An update is available for iTunesify Remote. Click OK to open the download page.');
-                if (update) {
-                    open(releasePage);
+    menu.append(new MenuItem({
+        label: 'Check for updates...',
+        click: function () {
+            update.checkForUpdates( (err, needsUpdate, releasePage) => {
+                if (err) {
+                    alert('An error occurred while checking for updates.');
+                    return;
                 }
-            } else {
-                alert('No updates available. You already have the latest version of iTunesify Remote. Thanks!');
-            }
-        });
-    }
-}));
+                
+                if (needsUpdate) {
+                    var update = confirm('An update is available for iTunesify Remote. Click OK to open the download page.');
+                    if (update) {
+                        open(releasePage);
+                    }
+                } else {
+                    alert('No updates available. You already have the latest version of iTunesify Remote. Thanks!');
+                }
+            });
+        }
+    }));
 
-menu.append(new gui.MenuItem({
-    label: 'Quit',
-    click: function() { 
-    	console.log('Clicked exit menu');
-        server.close();
-		gui.App.quit();
-    }
-}));
+    menu.append(new MenuItem({
+        label: 'Quit',
+        click: function() { 
+            console.log('Exiting...')
+            serverInstance.close()
+            app.quit()
+        }
+    }));
+
+    tray.setContextMenu(menu)
+    detectIP()
+}
+
+function detectIP() {
+    require('dns').lookup(require('os').hostname(), function (err, ip, fam) {
+        menu.insert(0, new MenuItem({
+            label: 'Server running on ' + ip,
+            enabled: false
+        }))
+        tray.setContextMenu(menu)
+    })
+}
 
 // Playback control
 function getiTunesTrackAndState(callback) {
@@ -181,7 +194,7 @@ function getSpotifyTrackAndState(callback) {
     });
 }
 
-app.get('/', function(req, res){
+server.get('/', function(req, res){
     console.log("[GET] /");
     if (activePlayer == 'itunes') {
         getiTunesTrackAndState(function(data){
@@ -197,7 +210,7 @@ app.get('/', function(req, res){
     }
 });
 
-app.get('/current_app/:app', function(req, res){
+server.get('/current_app/:app', function(req, res){
     console.log("[GET] /current_app/" + req.params.app);
 
     if (req.params.app === 'spotify') {
@@ -227,7 +240,7 @@ app.get('/current_app/:app', function(req, res){
     }
 });
 
-app.get('/playpause', function(req, res){
+server.get('/playpause', function(req, res){
     console.log("[GET] /playpause");
     if (activePlayer == 'itunes') {
         iTunes.playpause(function(error) {
@@ -245,7 +258,7 @@ app.get('/playpause', function(req, res){
     }
 });
 
-app.get('/previous', function(req, res){
+server.get('/previous', function(req, res){
     console.log("[GET] /previous");
     if (activePlayer == 'itunes') {
         iTunes.previous(function(error){
@@ -263,7 +276,7 @@ app.get('/previous', function(req, res){
     }
 });
 
-app.get('/next', function(req, res){
+server.get('/next', function(req, res){
     console.log("[GET] /next");
     if (activePlayer == 'itunes') {
         iTunes.next(function(error){
@@ -281,14 +294,14 @@ app.get('/next', function(req, res){
     }
 });
 
-app.get('/volume/', function(req, res){
+server.get('/volume/', function(req, res){
     console.log("[GET] /volume");
     volume.get(function(err, volume, muted) {
         res.json({ volume: volume, muted: muted, err: err });
     });
 });
 
-app.get('/volume/:vol', function(req, res){
+server.get('/volume/:vol', function(req, res){
     console.log("[GET] /volume/" + req.params.vol);
 
         var delta;
@@ -345,6 +358,5 @@ app.get('/volume/:vol', function(req, res){
     
 });
 
-
-server = app.listen(port);
+serverInstance = server.listen(port);
 console.log('iTunesify Remote started on port ' + port);

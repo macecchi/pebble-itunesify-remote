@@ -1,50 +1,33 @@
 {
-  "name": "pebble-itunesify-remote-osx",
-  "version": "1.5.0",
-  "main": "index.html",
-  "single-instance": true,
-  "window": {
-    "name": "iTunesify Remote for Pebble",
-    "show": false,
-    "show_in_taskbar": false
+  "private": true,
+  "build": {
+    "productName": "iTunesify Remote",
+    "appId": "xyz.meriw.itunesify.mac",
+    "app-category-type": "public.app-category.utilities",
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    }
   },
-  "description": "Control iTunes and Spotify playback (play/pause/next/prev/volume) from your Pebble watch!",
   "devDependencies": {
-    "nw": "^0.15.4",
-    "nw-builder": "^2.2.5"
+    "electron-builder": "^5.10.5",
+    "electron-prebuilt": "^1.2.5"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/nw --enable-logging=stderr",
-    "archive": "nwbuild -p osx64 --macIcns resources/iTunesify.icns -v 0.12.3 . && cd build/pebble-itunesify-remote-osx/osx64/ && mv pebble-itunesify-remote-osx.app iTunesify\\ Remote.app"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/macecchi/pebble-itunesify-remote.git"
-  },
-  "keywords": [
-    "itunes",
-    "pebble",
-    "spotify",
-    "remote",
-    "itunesify",
-    "spotitunes",
-    "control",
-    "os x",
-    "smartwatch"
-  ],
-  "author": "Mario Cecchi",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/macecchi/pebble-itunesify-remote/issues"
-  },
-  "homepage": "https://github.com/macecchi/pebble-itunesify-remote#readme",
-  "dependencies": {
-    "express": "^4.13.2",
-    "local-itunes": "https://github.com/macecchi/local-itunes",
-    "node-persist": "^0.0.6",
-    "open": "0.0.5",
-    "osx-wifi-volume-remote": "^1.0.2",
-    "spotify-node-applescript": "^0.2.2"
+    "postinstall": "install-app-deps",
+    "start": "./node_modules/.bin/electron app",
+    "archive": "./node_modules/.bin/build --mac",
+    "pack": "./node_modules/.bin/build --mac --dir"
   }
 }

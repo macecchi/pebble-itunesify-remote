@@ -2,4 +2,4 @@ build
 .lock-waf_darwin_build
 node_modules
 persist
-
+osx/dist
