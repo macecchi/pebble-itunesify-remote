@@ -1,12 +1,11 @@
-"use strict";
-const https = require('https');
-const pjson = require('./package.json');
+var https = require('https');
+var pjson = require('./package.json');
 
-const currentVersion = pjson.version;
-const githubRepo = 'macecchi/pebble-itunesify-remote';
+var currentVersion = pjson.version;
+var githubRepo = 'macecchi/pebble-itunesify-remote';
 
 function checkForUpdates(callback) {
-    const options = {
+    var options = {
         host: 'api.github.com',
         path: '/repos/' + githubRepo + '/tags',
         headers: {
@@ -14,7 +13,7 @@ function checkForUpdates(callback) {
         }
     };
 
-    https.get(options, (res) => {
+    https.get(options, function(res) {
         if (res.statusCode !== 200) {
             callback({ statusCode: res.statusCode });
             return;
@@ -22,13 +21,13 @@ function checkForUpdates(callback) {
 
         var response = '';
 
-        res.on('data', (chunk) => {
+        res.on('data', function(chunk) {
             response = response + chunk;
         });
 
-        res.on('end', () => {
-            let tags = JSON.parse(response);
-            let latestTag = tags[0];
+        res.on('end', function() {
+            var tags = JSON.parse(response);
+            var latestTag = tags[0];
             var latestVersion = latestTag.name;
             if (latestVersion.charAt(0) == 'v') {
                 latestVersion = latestVersion.substr(1);
@@ -50,7 +49,7 @@ function checkForUpdates(callback) {
 }
 
 function versionNeedsUpdate(version) {
-    let comp = compareVersions(version, currentVersion);
+    var comp = compareVersions(version, currentVersion);
     return comp > 0;
 }
 

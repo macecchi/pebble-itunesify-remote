@@ -43,7 +43,7 @@ require('dns').lookup(require('os').hostname(), function (err, add, fam) {
 })
 
 var tray = new gui.Tray({
-    icon: 'resources/images/bar_icon.png'
+    icon: 'images/bar_icon.png'
 });
 
 var menu = new gui.Menu();
@@ -135,7 +135,7 @@ menu.append(new gui.MenuItem({
 menu.append(new gui.MenuItem({
     label: 'Check for updates...',
     click: function () {
-        update.checkForUpdates( (err, needsUpdate, releasePage) => {
+        update.checkForUpdates(function(err, needsUpdate, releasePage) {
             if (err) {
                 alert('An error occurred while checking for updates.');
                 return;

@@ -1,0 +1,20 @@
+{
+  "name": "pebble-itunesify-remote-osx",
+  "version": "1.5.0",
+  "main": "index.html",
+  "single-instance": true,
+  "window": {
+    "name": "iTunesify Remote for Pebble",
+    "show": false,
+    "show_in_taskbar": false
+  },
+  "author": "Mario Cecchi",
+  "dependencies": {
+    "express": "^4.13.2",
+    "local-itunes": "https://github.com/macecchi/local-itunes",
+    "node-persist": "^0.0.6",
+    "open": "0.0.5",
+    "osx-wifi-volume-remote": "^1.0.2",
+    "spotify-node-applescript": "^0.2.2"
+  }
+}
