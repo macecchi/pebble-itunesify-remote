@@ -22,9 +22,10 @@ Control your iTunes and Spotify playback (play/pause/next/prev/volume) from your
 
 ## Support
 
-The best support method is [creating an issue](https://github.com/macecchi/pebble-itunesify-remote/issues) on GitHub.
+If you have any questions, want to report an issue or request a feature, [create an issue](https://github.com/macecchi/pebble-itunesify-remote/issues) on GitHub.
 
-Alternatively, I'll also try to help via email at macecchi@gmail.com.
+Alternatively, I'll also try to help via email
+ at macecchi@gmail.com.
 
 
 ## Manual compile
@@ -42,16 +43,14 @@ To manually compile you just need to `npm install` the dependencies and run `npm
 ```bash
 cd osx
 npm install
-npm install -g nw-builder
 npm run archive
 ```
 
-Alternatively, you can install node-webkit (nw) directly and run iTunesify without exporting the OS X app (useful for debugging).
+Alternatively, you can run iTunesify directly without packaging the OS X app (useful for debugging).
 
 ```bash
 cd osx
 npm install
-npm install -g nw
 npm start
 ```
 
