@@ -1,11 +1,3 @@
-//
-//  StatusMenuController.swift
-//  iTunesify Remote
-//
-//  Created by Mario Cecchi on 07/07/2016.
-//  Copyright © 2016 Mario Cecchi. All rights reserved.
-//
-
 import Cocoa
 
 class StatusMenuController: NSObject {

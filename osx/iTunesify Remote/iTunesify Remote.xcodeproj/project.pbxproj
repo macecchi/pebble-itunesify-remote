@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		0FF8606B6DF8D78EC63083FE /* Pods_iTunesify_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3071F4A5A4EDC6FAC25B36E9 /* Pods_iTunesify_Remote.framework */; };
 		A38E84321D443C73003368BE /* IFYServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84311D443C73003368BE /* IFYServer.swift */; };
+		A38E84371D4573D8003368BE /* IFYiTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84361D4573D8003368BE /* IFYiTunes.swift */; };
+		A38E843C1D457F8D003368BE /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38E843B1D457F8D003368BE /* ScriptingBridge.framework */; };
+		A38E843E1D457FE1003368BE /* iTunes.h in Sources */ = {isa = PBXBuildFile; fileRef = A38E843D1D457FCD003368BE /* iTunes.h */; };
+		A38E84421D4585C7003368BE /* IFYTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84411D4585C7003368BE /* IFYTrack.swift */; };
+		A38E84441D45877E003368BE /* IFYPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84431D45877E003368BE /* IFYPlayer.swift */; };
 		A3F3D4891D2EA88700BE9D01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3D4881D2EA88700BE9D01 /* AppDelegate.swift */; };
 		A3F3D48B1D2EA88700BE9D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3F3D48A1D2EA88700BE9D01 /* Assets.xcassets */; };
 		A3F3D48E1D2EA88700BE9D01 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F3D48C1D2EA88700BE9D01 /* MainMenu.xib */; };
@@ -19,7 +24,12 @@
 		3071F4A5A4EDC6FAC25B36E9 /* Pods_iTunesify_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTunesify_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		838F5BC0D35CCE53E353FB4C /* Pods-iTunesify Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunesify Remote.release.xcconfig"; path = "Pods/Target Support Files/Pods-iTunesify Remote/Pods-iTunesify Remote.release.xcconfig"; sourceTree = "<group>"; };
 		A38E84311D443C73003368BE /* IFYServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYServer.swift; sourceTree = "<group>"; };
-		A38E84331D443C81003368BE /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		A38E84331D443C81003368BE /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "iTunesify Remote/Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		A38E84361D4573D8003368BE /* IFYiTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYiTunes.swift; sourceTree = "<group>"; };
+		A38E843B1D457F8D003368BE /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		A38E843D1D457FCD003368BE /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
+		A38E84411D4585C7003368BE /* IFYTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYTrack.swift; sourceTree = "<group>"; };
+		A38E84431D45877E003368BE /* IFYPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYPlayer.swift; sourceTree = "<group>"; };
 		A3F3D4851D2EA88700BE9D01 /* iTunesify Remote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iTunesify Remote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F3D4881D2EA88700BE9D01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3F3D48A1D2EA88700BE9D01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -34,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A38E843C1D457F8D003368BE /* ScriptingBridge.framework in Frameworks */,
 				0FF8606B6DF8D78EC63083FE /* Pods_iTunesify_Remote.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,6 +59,17 @@
 				838F5BC0D35CCE53E353FB4C /* Pods-iTunesify Remote.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A38E84391D457CF0003368BE /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				A38E84431D45877E003368BE /* IFYPlayer.swift */,
+				A38E84361D4573D8003368BE /* IFYiTunes.swift */,
+				A38E84411D4585C7003368BE /* IFYTrack.swift */,
+				A38E843D1D457FCD003368BE /* iTunes.h */,
+			);
+			name = Player;
 			sourceTree = "<group>";
 		};
 		A3F3D47C1D2EA88700BE9D01 = {
@@ -78,6 +100,7 @@
 				A3F3D48C1D2EA88700BE9D01 /* MainMenu.xib */,
 				A3F3D48F1D2EA88700BE9D01 /* Info.plist */,
 				A38E84331D443C81003368BE /* Bridging-Header.h */,
+				A38E84391D457CF0003368BE /* Player */,
 			);
 			path = "iTunesify Remote";
 			sourceTree = "<group>";
@@ -85,6 +108,7 @@
 		ECF90B5D624C7DA8DD5DDB87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A38E843B1D457F8D003368BE /* ScriptingBridge.framework */,
 				3071F4A5A4EDC6FAC25B36E9 /* Pods_iTunesify_Remote.framework */,
 			);
 			name = Frameworks;
@@ -120,7 +144,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Mario Cecchi";
 				TargetAttributes = {
 					A3F3D4841D2EA88700BE9D01 = {
@@ -212,8 +236,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A38E84441D45877E003368BE /* IFYPlayer.swift in Sources */,
+				A38E843E1D457FE1003368BE /* iTunes.h in Sources */,
 				A3F3D4961D2EAAF600BE9D01 /* StatusMenuController.swift in Sources */,
 				A38E84321D443C73003368BE /* IFYServer.swift in Sources */,
+				A38E84371D4573D8003368BE /* IFYiTunes.swift in Sources */,
+				A38E84421D4585C7003368BE /* IFYTrack.swift in Sources */,
 				A3F3D4891D2EA88700BE9D01 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,7 +354,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.meriw.iTunesify-Remote";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "iTunesify Remote/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -344,7 +372,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.meriw.iTunesify-Remote";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "iTunesify Remote/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

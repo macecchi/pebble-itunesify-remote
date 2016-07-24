@@ -1,53 +1,41 @@
-//
-//  AppDelegate.swift
-//  iTunesify Remote
-//
-//  Created by Mario Cecchi on 07/07/2016.
-//  Copyright © 2016 Mario Cecchi. All rights reserved.
-//
-
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayerDelegate {
     lazy var server = IFYServer.sharedInstance
-    var lastPlayerMessage: IFYMessage?
+    var player: IFYPlayer!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        player = IFYiTunes.sharedInstance
+        player.delegate = self
+        
         server.delegate = self
         server.start()
         
-        DistributedNotificationCenter.default().addObserver(self, selector: #selector(didReceivePlayerInfo), name: "com.apple.iTunes.playerInfo" as NSNotification.Name, object: nil)
+        print(player.track?.name, player.track?.artist)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
     
-    func didReceivePlayerInfo(notification: NSNotification!) {
-        let player = notification.userInfo!
-        let name = player["Name"] as! String
-        let artist = player["Artist"] as! String
-        let state = player["Player State"] as! String
-        
-        print("\(artist) - \(name) (\(state))")
-        
-        let track = [ "name": name, "artist": artist, "state": state ]
-        let message: [String: AnyObject] = [ "player": "itunes", "track": track ]
-        lastPlayerMessage = message
-        
+    
+    // MARK: IFYServerDelegate
+    
+    func clientConnected(client: IFYClient) {
         do {
-            try server.send(message: message)
+            try client.send(message: player.message)
         } catch let error {
             print(error)
         }
     }
     
-    func clientConnected(client: IFYClient) {
-        guard let message = lastPlayerMessage else { return }
-        
+    
+    // MARK: IFYPlayerDelegate
+    
+    func didUpdatePlayerInfo() {
         do {
-            try client.send(message: message)
+            try server.send(message: player.message)
         } catch let error {
             print(error)
         }

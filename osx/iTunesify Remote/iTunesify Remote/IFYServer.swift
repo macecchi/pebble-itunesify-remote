@@ -1,11 +1,3 @@
-//
-//  Server.swift
-//  iTunesify Sockets
-//
-//  Created by Mario Cecchi on 23/07/2016.
-//  Copyright © 2016 Mario Cecchi. All rights reserved.
-//
-
 import PocketSocket
 
 typealias IFYMessage = [String: AnyObject]
