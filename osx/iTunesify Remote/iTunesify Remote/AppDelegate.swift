@@ -9,10 +9,12 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
-    lazy var server = Server.sharedInstance
+class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate {
+    lazy var server = IFYServer.sharedInstance
+    var lastPlayerMessage: IFYMessage?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        server.delegate = self
         server.start()
         
         DistributedNotificationCenter.default().addObserver(self, selector: #selector(didReceivePlayerInfo), name: "com.apple.iTunes.playerInfo" as NSNotification.Name, object: nil)
@@ -32,6 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let track = [ "name": name, "artist": artist, "state": state ]
         let message: [String: AnyObject] = [ "player": "itunes", "track": track ]
+        lastPlayerMessage = message
         
         do {
             try server.send(message: message)
@@ -40,5 +43,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    func clientConnected(client: IFYClient) {
+        guard let message = lastPlayerMessage else { return }
+        
+        do {
+            try client.send(message: message)
+        } catch let error {
+            print(error)
+        }
+    }
 }
 

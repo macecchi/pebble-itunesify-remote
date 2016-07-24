@@ -8,8 +8,36 @@
 
 import PocketSocket
 
-class Server: NSObject, PSWebSocketServerDelegate {
-    static let sharedInstance = Server()
+typealias IFYMessage = [String: AnyObject]
+typealias IFYClient = PSWebSocket
+
+func JSON(message: IFYMessage) -> String? {
+    if let data = try? JSONSerialization.data(withJSONObject: message, options: []) {
+        return String(data: data, encoding: .utf8)
+    }
+
+    return nil
+}
+
+extension IFYClient {
+    func send(message: IFYMessage) throws {
+        guard let string = JSON(message: message) else {
+            print("Error converting to JSON string")
+            return
+        }
+        
+        self.send(string)
+    }
+}
+
+protocol IFYServerDelegate : class {
+    func clientConnected(client: IFYClient)
+}
+
+class IFYServer: NSObject, PSWebSocketServerDelegate {
+    
+    static let sharedInstance = IFYServer()
+    weak var delegate: IFYServerDelegate?
     
     let server: PSWebSocketServer! = PSWebSocketServer(host: nil, port: 8000)
     var sockets: [PSWebSocket] = []
@@ -19,16 +47,16 @@ class Server: NSObject, PSWebSocketServerDelegate {
         server.start()
     }
     
-    func send(message: [String: AnyObject]) throws {
-        let data = try JSONSerialization.data(withJSONObject: message, options: [])
-        guard let string = String(data: data, encoding: .utf8) else {
+    func send(message: IFYMessage, toClients clients: [IFYClient]? = nil) throws {
+        guard let string = JSON(message: message) else {
             print("Error converting to JSON string")
             return
         }
         
         print("JSON: \(string)")
         
-        sockets.forEach { socket in
+        let destSockets = clients ?? sockets
+        destSockets.forEach { socket in
             socket.send(string)
             print("Sent message")
         }
@@ -50,6 +78,7 @@ class Server: NSObject, PSWebSocketServerDelegate {
     func server(_ server: PSWebSocketServer!, webSocketDidOpen webSocket: PSWebSocket!) {
         print("New socket connected")
         sockets.append(webSocket)
+        delegate?.clientConnected(client: webSocket)
     }
     
     func server(_ server: PSWebSocketServer!, webSocket: PSWebSocket!, didCloseWithCode code: Int, reason: String!, wasClean: Bool) {
