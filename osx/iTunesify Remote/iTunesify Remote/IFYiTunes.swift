@@ -49,7 +49,7 @@ class IFYiTunes: NSObject, IFYPlayer {
     
     var volume: Int {
         get { return iTunes.soundVolume }
-        set { iTunes.setValue(newValue, forKey: "soundVolume") }
+        set { iTunes.setValue(newValue, forKey: #keyPath(iTunesApplication.soundVolume)) }
     }
     
     func toggleState() {
