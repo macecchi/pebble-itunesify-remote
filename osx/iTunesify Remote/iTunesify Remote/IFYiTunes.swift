@@ -48,13 +48,8 @@ class IFYiTunes: NSObject, IFYPlayer {
     }
     
     var volume: Int {
-        get {
-            return iTunes.soundVolume
-        }
-        
-        set {
-//            iTunes.soundVolume = newValue
-        }
+        get { return iTunes.soundVolume }
+        set { iTunes.setValue(newValue, forKey: "soundVolume") }
     }
     
     func toggleState() {

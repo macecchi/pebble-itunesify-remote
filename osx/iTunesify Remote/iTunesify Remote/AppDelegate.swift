@@ -38,10 +38,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
             player.nextTrack()
         case .previous:
             player.previousTrack()
-//        case .volumeUp:
-//
-//        case .volumeDown:
-//            
+        case .volumeUp:
+            let newVolume = player.volume + 10
+            player.volume = newVolume
+        case .volumeDown:
+            let newVolume = player.volume - 10
+            player.volume = newVolume
         default:
             print("Unhandled command received")
         }
