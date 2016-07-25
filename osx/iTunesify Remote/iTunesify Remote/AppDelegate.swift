@@ -11,8 +11,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
         
         server.delegate = self
         server.start()
-        
-        print(player.track?.name, player.track?.artist)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -1,15 +1,13 @@
 import ScriptingBridge
 
-class IFYiTunes: NSObject, IFYPlayer {
+class IFYiTunes: IFYPlayer {
     static var sharedInstance: IFYPlayer = IFYiTunes()
     weak var delegate: IFYPlayerDelegate?
     
     private lazy var notificationCenter = DistributedNotificationCenter.default()
     private var iTunes = SBApplication(bundleIdentifier: "com.apple.iTunes") as! AnyObject
     
-    override init() {
-        super.init()
-        
+    init() {
         notificationCenter.addObserver(self, selector: #selector(didReceivePlayerInfo), name: "com.apple.iTunes.playerInfo" as NSNotification.Name, object: nil)
     }
     
@@ -17,7 +15,7 @@ class IFYiTunes: NSObject, IFYPlayer {
         notificationCenter.removeObserver(self)
     }
     
-    func didReceivePlayerInfo(notification: NSNotification!) {
+    @objc func didReceivePlayerInfo(notification: NSNotification!) {
         delegate?.didUpdatePlayerInfo()
     }
     

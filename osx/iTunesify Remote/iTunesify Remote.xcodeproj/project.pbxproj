@@ -11,7 +11,6 @@
 		A38E84321D443C73003368BE /* IFYServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84311D443C73003368BE /* IFYServer.swift */; };
 		A38E84371D4573D8003368BE /* IFYiTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84361D4573D8003368BE /* IFYiTunes.swift */; };
 		A38E843C1D457F8D003368BE /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38E843B1D457F8D003368BE /* ScriptingBridge.framework */; };
-		A38E843E1D457FE1003368BE /* iTunes.h in Sources */ = {isa = PBXBuildFile; fileRef = A38E843D1D457FCD003368BE /* iTunes.h */; };
 		A38E84421D4585C7003368BE /* IFYTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84411D4585C7003368BE /* IFYTrack.swift */; };
 		A38E84441D45877E003368BE /* IFYPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84431D45877E003368BE /* IFYPlayer.swift */; };
 		A3F3D4891D2EA88700BE9D01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3D4881D2EA88700BE9D01 /* AppDelegate.swift */; };
@@ -253,7 +252,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A38E84441D45877E003368BE /* IFYPlayer.swift in Sources */,
-				A38E843E1D457FE1003368BE /* iTunes.h in Sources */,
 				A3F3D4961D2EAAF600BE9D01 /* StatusMenuController.swift in Sources */,
 				A38E84321D443C73003368BE /* IFYServer.swift in Sources */,
 				A38E84371D4573D8003368BE /* IFYiTunes.swift in Sources */,

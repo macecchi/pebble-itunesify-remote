@@ -12,7 +12,7 @@ class StatusMenuController: NSObject {
     }
     
     
-    // MARK - Actions
+    // MARK: Actions
     
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         NSApplication.shared().terminate(self)
