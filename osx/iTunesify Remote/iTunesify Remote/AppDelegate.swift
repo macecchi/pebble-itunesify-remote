@@ -78,6 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
         
         player.delegate = self
         player.subscribeForUpdates()
+        didUpdatePlayerInfo()
     }
 }
 
