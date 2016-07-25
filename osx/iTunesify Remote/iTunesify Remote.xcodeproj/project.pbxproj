@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0FF8606B6DF8D78EC63083FE /* Pods_iTunesify_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3071F4A5A4EDC6FAC25B36E9 /* Pods_iTunesify_Remote.framework */; };
+		A3873E991D45A22800A9824B /* IFYSpotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3873E981D45A22800A9824B /* IFYSpotify.swift */; };
+		A3873EA01D45A6C000A9824B /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A3873E9F1D45A6C000A9824B /* iTunesBridge.m */; };
+		A3873EA31D45AA1F00A9824B /* SpotifyBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A3873EA21D45AA1F00A9824B /* SpotifyBridge.m */; };
 		A38E84321D443C73003368BE /* IFYServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84311D443C73003368BE /* IFYServer.swift */; };
 		A38E84371D4573D8003368BE /* IFYiTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84361D4573D8003368BE /* IFYiTunes.swift */; };
 		A38E843C1D457F8D003368BE /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38E843B1D457F8D003368BE /* ScriptingBridge.framework */; };
@@ -22,6 +25,12 @@
 /* Begin PBXFileReference section */
 		3071F4A5A4EDC6FAC25B36E9 /* Pods_iTunesify_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTunesify_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		838F5BC0D35CCE53E353FB4C /* Pods-iTunesify Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunesify Remote.release.xcconfig"; path = "Pods/Target Support Files/Pods-iTunesify Remote/Pods-iTunesify Remote.release.xcconfig"; sourceTree = "<group>"; };
+		A3873E971D45A20300A9824B /* Spotify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spotify.h; sourceTree = "<group>"; };
+		A3873E981D45A22800A9824B /* IFYSpotify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYSpotify.swift; sourceTree = "<group>"; };
+		A3873E9E1D45A6C000A9824B /* iTunesBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridge.h; sourceTree = "<group>"; };
+		A3873E9F1D45A6C000A9824B /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
+		A3873EA11D45AA1F00A9824B /* SpotifyBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifyBridge.h; sourceTree = "<group>"; };
+		A3873EA21D45AA1F00A9824B /* SpotifyBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifyBridge.m; sourceTree = "<group>"; };
 		A38E84311D443C73003368BE /* IFYServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYServer.swift; sourceTree = "<group>"; };
 		A38E84331D443C81003368BE /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "iTunesify Remote/Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		A38E84361D4573D8003368BE /* IFYiTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYiTunes.swift; sourceTree = "<group>"; };
@@ -77,13 +86,27 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		A3873E9A1D45A37000A9824B /* Scripting Bridges */ = {
+			isa = PBXGroup;
+			children = (
+				A3873E9E1D45A6C000A9824B /* iTunesBridge.h */,
+				A3873E9F1D45A6C000A9824B /* iTunesBridge.m */,
+				A3873EA11D45AA1F00A9824B /* SpotifyBridge.h */,
+				A3873EA21D45AA1F00A9824B /* SpotifyBridge.m */,
+				A38E843D1D457FCD003368BE /* iTunes.h */,
+				A3873E971D45A20300A9824B /* Spotify.h */,
+			);
+			name = "Scripting Bridges";
+			sourceTree = "<group>";
+		};
 		A38E84391D457CF0003368BE /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				A3873E9A1D45A37000A9824B /* Scripting Bridges */,
 				A38E84431D45877E003368BE /* IFYPlayer.swift */,
 				A38E84361D4573D8003368BE /* IFYiTunes.swift */,
+				A3873E981D45A22800A9824B /* IFYSpotify.swift */,
 				A38E84411D4585C7003368BE /* IFYTrack.swift */,
-				A38E843D1D457FCD003368BE /* iTunes.h */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -254,8 +277,11 @@
 				A38E84441D45877E003368BE /* IFYPlayer.swift in Sources */,
 				A3F3D4961D2EAAF600BE9D01 /* StatusMenuController.swift in Sources */,
 				A38E84321D443C73003368BE /* IFYServer.swift in Sources */,
+				A3873EA31D45AA1F00A9824B /* SpotifyBridge.m in Sources */,
+				A3873E991D45A22800A9824B /* IFYSpotify.swift in Sources */,
 				A38E84371D4573D8003368BE /* IFYiTunes.swift in Sources */,
 				A38E84421D4585C7003368BE /* IFYTrack.swift in Sources */,
+				A3873EA01D45A6C000A9824B /* iTunesBridge.m in Sources */,
 				A3F3D4891D2EA88700BE9D01 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

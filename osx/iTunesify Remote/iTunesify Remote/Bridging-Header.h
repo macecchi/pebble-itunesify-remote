@@ -3,4 +3,5 @@
 //
 
 #import <PocketSocket/PSWebSocketServer.h>
-#import "iTunes.h"
+#import "iTunesBridge.h"
+#import "SpotifyBridge.h"

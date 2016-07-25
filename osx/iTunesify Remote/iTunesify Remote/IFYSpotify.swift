@@ -1,14 +1,14 @@
 import ScriptingBridge
 
-class IFYiTunes: IFYPlayer {
-    static var sharedInstance: IFYPlayer = IFYiTunes()
+class IFYSpotify: IFYPlayer {
+    static var sharedInstance: IFYPlayer = IFYSpotify()
     weak var delegate: IFYPlayerDelegate?
     
     private lazy var notificationCenter = DistributedNotificationCenter.default()
-    private var iTunes: iTunesBridge! = iTunesBridge.sharedInstance()
+    private var spotify: SpotifyBridge! = SpotifyBridge.sharedInstance()
     
     init() {
-        notificationCenter.addObserver(self, selector: #selector(didReceivePlayerInfo), name: "com.apple.iTunes.playerInfo" as NSNotification.Name, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(didReceivePlayerInfo), name: "com.spotify.client.PlaybackStateChanged" as NSNotification.Name, object: nil)
     }
     
     deinit {
@@ -21,7 +21,7 @@ class IFYiTunes: IFYPlayer {
     
     var message: IFYMessage {
         var message = IFYMessage()
-        message["player"] = "itunes"
+        message["player"] = "spotify"
         
         if let track = track {
             message["track"] = track.dictionary
@@ -31,7 +31,7 @@ class IFYiTunes: IFYPlayer {
     }
     
     var track: IFYTrack? {
-        if let track = iTunes.currentTrack {
+        if let track = spotify.currentTrack {
             return IFYTrack(name: track.name, artist: track.artist)
         }
         
@@ -39,26 +39,26 @@ class IFYiTunes: IFYPlayer {
     }
     
     var state: IFYPlayerState {
-        let playerState = iTunes.playerState
-        if playerState == iTunesEPlSPaused { return .paused }
-        if playerState == iTunesEPlSPlaying { return .playing }
+        let playerState = spotify.playerState
+        if playerState == SpotifyEPlSPaused { return .paused }
+        if playerState == SpotifyEPlSPlaying { return .playing }
         return .stopped
     }
     
     var volume: Int {
-        get { return iTunes.soundVolume }
-        set { iTunes.soundVolume = newValue }
+        get { return spotify.soundVolume }
+        set { spotify.soundVolume = newValue }
     }
     
     func toggleState() {
-        iTunes.playpause()
+        spotify.playpause()
     }
     
     func previousTrack() {
-        iTunes.previousTrack()
+        spotify.previousTrack()
     }
     
     func nextTrack() {
-        iTunes.nextTrack()
+        spotify.nextTrack()
     }
 }

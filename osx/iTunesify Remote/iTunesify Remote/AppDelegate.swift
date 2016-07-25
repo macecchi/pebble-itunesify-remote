@@ -6,7 +6,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     var player: IFYPlayer!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        player = IFYiTunes.sharedInstance
+        player = IFYSpotify.sharedInstance
         player.delegate = self
         
         server.delegate = self
@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        server.stop()
     }
     
     
@@ -37,10 +37,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
         case .previous:
             player.previousTrack()
         case .volumeUp:
-            let newVolume = player.volume + 10
+            let newVolume = min(100, player.volume + 10)
             player.volume = newVolume
         case .volumeDown:
-            let newVolume = player.volume - 10
+            let newVolume = max(0, player.volume - 10)
             player.volume = newVolume
         default:
             print("Unhandled command received")

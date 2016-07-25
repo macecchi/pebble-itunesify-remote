@@ -12,9 +12,17 @@ iTunesify.connect = function() {
 		console.log('Connection successful.');
 	}
 
+	ws.onclose = function(event) {
+		console.log('Connection closed.');
+	}
+
 	ws.onmessage = function(event) {
 		var message = JSON.parse(event.data);
 		self.handleMessage(message);
+	}
+
+	ws.onerror = function(event) {
+		console.log('Connection errored.');
 	}
 
 	this.ws = ws;
@@ -44,12 +52,12 @@ iTunesify.doCommand = function(action) {
 	else if (action == "control_itunes") {
 		iTunesify.sendCommand("current_app/itunes");
 		localStorage.setItem("player", "itunes");
-    Pebble.sendAppMessage({ player: 'itunes' });
+		Pebble.sendAppMessage({ player: 'itunes' });
 	}
 	else if (action == "control_spotify") {
 		iTunesify.sendCommand("current_app/spotify");
 		localStorage.setItem("player", "spotify");
-    Pebble.sendAppMessage({ player: 'spotify' });
+		Pebble.sendAppMessage({ player: 'spotify' });
 	}
 };
 

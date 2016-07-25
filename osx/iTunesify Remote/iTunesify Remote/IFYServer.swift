@@ -50,6 +50,10 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
         server.start()
     }
     
+    func stop() {
+        server.stop()
+    }
+    
     func send(message: IFYMessage, toClients clients: [IFYClient]? = nil) throws {
         guard let string = toJSON(message: message) else {
             print("Error converting to JSON string")
@@ -57,7 +61,6 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
         }
         
         print("JSON: \(string)")
-//        
         let destSockets = clients ?? sockets
         destSockets.forEach { socket in
             socket.send(string)
@@ -81,8 +84,9 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
     }
     
     func server(_ server: PSWebSocketServer!, webSocketDidOpen webSocket: PSWebSocket!) {
-        print("New socket connected")
         sockets.append(webSocket)
+        print("New client connected. Total: \(sockets.count)")
+        
         delegate?.clientConnected(client: webSocket)
     }
     
