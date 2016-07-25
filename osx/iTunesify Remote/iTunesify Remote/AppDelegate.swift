@@ -6,14 +6,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     
     lazy var server = IFYServer.sharedInstance
     var player: IFYPlayer!
+    let preferences = UserDefaults.standard
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let selectedPlayer = preferences.string(forKey: "player") ?? "itunes"
         menuController.delegate = self
-        menuController.setSelected(player: "itunes")
+        menuController.setSelected(player: selectedPlayer)
         
-        player = IFYiTunes.sharedInstance
-        player.delegate = self
-        player.subscribeForUpdates()
+        startPlayer(player: selectedPlayer)
         
         server.delegate = self
         server.start()
@@ -21,6 +21,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
 
     func applicationWillTerminate(_ aNotification: Notification) {
         server.stop()
+    }
+    
+    func startPlayer(player selectedPlayer: String) {
+        player?.unsubscribe()
+        
+        if selectedPlayer == "itunes" {
+            player = IFYiTunes.sharedInstance
+        } else if selectedPlayer == "spotify" {
+            player = IFYSpotify.sharedInstance
+        }
+        
+        player.delegate = self
+        player.subscribeForUpdates()
+        didUpdatePlayerInfo()
     }
     
     
@@ -68,17 +82,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     // MARK: StatusMenuControllerDelegate
     
     func didSelect(player selectedPlayer: String) {
-        player.unsubscribe()
-        
-        if selectedPlayer == "itunes" {
-            player = IFYiTunes.sharedInstance
-        } else if selectedPlayer == "spotify" {
-            player = IFYSpotify.sharedInstance
-        }
-        
-        player.delegate = self
-        player.subscribeForUpdates()
-        didUpdatePlayerInfo()
+        preferences.set(selectedPlayer, forKey: "player")
+        startPlayer(player: selectedPlayer)
     }
 }
 
