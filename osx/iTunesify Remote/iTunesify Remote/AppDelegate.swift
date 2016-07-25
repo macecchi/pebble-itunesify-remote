@@ -30,6 +30,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
         }
     }
     
+    func receivedCommand(command: IFYCommand) {
+        switch command {
+        case .playPause:
+            player.toggleState()
+        case .next:
+            player.nextTrack()
+        case .previous:
+            player.previousTrack()
+//        case .volumeUp:
+//
+//        case .volumeDown:
+//            
+        default:
+            print("Unhandled command received")
+        }
+    }
+    
     
     // MARK: IFYPlayerDelegate
     

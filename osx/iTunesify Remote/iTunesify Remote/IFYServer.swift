@@ -3,7 +3,7 @@ import PocketSocket
 typealias IFYMessage = [String: AnyObject]
 typealias IFYClient = PSWebSocket
 
-func JSON(message: IFYMessage) -> String? {
+func toJSON(message: IFYMessage) -> String? {
     if let data = try? JSONSerialization.data(withJSONObject: message, options: []) {
         return String(data: data, encoding: .utf8)
     }
@@ -11,9 +11,19 @@ func JSON(message: IFYMessage) -> String? {
     return nil
 }
 
+func fromJSON(json: String) -> IFYMessage? {
+    guard let data = json.data(using: .utf8) else { return nil }
+    
+    return (try? JSONSerialization.jsonObject(with: data, options: [])) as? IFYMessage
+}
+
+enum IFYCommand {
+    case playPause, next, previous, volumeUp, volumeDown, selectPlayer, unknown
+}
+
 extension IFYClient {
     func send(message: IFYMessage) throws {
-        guard let string = JSON(message: message) else {
+        guard let string = toJSON(message: message) else {
             print("Error converting to JSON string")
             return
         }
@@ -24,6 +34,7 @@ extension IFYClient {
 
 protocol IFYServerDelegate : class {
     func clientConnected(client: IFYClient)
+    func receivedCommand(command: IFYCommand)
 }
 
 class IFYServer: NSObject, PSWebSocketServerDelegate {
@@ -40,13 +51,13 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
     }
     
     func send(message: IFYMessage, toClients clients: [IFYClient]? = nil) throws {
-        guard let string = JSON(message: message) else {
+        guard let string = toJSON(message: message) else {
             print("Error converting to JSON string")
             return
         }
         
         print("JSON: \(string)")
-        
+//        
         let destSockets = clients ?? sockets
         destSockets.forEach { socket in
             socket.send(string)
@@ -54,6 +65,8 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
         }
     }
 
+    
+    // MARK: PSWebSocketServerDelegate
     
     func serverDidStart(_ server: PSWebSocketServer!) {
         print("Server started")
@@ -78,8 +91,15 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
         forget(socket: webSocket)
     }
     
-    func server(_ server: PSWebSocketServer!, webSocket: PSWebSocket!, didReceiveMessage message: AnyObject!) {
-        print("Received message: \(message)")
+    func server(_ server: PSWebSocketServer!, webSocket: PSWebSocket!, didReceiveMessage messageObject: AnyObject!) {
+        print("Received message: \(messageObject)")
+        
+        if let messageString = messageObject as? String, let message = fromJSON(json: messageString) {
+            if let action = message["action"] as? String {
+                let command = action.IFYCommand()
+                delegate?.receivedCommand(command: command)
+            }
+        }
     }
     
     func server(_ server: PSWebSocketServer!, webSocket: PSWebSocket!, didFailWithError error: NSError!) {
@@ -88,9 +108,31 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
 
     }
     
+    
+    // MARK: Etc.
+    
     private func forget(socket: PSWebSocket) {
         if let index = sockets.index(of: socket) {
             sockets.remove(at: index)
+        }
+    }
+}
+
+extension String {
+    func IFYCommand() -> IFYCommand {
+        switch self {
+        case "playpause":
+            return .playPause
+        case "next":
+            return .next
+        case "previous":
+            return .previous
+        case "volume/up":
+            return .volumeUp
+        case "volume/down":
+            return .volumeDown
+        default:
+            return .unknown
         }
     }
 }
