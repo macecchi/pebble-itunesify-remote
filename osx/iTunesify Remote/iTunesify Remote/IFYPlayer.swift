@@ -13,6 +13,9 @@ protocol IFYPlayer: class {
     func toggleState()
     func previousTrack()
     func nextTrack()
+    
+    func subscribeForUpdates()
+    func unsubscribe()
 }
 
 protocol IFYPlayerDelegate: class {

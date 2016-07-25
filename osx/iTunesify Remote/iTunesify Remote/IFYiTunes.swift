@@ -7,12 +7,16 @@ class IFYiTunes: IFYPlayer {
     private lazy var notificationCenter = DistributedNotificationCenter.default()
     private var iTunes: iTunesBridge! = iTunesBridge.sharedInstance()
     
-    init() {
+    func subscribeForUpdates() {
         notificationCenter.addObserver(self, selector: #selector(didReceivePlayerInfo), name: "com.apple.iTunes.playerInfo" as NSNotification.Name, object: nil)
     }
     
-    deinit {
+    func unsubscribe() {
         notificationCenter.removeObserver(self)
+    }
+    
+    deinit {
+        unsubscribe()
     }
     
     @objc func didReceivePlayerInfo(notification: NSNotification!) {

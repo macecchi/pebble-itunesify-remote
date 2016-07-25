@@ -1,13 +1,19 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayerDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayerDelegate, StatusMenuControllerDelegate {
+    @IBOutlet weak var menuController: StatusMenuController!
+    
     lazy var server = IFYServer.sharedInstance
     var player: IFYPlayer!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        player = IFYSpotify.sharedInstance
+        menuController.delegate = self
+        menuController.setSelected(player: "itunes")
+        
+        player = IFYiTunes.sharedInstance
         player.delegate = self
+        player.subscribeForUpdates()
         
         server.delegate = self
         server.start()
@@ -56,6 +62,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
         } catch let error {
             print(error)
         }
+    }
+    
+    
+    // MARK: StatusMenuControllerDelegate
+    
+    func didSelect(player selectedPlayer: String) {
+        player.unsubscribe()
+        
+        if selectedPlayer == "itunes" {
+            player = IFYiTunes.sharedInstance
+        } else if selectedPlayer == "spotify" {
+            player = IFYSpotify.sharedInstance
+        }
+        
+        player.delegate = self
+        player.subscribeForUpdates()
     }
 }
 

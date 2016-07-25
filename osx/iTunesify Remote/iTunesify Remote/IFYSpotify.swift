@@ -7,12 +7,16 @@ class IFYSpotify: IFYPlayer {
     private lazy var notificationCenter = DistributedNotificationCenter.default()
     private var spotify: SpotifyBridge! = SpotifyBridge.sharedInstance()
     
-    init() {
+    func subscribeForUpdates() {
         notificationCenter.addObserver(self, selector: #selector(didReceivePlayerInfo), name: "com.spotify.client.PlaybackStateChanged" as NSNotification.Name, object: nil)
     }
     
-    deinit {
+    func unsubscribe() {
         notificationCenter.removeObserver(self)
+    }
+    
+    deinit {
+        unsubscribe()
     }
     
     @objc func didReceivePlayerInfo(notification: NSNotification!) {
