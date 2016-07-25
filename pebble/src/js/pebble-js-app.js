@@ -1,113 +1,97 @@
 /* global Pebble; */
-var iTunes = {};
-iTunes.server = localStorage.getItem("server");
-iTunes.configureUrl = "https://macecchi.github.io/pebble-itunesify-remote/index.html";
+var iTunesify = {};
 
-iTunes.doCommand = function(action) {
+iTunesify.server = localStorage.getItem("server");
+iTunesify.configureUrl = "https://macecchi.github.io/pebble-itunesify-remote/index.html";
+
+iTunesify.connect = function() {
+	var ws = new WebSocket('ws://' + this.server + ':8000');
+	var self = this;
+
+	ws.onopen = function(event) {
+		console.log('Connection successful.');
+	}
+
+	ws.onmessage = function(event) {
+		var message = JSON.parse(event.data);
+		self.handleMessage(message);
+	}
+
+	this.ws = ws;
+}
+
+iTunesify.sendCommand = function(command) {
+	var message = { "action": command };
+	this.ws.send(JSON.stringify(message));
+}
+
+iTunesify.doCommand = function(action) {
 	if (action == "next") {
-		iTunes.sendCommand("next");
+		iTunesify.sendCommand("next");
 	}
 	else if (action == "previous") {
-		iTunes.sendCommand("previous");
+		iTunesify.sendCommand("previous");
 	}
 	else if (action == "playpause") {
-		iTunes.sendCommand("playpause");
+		iTunesify.sendCommand("playpause");
 	}
 	else if (action == "volume_up") {
-		iTunes.sendCommand("volume/up");
+		iTunesify.sendCommand("volume/up");
 	}
 	else if (action == "volume_down") {
-		iTunes.sendCommand("volume/down");
+		iTunesify.sendCommand("volume/down");
 	}
 	else if (action == "control_itunes") {
-		iTunes.sendCommand("current_app/itunes");
+		iTunesify.sendCommand("current_app/itunes");
 		localStorage.setItem("player", "itunes");
-    	Pebble.sendAppMessage({player: 'itunes'});
+    Pebble.sendAppMessage({ player: 'itunes' });
 	}
 	else if (action == "control_spotify") {
-		iTunes.sendCommand("current_app/spotify");
+		iTunesify.sendCommand("current_app/spotify");
 		localStorage.setItem("player", "spotify");
-    	Pebble.sendAppMessage({player: 'spotify'});
+    Pebble.sendAppMessage({ player: 'spotify' });
 	}
 };
 
-iTunes.sendCommand = function(command) {
-	var url = "http://" + iTunes.server + ":8080/" + command;
-	console.log("Sending command to " + url);
+iTunesify.handleMessage = function(message) {
+	var pebbleMsg = {};
 
-	var req = new XMLHttpRequest();
-	req.timeout = 2000;
-	
-	req.onload = function() {
-		if (req.status === 200) {
-			console.log("Response OK for command: " + command);
-			
-			try {
-				var responseObj = JSON.parse(req.responseText);
-				var pebbleMsg = {};
-				
-				if (responseObj.player) {
-					var current_player = responseObj.player;
-					console.log('Current player: ' + current_player);
-					pebbleMsg.player = current_player;
-				}
-			
-				if (responseObj.track) {
-					console.log('Found track info');
-					pebbleMsg.trackName = responseObj.track.name;
-					pebbleMsg.trackArtist = responseObj.track.artist;
-					
-					// Request track info again after a while
-					setTimeout(function() {
-						iTunes.sendCommand('');
-					}, 30000);
-				}
-			
-				Pebble.sendAppMessage(pebbleMsg);
-			} catch (error) {
-				console.log('Could not decode JSON');
-			}
-		}
-		else {
-			console.log("Request to " + url + " failed with status " + req.status + " Response: " + req.responseText);
-			
-			if (req.status == 404) {
-				Pebble.showSimpleNotificationOnPebble("iTunesify Error", "You are running an outdated version of the Mac app. Please update it on bit.ly/itfy-update.");	
-			}
-		}
-	};
-	
-	req.onerror = function(e) {
-		console.log("Request to " + url + " failed.");
-		Pebble.showSimpleNotificationOnPebble("iTunesify Remote", "Unable to connect. Check the connection and configuration.");
-		Pebble.sendAppMessage({ alert: "failed" });
-	};
-	
-	req.open("GET", url, true);
-	req.send();
+	if (message.player) {
+		var current_player = message.player;
+		console.log('Current player: ' + current_player);
+		pebbleMsg.player = current_player;
+	}
+
+	if (message.track) {
+		console.log('Found track info');
+		pebbleMsg.trackName = message.track.name;
+		pebbleMsg.trackArtist = message.track.artist;
+	}
+
+	Pebble.sendAppMessage(pebbleMsg);
 };
 
 Pebble.addEventListener("ready", function(e) {
-	console.log("iTunes Remote is ready.");
+	console.log("iTunesify Remote is ready.");
 
-	if (localStorage.getItem("server") === null || iTunes.server == '') {
+	if (localStorage.getItem("server") === null || iTunesify.server == '') {
 		Pebble.showSimpleNotificationOnPebble("Almost there!", "Please configure iTunesify Remote on the Pebble app.");
 		Pebble.sendAppMessage({ alert: "not configured" });
 	}
 	else {
-		iTunes.sendCommand('');
+		iTunesify.connect();
 	}
 });
 
 Pebble.addEventListener("appmessage", function(e) {
 	console.log("Received message: " + JSON.stringify(e.payload));
 	if (e.payload.action) {
-		iTunes.doCommand(e.payload.action);
+		iTunesify.doCommand(e.payload.action);
 	}
 });
 
 Pebble.addEventListener("showConfiguration", function(e) {
-	Pebble.openURL(iTunes.configureUrl);
+	Pebble.openURL(iTunesify.configureUrl);
 });
 
 Pebble.addEventListener("webviewclosed", function(e) {
@@ -115,11 +99,11 @@ Pebble.addEventListener("webviewclosed", function(e) {
 		var configuration = JSON.parse(decodeURIComponent(e.response));
 		console.log("Configuration window returned: " + JSON.stringify(configuration));
 
-		console.log("iTunes Server: " + configuration.server);
+		console.log("iTunesify Server: " + configuration.server);
 		localStorage.setItem("server", configuration.server);
 
-		iTunes.server = configuration.server;
+		iTunesify.server = configuration.server;
 
-		iTunes.sendCommand('');
+		iTunesify.connect();
 	}
 });
