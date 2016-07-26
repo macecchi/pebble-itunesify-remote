@@ -5,7 +5,7 @@ protocol StatusMenuControllerDelegate: class {
     func didSelect(systemVolume: Bool)
 }
 
-class StatusMenuController: NSObject {
+class StatusMenuController: NSObject, NSMenuDelegate {
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var hostMenu: NSMenuItem!
     @IBOutlet weak var versionMenu: NSMenuItem!
@@ -22,7 +22,16 @@ class StatusMenuController: NSObject {
         let icon = NSImage(named: "StatusBarIcon")
         statusItem.image = icon
         statusItem.menu = statusMenu
+        statusMenu.delegate = self
         
+        loadIPAddress()
+        
+        let appName = Bundle.main.appName
+        let appVersion = Bundle.main.appVersion
+        versionMenu.title = "\(appName) v\(appVersion)"
+    }
+    
+    private func loadIPAddress() {
         if let ipAddress = IFYNetworkInfo.getIFAddresses().first {
             hostMenu.title = "Server running on \(ipAddress)"
         } else if IFYNetworkInfo.isConnectedToNetwork() {
@@ -30,10 +39,6 @@ class StatusMenuController: NSObject {
         } else {
             hostMenu.title = "Not connected to a network"
         }
-        
-        let appName = Bundle.main.appName
-        let appVersion = Bundle.main.appVersion
-        versionMenu.title = "\(appName) v\(appVersion)"
     }
     
     func setSelected(player: String) {
@@ -84,5 +89,12 @@ class StatusMenuController: NSObject {
         let systemVolume = false
         setSelected(systemVolume: systemVolume)
         delegate?.didSelect(systemVolume: systemVolume)
+    }
+    
+    
+    // MARK: NSMenuDelegate
+    
+    func menuWillOpen(_ menu: NSMenu) {
+        loadIPAddress()
     }
 }
