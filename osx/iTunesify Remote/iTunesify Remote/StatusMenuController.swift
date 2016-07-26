@@ -24,7 +24,10 @@ class StatusMenuController: NSObject {
         statusItem.menu = statusMenu
         
         // TODO: update ip
-        // TODO: update version
+        
+        let appName = Bundle.main.appName
+        let appVersion = Bundle.main.appVersion
+        versionMenu.title = "\(appName) v\(appVersion)"
     }
     
     func setSelected(player: String) {
