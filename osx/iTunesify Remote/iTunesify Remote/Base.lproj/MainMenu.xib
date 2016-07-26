@@ -39,6 +39,22 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="Ktd-OW-Tcy"/>
+                <menuItem title="Volume" enabled="NO" id="UNl-Ww-VE7">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Global volume" id="riA-fQ-dbm">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="didTapGlobalVolumeMenu:" target="SHc-8Z-c6b" id="EE2-lt-0nr"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Player volume" id="d9l-3b-CfV">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="didTapPlayerVolumeMenu:" target="SHc-8Z-c6b" id="AgS-yA-Jxf"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="vcO-G9-Eat"/>
                 <menuItem title="iTunesify Remote v2.x" enabled="NO" id="AgR-iH-kHz">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
@@ -52,8 +68,10 @@
         </menu>
         <customObject id="SHc-8Z-c6b" customClass="StatusMenuController" customModule="iTunesify_Remote" customModuleProvider="target">
             <connections>
+                <outlet property="globalVolumeMenu" destination="riA-fQ-dbm" id="bWs-vc-UFN"/>
                 <outlet property="hostMenu" destination="ZBs-Fs-fb0" id="f9w-FD-vqe"/>
                 <outlet property="iTunesMenu" destination="WgZ-Wi-l4E" id="qLd-Qt-P4k"/>
+                <outlet property="playerVolumeMenu" destination="d9l-3b-CfV" id="i9j-5O-vBy"/>
                 <outlet property="spotifyMenu" destination="fIg-di-w7Z" id="zzO-9V-Tid"/>
                 <outlet property="statusMenu" destination="h9d-Bu-1mc" id="3qf-LD-9Uk"/>
                 <outlet property="versionMenu" destination="AgR-iH-kHz" id="uhR-at-WZv"/>

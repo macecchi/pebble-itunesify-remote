@@ -54,7 +54,7 @@ class IFYiTunes: IFYPlayer {
         set { iTunes.soundVolume = newValue }
     }
     
-    func toggleState() {
+    func playPause() {
         iTunes.playpause()
     }
     

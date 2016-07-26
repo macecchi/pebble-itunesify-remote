@@ -54,7 +54,7 @@ class IFYSpotify: IFYPlayer {
         set { spotify.soundVolume = newValue }
     }
     
-    func toggleState() {
+    func playPause() {
         spotify.playpause()
     }
     

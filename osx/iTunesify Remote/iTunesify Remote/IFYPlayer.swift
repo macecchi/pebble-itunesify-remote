@@ -10,7 +10,7 @@ protocol IFYPlayer: class {
     var state: IFYPlayerState { get }
     var track: IFYTrack? { get }
     var volume: Int { get set }
-    func toggleState()
+    func playPause()
     func previousTrack()
     func nextTrack()
     

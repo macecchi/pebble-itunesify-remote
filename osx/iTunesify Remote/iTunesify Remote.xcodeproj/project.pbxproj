@@ -11,6 +11,9 @@
 		A3873E991D45A22800A9824B /* IFYSpotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3873E981D45A22800A9824B /* IFYSpotify.swift */; };
 		A3873EA01D45A6C000A9824B /* iTunesBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A3873E9F1D45A6C000A9824B /* iTunesBridge.m */; };
 		A3873EA31D45AA1F00A9824B /* SpotifyBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A3873EA21D45AA1F00A9824B /* SpotifyBridge.m */; };
+		A3873EA51D46D56500A9824B /* IFYSystemVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3873EA41D46D56500A9824B /* IFYSystemVolume.swift */; };
+		A3873EA91D46D90900A9824B /* ISSoundAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A3873EA81D46D90900A9824B /* ISSoundAdditions.m */; };
+		A3873EAB1D46D93300A9824B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3873EAA1D46D93300A9824B /* CoreAudio.framework */; };
 		A38E84321D443C73003368BE /* IFYServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84311D443C73003368BE /* IFYServer.swift */; };
 		A38E84371D4573D8003368BE /* IFYiTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84361D4573D8003368BE /* IFYiTunes.swift */; };
 		A38E843C1D457F8D003368BE /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38E843B1D457F8D003368BE /* ScriptingBridge.framework */; };
@@ -31,6 +34,10 @@
 		A3873E9F1D45A6C000A9824B /* iTunesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesBridge.m; sourceTree = "<group>"; };
 		A3873EA11D45AA1F00A9824B /* SpotifyBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifyBridge.h; sourceTree = "<group>"; };
 		A3873EA21D45AA1F00A9824B /* SpotifyBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifyBridge.m; sourceTree = "<group>"; };
+		A3873EA41D46D56500A9824B /* IFYSystemVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYSystemVolume.swift; sourceTree = "<group>"; };
+		A3873EA71D46D90900A9824B /* ISSoundAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISSoundAdditions.h; sourceTree = "<group>"; };
+		A3873EA81D46D90900A9824B /* ISSoundAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISSoundAdditions.m; sourceTree = "<group>"; };
+		A3873EAA1D46D93300A9824B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A38E84311D443C73003368BE /* IFYServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYServer.swift; sourceTree = "<group>"; };
 		A38E84331D443C81003368BE /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "iTunesify Remote/Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		A38E84361D4573D8003368BE /* IFYiTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYiTunes.swift; sourceTree = "<group>"; };
@@ -52,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3873EAB1D46D93300A9824B /* CoreAudio.framework in Frameworks */,
 				A38E843C1D457F8D003368BE /* ScriptingBridge.framework in Frameworks */,
 				0FF8606B6DF8D78EC63083FE /* Pods_iTunesify_Remote.framework in Frameworks */,
 			);
@@ -99,6 +107,16 @@
 			name = "Scripting Bridges";
 			sourceTree = "<group>";
 		};
+		A3873EA61D46D8FD00A9824B /* Volume */ = {
+			isa = PBXGroup;
+			children = (
+				A3873EA41D46D56500A9824B /* IFYSystemVolume.swift */,
+				A3873EA71D46D90900A9824B /* ISSoundAdditions.h */,
+				A3873EA81D46D90900A9824B /* ISSoundAdditions.m */,
+			);
+			name = Volume;
+			sourceTree = "<group>";
+		};
 		A38E84391D457CF0003368BE /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +154,7 @@
 				A3873E961D4595AB00A9824B /* UI */,
 				A3873E951D4595A000A9824B /* Server */,
 				A38E84391D457CF0003368BE /* Player */,
+				A3873EA61D46D8FD00A9824B /* Volume */,
 				A3F3D48A1D2EA88700BE9D01 /* Assets.xcassets */,
 				A3F3D48F1D2EA88700BE9D01 /* Info.plist */,
 				A38E84331D443C81003368BE /* Bridging-Header.h */,
@@ -146,6 +165,7 @@
 		ECF90B5D624C7DA8DD5DDB87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A3873EAA1D46D93300A9824B /* CoreAudio.framework */,
 				A38E843B1D457F8D003368BE /* ScriptingBridge.framework */,
 				3071F4A5A4EDC6FAC25B36E9 /* Pods_iTunesify_Remote.framework */,
 			);
@@ -277,12 +297,14 @@
 				A38E84441D45877E003368BE /* IFYPlayer.swift in Sources */,
 				A3F3D4961D2EAAF600BE9D01 /* StatusMenuController.swift in Sources */,
 				A38E84321D443C73003368BE /* IFYServer.swift in Sources */,
+				A3873EA91D46D90900A9824B /* ISSoundAdditions.m in Sources */,
 				A3873EA31D45AA1F00A9824B /* SpotifyBridge.m in Sources */,
 				A3873E991D45A22800A9824B /* IFYSpotify.swift in Sources */,
 				A38E84371D4573D8003368BE /* IFYiTunes.swift in Sources */,
 				A38E84421D4585C7003368BE /* IFYTrack.swift in Sources */,
 				A3873EA01D45A6C000A9824B /* iTunesBridge.m in Sources */,
 				A3F3D4891D2EA88700BE9D01 /* AppDelegate.swift in Sources */,
+				A3873EA51D46D56500A9824B /* IFYSystemVolume.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

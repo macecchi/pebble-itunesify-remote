@@ -6,12 +6,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     
     lazy var server = IFYServer.sharedInstance
     var player: IFYPlayer!
+    let systemVolume = IFYSystemVolume.sharedInstance
     let preferences = UserDefaults.standard
+    var controlSystemVolume: Bool = true
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let selectedPlayer = preferences.string(forKey: "player") ?? "itunes"
+        controlSystemVolume = preferences.object(forKey: "system_volume") as? Bool ?? true
+        
         menuController.delegate = self
         menuController.setSelected(player: selectedPlayer)
+        menuController.setSelected(systemVolume: controlSystemVolume)
         
         startPlayer(player: selectedPlayer)
         
@@ -37,6 +42,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
         didUpdatePlayerInfo()
     }
     
+    func fadeVolumeBy(amount: Int) {
+        let currentVolume = controlSystemVolume ? systemVolume.volume : player.volume
+        let newVolume = amount > 0 ? min(100, currentVolume + 10) : max(0, currentVolume - 10)
+        
+        if controlSystemVolume {
+            systemVolume.volume = newVolume
+        } else {
+            player.volume = newVolume
+        }
+    }
     
     // MARK: IFYServerDelegate
     
@@ -51,17 +66,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     func receivedCommand(command: IFYCommand) {
         switch command {
         case .playPause:
-            player.toggleState()
+            player.playPause()
         case .next:
             player.nextTrack()
         case .previous:
             player.previousTrack()
         case .volumeUp:
-            let newVolume = min(100, player.volume + 10)
-            player.volume = newVolume
+            fadeVolumeBy(amount: 10)
         case .volumeDown:
-            let newVolume = max(0, player.volume - 10)
-            player.volume = newVolume
+            fadeVolumeBy(amount: -10)
         default:
             print("Unhandled command received")
         }
@@ -84,6 +97,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     func didSelect(player selectedPlayer: String) {
         preferences.set(selectedPlayer, forKey: "player")
         startPlayer(player: selectedPlayer)
+    }
+    
+    func didSelect(systemVolume: Bool) {
+        preferences.set(systemVolume, forKey: "system_volume")
+        controlSystemVolume = systemVolume
     }
 }
 
