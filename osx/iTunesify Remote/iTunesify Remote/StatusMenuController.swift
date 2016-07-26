@@ -23,7 +23,13 @@ class StatusMenuController: NSObject {
         statusItem.image = icon
         statusItem.menu = statusMenu
         
-        // TODO: update ip
+        if let ipAddress = IFYNetworkInfo.getIFAddresses().first {
+            hostMenu.title = "Server running on \(ipAddress)"
+        } else if IFYNetworkInfo.isConnectedToNetwork() {
+            hostMenu.title = "Could not detect your IP address"
+        } else {
+            hostMenu.title = "Not connected to a network"
+        }
         
         let appName = Bundle.main.appName
         let appVersion = Bundle.main.appVersion

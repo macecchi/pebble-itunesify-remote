@@ -15,6 +15,7 @@
 		A3873EA91D46D90900A9824B /* ISSoundAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A3873EA81D46D90900A9824B /* ISSoundAdditions.m */; };
 		A3873EAB1D46D93300A9824B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3873EAA1D46D93300A9824B /* CoreAudio.framework */; };
 		A3873EAD1D46E3B000A9824B /* NSBundle+AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3873EAC1D46E3B000A9824B /* NSBundle+AppInfo.swift */; };
+		A3873EAF1D46E87E00A9824B /* IFYNetworkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3873EAE1D46E87E00A9824B /* IFYNetworkInfo.swift */; };
 		A38E84321D443C73003368BE /* IFYServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84311D443C73003368BE /* IFYServer.swift */; };
 		A38E84371D4573D8003368BE /* IFYiTunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E84361D4573D8003368BE /* IFYiTunes.swift */; };
 		A38E843C1D457F8D003368BE /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38E843B1D457F8D003368BE /* ScriptingBridge.framework */; };
@@ -40,6 +41,7 @@
 		A3873EA81D46D90900A9824B /* ISSoundAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISSoundAdditions.m; sourceTree = "<group>"; };
 		A3873EAA1D46D93300A9824B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A3873EAC1D46E3B000A9824B /* NSBundle+AppInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+AppInfo.swift"; sourceTree = "<group>"; };
+		A3873EAE1D46E87E00A9824B /* IFYNetworkInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYNetworkInfo.swift; sourceTree = "<group>"; };
 		A38E84311D443C73003368BE /* IFYServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYServer.swift; sourceTree = "<group>"; };
 		A38E84331D443C81003368BE /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "iTunesify Remote/Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		A38E84361D4573D8003368BE /* IFYiTunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYiTunes.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				A3F3D48F1D2EA88700BE9D01 /* Info.plist */,
 				A38E84331D443C81003368BE /* Bridging-Header.h */,
 				A3873EAC1D46E3B000A9824B /* NSBundle+AppInfo.swift */,
+				A3873EAE1D46E87E00A9824B /* IFYNetworkInfo.swift */,
 			);
 			path = "iTunesify Remote";
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				A38E84371D4573D8003368BE /* IFYiTunes.swift in Sources */,
 				A38E84421D4585C7003368BE /* IFYTrack.swift in Sources */,
 				A3873EA01D45A6C000A9824B /* iTunesBridge.m in Sources */,
+				A3873EAF1D46E87E00A9824B /* IFYNetworkInfo.swift in Sources */,
 				A3F3D4891D2EA88700BE9D01 /* AppDelegate.swift in Sources */,
 				A3873EA51D46D56500A9824B /* IFYSystemVolume.swift in Sources */,
 			);
