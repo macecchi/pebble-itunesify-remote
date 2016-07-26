@@ -422,7 +422,7 @@
 				INFOPLIST_FILE = "iTunesify Remote/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = "xyz.meriw.iTunesify-Remote";
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.meriw.itunesify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iTunesify Remote/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -440,7 +440,7 @@
 				INFOPLIST_FILE = "iTunesify Remote/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = "xyz.meriw.iTunesify-Remote";
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.meriw.itunesify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iTunesify Remote/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
