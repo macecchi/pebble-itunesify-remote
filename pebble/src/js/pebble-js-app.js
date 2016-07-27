@@ -3,17 +3,15 @@ var iTunesify = {};
 
 iTunesify.server = localStorage.getItem("server");
 iTunesify.configureUrl = "https://macecchi.github.io/pebble-itunesify-remote/index.html";
+iTunesify.retryInterval = 5000; // time to retry connection in ms
 
 iTunesify.connect = function() {
-	var ws = new WebSocket('ws://' + this.server + ':8000');
+	var wsServer = 'ws://' + this.server + ':8000';
+	var ws = new WebSocket(wsServer);
 	var self = this;
 
 	ws.onopen = function(event) {
 		console.log('Connection successful.');
-	}
-
-	ws.onclose = function(event) {
-		console.log('Connection closed.');
 	}
 
 	ws.onmessage = function(event) {
@@ -21,8 +19,24 @@ iTunesify.connect = function() {
 		self.handleMessage(message);
 	}
 
+	ws.onclose = function(event) {
+		console.log('Connection closed.');
+		Pebble.sendAppMessage({ alert: "closed" });
+
+		setTimeout(function() {
+			console.log('Retrying connection...');
+			self.connect();
+		}, self.retryInterval);
+	}
+
 	ws.onerror = function(event) {
 		console.log('Connection errored.');
+		Pebble.sendAppMessage({ alert: "errored" });
+
+		setTimeout(function() {
+			console.log('Retrying connection...');
+			self.connect();
+		}, self.retryInterval);
 	}
 
 	this.ws = ws;
