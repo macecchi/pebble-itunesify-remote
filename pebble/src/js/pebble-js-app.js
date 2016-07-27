@@ -1,12 +1,13 @@
 /* global Pebble; */
 var iTunesify = {};
 
-iTunesify.server = localStorage.getItem("server");
-iTunesify.configureUrl = "https://macecchi.github.io/pebble-itunesify-remote/index.html";
+iTunesify.host = localStorage.getItem("server");
+iTunesify.port = 31415;
 iTunesify.retryInterval = 5000; // time to retry connection in ms
+iTunesify.configureUrl = "https://macecchi.github.io/pebble-itunesify-remote/index.html";
 
 iTunesify.connect = function() {
-	var wsServer = 'ws://' + this.server + ':8000';
+	var wsServer = 'ws://' + this.host + ':' + this.port;
 	var ws = new WebSocket(wsServer);
 	var self = this;
 

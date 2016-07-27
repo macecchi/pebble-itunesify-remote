@@ -42,7 +42,7 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
     static let sharedInstance = IFYServer()
     weak var delegate: IFYServerDelegate?
     
-    let server: PSWebSocketServer! = PSWebSocketServer(host: nil, port: 8000)
+    let server: PSWebSocketServer! = PSWebSocketServer(host: nil, port: 31415)
     var sockets: [PSWebSocket] = []
     
     func start() {
