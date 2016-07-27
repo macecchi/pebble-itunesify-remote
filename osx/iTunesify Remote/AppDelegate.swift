@@ -76,6 +76,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
             fadeVolumeBy(amount: 10)
         case .volumeDown:
             fadeVolumeBy(amount: -10)
+        case .playerITunes:
+            startPlayer(player: "itunes")
+            menuController.setSelected(player: "itunes")
+        case .playerSpotify:
+            startPlayer(player: "spotify")
+            menuController.setSelected(player: "spotify")
         default:
             print("Unhandled command received")
         }

@@ -65,13 +65,9 @@ iTunesify.doCommand = function(action) {
 	}
 	else if (action == "control_itunes") {
 		iTunesify.sendCommand("current_app/itunes");
-		localStorage.setItem("player", "itunes");
-		Pebble.sendAppMessage({ player: 'itunes' });
 	}
 	else if (action == "control_spotify") {
 		iTunesify.sendCommand("current_app/spotify");
-		localStorage.setItem("player", "spotify");
-		Pebble.sendAppMessage({ player: 'spotify' });
 	}
 };
 

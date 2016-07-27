@@ -10,13 +10,8 @@ class IFYTrack {
     var dictionary: IFYMessage {
         var dict = IFYMessage()
         
-        if let name = name {
-            dict["name"] = name
-        }
-        
-        if let artist = artist {
-            dict["artist"] = artist
-        }
+        dict["name"] = name ?? ""
+        dict["artist"] = artist ?? ""
         
         return dict
     }

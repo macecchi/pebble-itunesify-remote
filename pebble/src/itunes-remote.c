@@ -55,9 +55,9 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 		} else if (strcmp(alertType, "failed") == 0) {
 			ui_display_error_msg("Could not connect.");
 		} else if (strcmp(alertType, "closed") == 0) {
-			ui_display_error_msg("Disconnected.");
+			ui_display_error_msg("Mac disconnected.");
 		} else if (strcmp(alertType, "errored") == 0) {
-			ui_display_error_msg("Connection errored.");
+			ui_display_error_msg("Trying to connect...");
 		}
 	}
 
@@ -66,10 +66,8 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 	if (player) {
 		char *selectedPlayer = player->value->cstring;
 		if (strcmp(selectedPlayer, "spotify") == 0) {
-			APP_LOG(APP_LOG_LEVEL_DEBUG, "Current player is Spotify.");
 			appPlayer = APP_PLAYER_SPOTIFY;
 		} else if (strcmp(selectedPlayer, "itunes") == 0) {
-			APP_LOG(APP_LOG_LEVEL_DEBUG, "Current player is iTunes.");
 			appPlayer = APP_PLAYER_ITUNES;
 		}
 
@@ -79,14 +77,12 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 	// Track name message
 	Tuple *track_name = dict_find(iter, APP_KEY_TRACK_NAME);
 	if (track_name) {
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Received track name info.");
 		ui_update_name(track_name->value->cstring);
 	}
 
 	// Track artist message
 	Tuple *track_artist = dict_find(iter, APP_KEY_TRACK_ARTIST);
 	if (track_artist) {
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Received track artist info.");
 		ui_update_artist(track_artist->value->cstring);
 	}
 
@@ -95,6 +91,9 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 
 static void app_connection_handler(bool connected) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Pebble app %sconnected", connected ? "" : "dis");
+	if (!connected) {
+		ui_display_error_msg("Pebble disconnected");
+	}
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
@@ -119,10 +118,8 @@ static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 	if (appMode == APP_MODE_PLAYBACK) {
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Play/pause clicked.");
 		send_message("playpause");
 	} else {
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Options clicked.");
 		#ifdef PBL_COLOR
 		// Configure the ActionMenu Window about to be shown
 		ActionMenuConfig config = (ActionMenuConfig) {
@@ -146,8 +143,6 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void long_select_click_handler(ClickRecognizerRef recognizer, void *context) {
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "Middle button long press.");
-
 	if (appMode == APP_MODE_PLAYBACK) {
 		appMode = APP_MODE_VOLUME;
 	} else {
@@ -169,11 +164,11 @@ void action_performed_callback(ActionMenu *action_menu, const ActionMenuItem *ac
 	AppPlayer player = (AppPlayer)action_menu_item_get_action_data(action);
 
 	if (player == APP_PLAYER_ITUNES) {
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Selected iTunes control.");
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Requesting iTunes control.");
 		send_message("control_itunes");
 	}
 	else if (player == APP_PLAYER_SPOTIFY) {
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Selected Spotify control.");
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Requesting Spotify control.");
 		send_message("control_spotify");
 	}
 }
@@ -198,6 +193,10 @@ static void init(void) {
 
 	app_message_register_inbox_received(in_received_handler);
 	app_message_open(256, 256);
+
+	connection_service_subscribe((ConnectionHandlers) {
+	  .pebble_app_connection_handler = app_connection_handler,
+	});
 
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "Done initializing, pushed window: %p", window);
 }

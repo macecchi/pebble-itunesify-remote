@@ -18,7 +18,7 @@ func fromJSON(json: String) -> IFYMessage? {
 }
 
 enum IFYCommand {
-    case playPause, next, previous, volumeUp, volumeDown, selectPlayer, unknown
+    case playPause, next, previous, volumeUp, volumeDown, selectPlayer, unknown, playerSpotify, playerITunes
 }
 
 extension IFYClient {
@@ -60,11 +60,10 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
             return
         }
         
-        print("JSON: \(string)")
         let destSockets = clients ?? sockets
         destSockets.forEach { socket in
             socket.send(string)
-            print("Sent message")
+            print("Sent message: \(string)")
         }
     }
 
@@ -135,6 +134,10 @@ extension String {
             return .volumeUp
         case "volume/down":
             return .volumeDown
+        case "current_app/spotify":
+            return .playerSpotify
+        case "current_app/itunes":
+            return .playerITunes
         default:
             return .unknown
         }
