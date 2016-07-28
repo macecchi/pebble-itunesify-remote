@@ -5,6 +5,7 @@
     "companyName": "Mario Cecchi",
     "versionLabel": "1.5",
     "sdkVersion": "3",
+    "enableMultiJS": true,
     "targetPlatforms": [
         "aplite",
         "basalt",
