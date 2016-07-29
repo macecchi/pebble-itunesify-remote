@@ -5,7 +5,10 @@ extension NSImage {
         img.lockFocus()
         let ctx = NSGraphicsContext.current()
         ctx?.imageInterpolation = .high
-        self.draw(in: NSMakeRect(0, 0, width, height), from: NSMakeRect(0, 0, size.width, size.height), operation: .copy, fraction: 1)
+        self.draw(in: NSRect(x: 0, y: 0, width: width, height: height),
+                  from: NSRect(x: 0, y: 0, width: size.width, height: size.height),
+                  operation: .copy,
+                  fraction: 1)
         img.unlockFocus()
         
         return img
