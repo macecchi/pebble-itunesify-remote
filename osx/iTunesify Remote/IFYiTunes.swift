@@ -30,13 +30,17 @@ class IFYiTunes: IFYPlayer {
         if let track = track {
             message["track"] = track.dictionary
         }
-        
+        print(message)
         return message
     }
     
     var track: IFYTrack? {
         if let track = iTunes.currentTrack {
-            return IFYTrack(name: track.name, artist: track.artist)
+            var artworkImage: NSImage?
+            if let artwork = track.artworks()?[0] as? SBObject {
+                artworkImage = artwork.artworkImage()
+            }
+            return IFYTrack(name: track.name, artist: track.artist, artwork: artworkImage)
         }
         
         return nil

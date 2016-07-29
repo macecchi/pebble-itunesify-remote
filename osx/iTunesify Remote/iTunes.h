@@ -297,6 +297,9 @@ typedef enum iTunesEClS iTunesEClS;
 
 @end
 
+
+typedef iTunesArtwork ITunesArtwork;
+
 // converts a track to a specific file format
 @interface iTunesEncoder : iTunesItem
 

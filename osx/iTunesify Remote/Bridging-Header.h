@@ -5,5 +5,6 @@
 #include <ifaddrs.h>
 #import <PocketSocket/PSWebSocketServer.h>
 #import "iTunesBridge.h"
+#import "SBObject+Extensions.h"
 #import "SpotifyBridge.h"
 #import "ISSoundAdditions.h"
