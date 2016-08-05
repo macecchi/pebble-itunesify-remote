@@ -191,6 +191,7 @@
 				A3F3D4831D2EA88700BE9D01 /* Resources */,
 				E1FC2FC6763D332CFE5D8784 /* [CP] Embed Pods Frameworks */,
 				55F3C9ADA76CD98CA2C3A64F /* [CP] Copy Pods Resources */,
+				A3A0780A1D54285D0040745B /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -265,6 +266,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iTunesify Remote/Pods-iTunesify Remote-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A3A0780A1D54285D0040745B /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		A7BD5757A259D0D946C89D5D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
