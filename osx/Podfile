@@ -2,5 +2,6 @@ target 'iTunesify Remote' do
   platform :osx, '10.10'
   use_frameworks!
 
-  pod 'PocketSocket', '1.0.1'
+  pod 'PocketSocket', '~> 1.0.1'
+  pod 'Answers', '~> 1.2.1'
 end

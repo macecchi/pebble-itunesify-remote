@@ -1,4 +1,6 @@
 import Cocoa
+import Fabric
+import Answers
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayerDelegate, StatusMenuControllerDelegate {
@@ -9,8 +11,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     let systemVolume = IFYSystemVolume.sharedInstance
     let preferences = UserDefaults.standard
     var controlSystemVolume: Bool = true
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        Fabric.with([Answers.self])
+        
         let selectedPlayer = preferences.string(forKey: "player") ?? "itunes"
         controlSystemVolume = preferences.object(forKey: "system_volume") as? Bool ?? true
         
@@ -23,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
         server.delegate = self
         server.start()
     }
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         server.stop()
     }
@@ -94,6 +98,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
         do {
             try server.send(message: player.message)
         } catch let error {
+            Answers.logCustomEvent(withName: "error_send_message",
+                                   customAttributes: nil)
             print(error)
         }
     }
@@ -104,11 +110,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     func didSelect(player selectedPlayer: String) {
         preferences.set(selectedPlayer, forKey: "player")
         startPlayer(player: selectedPlayer)
+        
+        Answers.logCustomEvent(withName: "change_player",
+                               customAttributes: ["player": selectedPlayer])
     }
     
     func didSelect(systemVolume: Bool) {
         preferences.set(systemVolume, forKey: "system_volume")
         controlSystemVolume = systemVolume
+        
+        Answers.logCustomEvent(withName: "change_volume",
+                               customAttributes: ["system_volume": systemVolume])
     }
 }
 

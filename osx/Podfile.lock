@@ -1,4 +1,7 @@
 PODS:
+  - Answers (1.2.1):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
   - PocketSocket (1.0.1):
     - PocketSocket/Client (= 1.0.1)
     - PocketSocket/Core (= 1.0.1)
@@ -10,11 +13,14 @@ PODS:
     - PocketSocket/Client
 
 DEPENDENCIES:
-  - PocketSocket (= 1.0.1)
+  - Answers (~> 1.2.1)
+  - PocketSocket (~> 1.0.1)
 
 SPEC CHECKSUMS:
+  Answers: 57ee6bcc9bd3c6710862065c9251365a2a404920
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   PocketSocket: 9c6867d66fb4f962af96b9b07f4b45bb561b2c2a
 
-PODFILE CHECKSUM: 58ea1e074aab4b61e9d7b4a5d8a065770b6c5b4b
+PODFILE CHECKSUM: 3ab7d6c5558f78db827fba7122ba95f0acfef567
 
 COCOAPODS: 1.1.0.beta.1
