@@ -18,7 +18,10 @@ func fromJSON(json: String) -> IFYMessage? {
 }
 
 enum IFYCommand {
-    case playPause, next, previous, volumeUp, volumeDown, selectPlayer, unknown, playerSpotify, playerITunes
+    case playPause, next, previous
+    case volumeUp, volumeDown, selectPlayer
+    case playerSpotify, playerITunes
+    case unknown
 }
 
 extension IFYClient {

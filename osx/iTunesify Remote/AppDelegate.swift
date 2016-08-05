@@ -3,7 +3,10 @@ import Fabric
 import Crashlytics
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayerDelegate, StatusMenuControllerDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate,
+    IFYServerDelegate, IFYPlayerDelegate,
+    StatusMenuControllerDelegate {
+
     @IBOutlet weak var menuController: StatusMenuController!
     
     lazy var server = IFYServer.sharedInstance
@@ -15,10 +18,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         UserDefaults.standard.set(true, forKey: "NSApplicationCrashOnExceptions")
         Fabric.with([Answers.self, Crashlytics.self])
-        
-        let selectedPlayer = preferences.string(forKey: "player") ?? "itunes"
-        controlSystemVolume = preferences.object(forKey: "system_volume") as? Bool ?? true
-        
+
+        let selectedPlayer = preferences.string(forKey: PreferenceKeys.player.rawValue) ?? "itunes"
+        controlSystemVolume = preferences.object(forKey: PreferenceKeys.systemVolume.rawValue) as? Bool ?? true
+
         menuController.delegate = self
         menuController.setSelected(player: selectedPlayer)
         menuController.setSelected(systemVolume: controlSystemVolume)
@@ -27,6 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
         
         server.delegate = self
         server.start()
+
+        setupNotifications()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -107,11 +112,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     
     
     // MARK: StatusMenuControllerDelegate
-    
-    func didSelect(player selectedPlayer: String) {
-            Crashlytics.sharedInstance().crash()
 
-        preferences.set(selectedPlayer, forKey: "player")
+    func didSelect(player selectedPlayer: String) {
+        preferences.set(selectedPlayer, forKey: PreferenceKeys.player.rawValue)
         startPlayer(player: selectedPlayer)
         
         Answers.logCustomEvent(withName: "change_player",
@@ -119,11 +122,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     }
     
     func didSelect(systemVolume: Bool) {
-        preferences.set(systemVolume, forKey: "system_volume")
+        preferences.set(systemVolume, forKey: PreferenceKeys.systemVolume.rawValue)
         controlSystemVolume = systemVolume
         
         Answers.logCustomEvent(withName: "change_volume",
                                customAttributes: ["system_volume": systemVolume])
     }
 }
-

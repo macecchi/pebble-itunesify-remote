@@ -37,4 +37,5 @@ profile
 report.xml
 *.dSYM.zip
 *.ipa
-
+osx/fastlane/metadata
+osx/fastlane/screenshots

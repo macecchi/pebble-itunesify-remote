@@ -6,7 +6,7 @@ class IFYNetworkInfo {
         var addresses = [String]()
         
         // Get list of all interfaces on the local machine:
-        var ifaddr : UnsafeMutablePointer<ifaddrs>?
+        var ifaddr: UnsafeMutablePointer<ifaddrs>?
         guard getifaddrs(&ifaddr) == 0 else { return [] }
         guard let firstAddr = ifaddr else { return [] }
         
