@@ -1,5 +1,5 @@
 PODS:
-  - Answers (1.2.1):
+  - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.7)
   - PocketSocket (1.0.1):
@@ -13,14 +13,14 @@ PODS:
     - PocketSocket/Client
 
 DEPENDENCIES:
-  - Answers (~> 1.2.1)
+  - Crashlytics (~> 3.7.2)
   - PocketSocket (~> 1.0.1)
 
 SPEC CHECKSUMS:
-  Answers: 57ee6bcc9bd3c6710862065c9251365a2a404920
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   PocketSocket: 9c6867d66fb4f962af96b9b07f4b45bb561b2c2a
 
-PODFILE CHECKSUM: 3ab7d6c5558f78db827fba7122ba95f0acfef567
+PODFILE CHECKSUM: 0b3648a6b19b94392de9aac24a3d74605e2ef2b6
 
 COCOAPODS: 1.1.0.beta.1

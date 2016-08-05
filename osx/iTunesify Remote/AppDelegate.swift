@@ -1,6 +1,6 @@
 import Cocoa
 import Fabric
-import Answers
+import Crashlytics
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayerDelegate, StatusMenuControllerDelegate {
@@ -13,7 +13,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     var controlSystemVolume: Bool = true
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        Fabric.with([Answers.self])
+        UserDefaults.standard.set(true, forKey: "NSApplicationCrashOnExceptions")
+        Fabric.with([Answers.self, Crashlytics.self])
         
         let selectedPlayer = preferences.string(forKey: "player") ?? "itunes"
         controlSystemVolume = preferences.object(forKey: "system_volume") as? Bool ?? true
@@ -108,6 +109,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, IFYServerDelegate, IFYPlayer
     // MARK: StatusMenuControllerDelegate
     
     func didSelect(player selectedPlayer: String) {
+            Crashlytics.sharedInstance().crash()
+
         preferences.set(selectedPlayer, forKey: "player")
         startPlayer(player: selectedPlayer)
         

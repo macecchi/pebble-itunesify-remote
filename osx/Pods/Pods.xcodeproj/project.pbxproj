@@ -7,33 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0075E5A15539455EAEC3FAD33C49B454 /* PSWebSocketUTF8Decoder.m in Sources */ = {isa = PBXBuildFile; fileRef = DA856AAF37FE9847E441640EF40FCF0C /* PSWebSocketUTF8Decoder.m */; };
+		0075E5A15539455EAEC3FAD33C49B454 /* PSWebSocketUTF8Decoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 428C063D3F1CE6B7BB49CC6DCF4832B3 /* PSWebSocketUTF8Decoder.m */; };
 		040B165EF9945B9D09F08057C7035308 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A247CA545C76E8C61202898D141959 /* Security.framework */; };
-		088E4C43B6F944AD03AA71EB1886C63B /* PocketSocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D695E8515F15BA3921899269798B125D /* PocketSocket-dummy.m */; };
-		104486FAE28EF9EFD828E58AC7DAE870 /* PSWebSocketUTF8Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E56CF5CD851A7704208117A6C8FFBA2 /* PSWebSocketUTF8Decoder.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		193663BD1FDE4EF0083E11D792E516AD /* PSWebSocketInflater.m in Sources */ = {isa = PBXBuildFile; fileRef = C96916DCCB520F06D5E9EB2C7977845A /* PSWebSocketInflater.m */; };
-		22D80FF0984B014046244FEA9D981B49 /* PSWebSocketBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E03A2D37AD6C02CB7959FD79E366642B /* PSWebSocketBuffer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		294185D636CB3943D2C216437369F431 /* PSWebSocketDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = DF985D1DB6826D994FF76D0525FD27FA /* PSWebSocketDriver.m */; };
-		2C5A1775FB6BF2DC97D47E5B574456D1 /* PocketSocket-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C1F2E84F23122DF17EB01F6A8932CA0 /* PocketSocket-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		088E4C43B6F944AD03AA71EB1886C63B /* PocketSocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B66EF07BC5166BA4D09373F2A02C8C /* PocketSocket-dummy.m */; };
+		104486FAE28EF9EFD828E58AC7DAE870 /* PSWebSocketUTF8Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = E0AF51ED07F638E90EDE4CCD9F77B7BC /* PSWebSocketUTF8Decoder.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		193663BD1FDE4EF0083E11D792E516AD /* PSWebSocketInflater.m in Sources */ = {isa = PBXBuildFile; fileRef = D2942D7118E91A1505DE42A0D22ADE2F /* PSWebSocketInflater.m */; };
+		22D80FF0984B014046244FEA9D981B49 /* PSWebSocketBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A1BA11249869CA540D8B2BD67AD22543 /* PSWebSocketBuffer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		294185D636CB3943D2C216437369F431 /* PSWebSocketDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 97004190CA4698AB6B7A4CBE12B3B6D8 /* PSWebSocketDriver.m */; };
+		2C5A1775FB6BF2DC97D47E5B574456D1 /* PocketSocket-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F7B11A8221C50B8246DEDD0EDB1180E2 /* PocketSocket-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		383EDDE23D73ABF3A4D06CD4FD8FD3F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49826E7931AC5B376BA179931ECFB501 /* Cocoa.framework */; };
-		49EE0B9F185D56866D0CB37E1B9B09FA /* PSWebSocketDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C9B7EAB956D5213501ED535D7C74C68 /* PSWebSocketDriver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49EE0B9F185D56866D0CB37E1B9B09FA /* PSWebSocketDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 83265F1C75C893658E334D3C6BE71878 /* PSWebSocketDriver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60E305C6DCB93BBBD7B05F872202CF5F /* Pods-iTunesify Remote-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D40E2AAEEC2C78A38F70CD907305B0DB /* Pods-iTunesify Remote-dummy.m */; };
-		7DEE608EC8802130D677D1D2636191B4 /* PSWebSocketDeflater.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C7C27BF2A994DBC5B32781BFBFDF2D /* PSWebSocketDeflater.m */; };
+		7DEE608EC8802130D677D1D2636191B4 /* PSWebSocketDeflater.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8253E11C51BB9F88028A5AB24A3571 /* PSWebSocketDeflater.m */; };
 		950B416BD403D6B4670BDD2E56CECFD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49826E7931AC5B376BA179931ECFB501 /* Cocoa.framework */; };
-		999AE26A6A89B80315561FE57EA8D881 /* PSWebSocketTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 49ACA35B657B2199A87D9A448609BACC /* PSWebSocketTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		999AE26A6A89B80315561FE57EA8D881 /* PSWebSocketTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = B16C43E667738E305C71E8204B0E9EB6 /* PSWebSocketTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CDE96A603D5941B46BDFACC5AC72C8A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D574F8202D77C11DB09E7DAC0F2D03D /* CFNetwork.framework */; };
-		A1A5DD93D96529D3037F651F8176851E /* PSWebSocketServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5975B5EB2A4273A8B4025C64B64C81 /* PSWebSocketServer.m */; };
+		A1A5DD93D96529D3037F651F8176851E /* PSWebSocketServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9870888626727278A378C713D09507FF /* PSWebSocketServer.m */; };
 		A23AEF18D7B302BACE2F280BC56D3554 /* Pods-iTunesify Remote-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B7226501208D2D3C750DE763203082D /* Pods-iTunesify Remote-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A73CAF38AFB9B7877B9D27D4C7FC37D1 /* PSWebSocketNetworkThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 18A7BC928FA883CF5EBCE76F388BFD75 /* PSWebSocketNetworkThread.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		AB0CAE22E8C7CF6600A3E91995F4BC5E /* PSWebSocketInflater.h in Headers */ = {isa = PBXBuildFile; fileRef = B7A187883A5AF91F0B7F87D5E1D57854 /* PSWebSocketInflater.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B3E397FB3BE1B475A7AAC3D4EDE437E6 /* PSWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CEAAB8CF37538A708F309F205A61EFB /* PSWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C99CDF072B1B5CB647F73DE0E4B0579E /* PSWebSocketDeflater.h in Headers */ = {isa = PBXBuildFile; fileRef = D1A55D6F3578954544D384F3035899BF /* PSWebSocketDeflater.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D9535EEA84962083C63BA8C5F5101D89 /* PSWebSocketNetworkThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 50500F7765445FD414065AFD5EC660E2 /* PSWebSocketNetworkThread.m */; };
-		DDAEEBA2A316F0173205C1DAC3C6CAED /* PSWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = AA37978C6378D7CF6F156B6770B7DC1D /* PSWebSocket.m */; };
+		A73CAF38AFB9B7877B9D27D4C7FC37D1 /* PSWebSocketNetworkThread.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A2D2C80556DB778F76CDBA6282B63D /* PSWebSocketNetworkThread.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AB0CAE22E8C7CF6600A3E91995F4BC5E /* PSWebSocketInflater.h in Headers */ = {isa = PBXBuildFile; fileRef = E675E7EAB7B7DB32F559D98C0FEBB0E5 /* PSWebSocketInflater.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B3E397FB3BE1B475A7AAC3D4EDE437E6 /* PSWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5621379A51E0A949558F5F7CDBAECF /* PSWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C99CDF072B1B5CB647F73DE0E4B0579E /* PSWebSocketDeflater.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DEDFEC93D3E6F1CC4A6926545E551BD /* PSWebSocketDeflater.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D9535EEA84962083C63BA8C5F5101D89 /* PSWebSocketNetworkThread.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8E2CF6BC64FA3C1386272D764D13AD /* PSWebSocketNetworkThread.m */; };
+		DDAEEBA2A316F0173205C1DAC3C6CAED /* PSWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D610667BB634150FD226F41B1148E19 /* PSWebSocket.m */; };
 		E0E00BD9BC4B8B9BB62D9FDAB2F86B8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424D7CD67D7337A35ED2700A90031C7F /* Foundation.framework */; };
-		E4D74BD0F4316098CC7222882F09752A /* PSWebSocketInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DFCF3C8236CA3D78973A5EE2A816EAF /* PSWebSocketInternal.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		EFE4C29EE0916483A6224F44C2AB2D67 /* PSWebSocketServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E50195FDB00ADC7CC90F7A2ED04F55B4 /* PSWebSocketServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F14778294AC55210214DA57CC57CBDA6 /* PSWebSocketBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3729A19A7143D0AF3E0D9C2E5BB7CAC4 /* PSWebSocketBuffer.m */; };
+		E4D74BD0F4316098CC7222882F09752A /* PSWebSocketInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = F51C7196627799FFB169CB4A483ECB33 /* PSWebSocketInternal.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		EFE4C29EE0916483A6224F44C2AB2D67 /* PSWebSocketServer.h in Headers */ = {isa = PBXBuildFile; fileRef = DA80D79B35DF4C6ED09934512F6C1EC9 /* PSWebSocketServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F14778294AC55210214DA57CC57CBDA6 /* PSWebSocketBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E87A1DE5DFF949FF969C1F97D804C /* PSWebSocketBuffer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,51 +47,56 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0464D8DCF82C82C6F8C8E5617CA91712 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = OSX/Fabric.framework; sourceTree = "<group>"; };
 		0E00FBFE50C4FD2BBBB7CE55BF31BE6E /* Pods_iTunesify_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTunesify_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		18A7BC928FA883CF5EBCE76F388BFD75 /* PSWebSocketNetworkThread.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketNetworkThread.h; path = PocketSocket/PSWebSocketNetworkThread.h; sourceTree = "<group>"; };
-		1F5975B5EB2A4273A8B4025C64B64C81 /* PSWebSocketServer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketServer.m; path = PocketSocket/PSWebSocketServer.m; sourceTree = "<group>"; };
-		212E6850F90D13CF705CFC0AE418C912 /* PocketSocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PocketSocket-prefix.pch"; sourceTree = "<group>"; };
+		0F8253E11C51BB9F88028A5AB24A3571 /* PSWebSocketDeflater.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketDeflater.m; path = PocketSocket/PSWebSocketDeflater.m; sourceTree = "<group>"; };
+		209E87A1DE5DFF949FF969C1F97D804C /* PSWebSocketBuffer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketBuffer.m; path = PocketSocket/PSWebSocketBuffer.m; sourceTree = "<group>"; };
+		222D046EF7DC3A53AD28D450F0453D4E /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = OSX/Crashlytics.framework/Versions/A/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
 		296904B8D77D87CEA293F5C694F155A9 /* Pods-iTunesify Remote-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iTunesify Remote-resources.sh"; sourceTree = "<group>"; };
-		2CEAAB8CF37538A708F309F205A61EFB /* PSWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocket.h; path = PocketSocket/PSWebSocket.h; sourceTree = "<group>"; };
 		2DE79C1ECCAC9FC1E0B6C762867D6292 /* PocketSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PocketSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3729A19A7143D0AF3E0D9C2E5BB7CAC4 /* PSWebSocketBuffer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketBuffer.m; path = PocketSocket/PSWebSocketBuffer.m; sourceTree = "<group>"; };
+		32986628B7BA9C71A216F91F4B34B6FA /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = OSX/Crashlytics.framework/Versions/A/Headers/Answers.h; sourceTree = "<group>"; };
+		39A2EA0738A55E60EE69AF2F95430FD6 /* PocketSocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PocketSocket-prefix.pch"; sourceTree = "<group>"; };
+		3D64C10B8E8C182D62F6AECEF7282F06 /* PocketSocket.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = PocketSocket.modulemap; sourceTree = "<group>"; };
+		403B238B1D7C38B63867379FF0188196 /* PocketSocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PocketSocket.xcconfig; sourceTree = "<group>"; };
 		424D7CD67D7337A35ED2700A90031C7F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		45C7C27BF2A994DBC5B32781BFBFDF2D /* PSWebSocketDeflater.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketDeflater.m; path = PocketSocket/PSWebSocketDeflater.m; sourceTree = "<group>"; };
+		428C063D3F1CE6B7BB49CC6DCF4832B3 /* PSWebSocketUTF8Decoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketUTF8Decoder.m; path = PocketSocket/PSWebSocketUTF8Decoder.m; sourceTree = "<group>"; };
 		49826E7931AC5B376BA179931ECFB501 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		49ACA35B657B2199A87D9A448609BACC /* PSWebSocketTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketTypes.h; path = PocketSocket/PSWebSocketTypes.h; sourceTree = "<group>"; };
-		50500F7765445FD414065AFD5EC660E2 /* PSWebSocketNetworkThread.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketNetworkThread.m; path = PocketSocket/PSWebSocketNetworkThread.m; sourceTree = "<group>"; };
-		53A8A0A1255734B83197CD9E0DAC8AE8 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = OSX/Fabric.framework; sourceTree = "<group>"; };
 		59DA5153BCA7EB933A1E3A7A284BD36A /* Pods-iTunesify Remote-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iTunesify Remote-acknowledgements.plist"; sourceTree = "<group>"; };
-		5DFCF3C8236CA3D78973A5EE2A816EAF /* PSWebSocketInternal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketInternal.h; path = PocketSocket/PSWebSocketInternal.h; sourceTree = "<group>"; };
+		5DEDFEC93D3E6F1CC4A6926545E551BD /* PSWebSocketDeflater.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketDeflater.h; path = PocketSocket/PSWebSocketDeflater.h; sourceTree = "<group>"; };
 		651D5F124ABDFE3BA7C3900BD47B7D68 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A26930137232D9AE71F189C72C57A6B /* Pods-iTunesify Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iTunesify Remote.release.xcconfig"; sourceTree = "<group>"; };
-		6DACD220A04FCAB10B4A0B8FE63E566E /* PocketSocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PocketSocket.xcconfig; sourceTree = "<group>"; };
-		79EE8C9F7333C1CDBFB5CD6848C21DDB /* Answers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Answers.framework; path = OSX/Answers.framework; sourceTree = "<group>"; };
+		6D610667BB634150FD226F41B1148E19 /* PSWebSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocket.m; path = PocketSocket/PSWebSocket.m; sourceTree = "<group>"; };
 		7D574F8202D77C11DB09E7DAC0F2D03D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
-		8202703E8096C63C8193C99AF7AB18A0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83265F1C75C893658E334D3C6BE71878 /* PSWebSocketDriver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketDriver.h; path = PocketSocket/PSWebSocketDriver.h; sourceTree = "<group>"; };
 		84A247CA545C76E8C61202898D141959 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		86961D83DFC3DC4BD6D46EE1FB7E9628 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = OSX/Crashlytics.framework; sourceTree = "<group>"; };
 		88D5B6809889D6B0514BF3DEA76A30AC /* Pods-iTunesify Remote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iTunesify Remote.debug.xcconfig"; sourceTree = "<group>"; };
+		8B5621379A51E0A949558F5F7CDBAECF /* PSWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocket.h; path = PocketSocket/PSWebSocket.h; sourceTree = "<group>"; };
 		8B7226501208D2D3C750DE763203082D /* Pods-iTunesify Remote-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-iTunesify Remote-umbrella.h"; sourceTree = "<group>"; };
-		8C9B7EAB956D5213501ED535D7C74C68 /* PSWebSocketDriver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketDriver.h; path = PocketSocket/PSWebSocketDriver.h; sourceTree = "<group>"; };
-		8E56CF5CD851A7704208117A6C8FFBA2 /* PSWebSocketUTF8Decoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketUTF8Decoder.h; path = PocketSocket/PSWebSocketUTF8Decoder.h; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9C1F2E84F23122DF17EB01F6A8932CA0 /* PocketSocket-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PocketSocket-umbrella.h"; sourceTree = "<group>"; };
-		AA37978C6378D7CF6F156B6770B7DC1D /* PSWebSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocket.m; path = PocketSocket/PSWebSocket.m; sourceTree = "<group>"; };
-		B0A94B994DF5C478396EF9C1ED90C216 /* PocketSocket.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = PocketSocket.modulemap; sourceTree = "<group>"; };
+		97004190CA4698AB6B7A4CBE12B3B6D8 /* PSWebSocketDriver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketDriver.m; path = PocketSocket/PSWebSocketDriver.m; sourceTree = "<group>"; };
+		9870888626727278A378C713D09507FF /* PSWebSocketServer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketServer.m; path = PocketSocket/PSWebSocketServer.m; sourceTree = "<group>"; };
+		9B7922FCF3142BCE22AF191D98FD90F7 /* CLSReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSReport.h; path = OSX/Crashlytics.framework/Versions/A/Headers/CLSReport.h; sourceTree = "<group>"; };
+		A1BA11249869CA540D8B2BD67AD22543 /* PSWebSocketBuffer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketBuffer.h; path = PocketSocket/PSWebSocketBuffer.h; sourceTree = "<group>"; };
+		A7A2D2C80556DB778F76CDBA6282B63D /* PSWebSocketNetworkThread.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketNetworkThread.h; path = PocketSocket/PSWebSocketNetworkThread.h; sourceTree = "<group>"; };
+		B16C43E667738E305C71E8204B0E9EB6 /* PSWebSocketTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketTypes.h; path = PocketSocket/PSWebSocketTypes.h; sourceTree = "<group>"; };
 		B5CD88F118B180A15A337292C53ACEC3 /* Pods-iTunesify Remote-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iTunesify Remote-acknowledgements.markdown"; sourceTree = "<group>"; };
-		B7A187883A5AF91F0B7F87D5E1D57854 /* PSWebSocketInflater.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketInflater.h; path = PocketSocket/PSWebSocketInflater.h; sourceTree = "<group>"; };
-		C96916DCCB520F06D5E9EB2C7977845A /* PSWebSocketInflater.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketInflater.m; path = PocketSocket/PSWebSocketInflater.m; sourceTree = "<group>"; };
-		D1A55D6F3578954544D384F3035899BF /* PSWebSocketDeflater.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketDeflater.h; path = PocketSocket/PSWebSocketDeflater.h; sourceTree = "<group>"; };
+		C4B66EF07BC5166BA4D09373F2A02C8C /* PocketSocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PocketSocket-dummy.m"; sourceTree = "<group>"; };
+		CFB2919024FCBF30AAEF6AA6B40ED941 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2942D7118E91A1505DE42A0D22ADE2F /* PSWebSocketInflater.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketInflater.m; path = PocketSocket/PSWebSocketInflater.m; sourceTree = "<group>"; };
 		D40E2AAEEC2C78A38F70CD907305B0DB /* Pods-iTunesify Remote-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iTunesify Remote-dummy.m"; sourceTree = "<group>"; };
-		D695E8515F15BA3921899269798B125D /* PocketSocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PocketSocket-dummy.m"; sourceTree = "<group>"; };
-		DA856AAF37FE9847E441640EF40FCF0C /* PSWebSocketUTF8Decoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketUTF8Decoder.m; path = PocketSocket/PSWebSocketUTF8Decoder.m; sourceTree = "<group>"; };
-		DF985D1DB6826D994FF76D0525FD27FA /* PSWebSocketDriver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketDriver.m; path = PocketSocket/PSWebSocketDriver.m; sourceTree = "<group>"; };
-		E03A2D37AD6C02CB7959FD79E366642B /* PSWebSocketBuffer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketBuffer.h; path = PocketSocket/PSWebSocketBuffer.h; sourceTree = "<group>"; };
+		DA80D79B35DF4C6ED09934512F6C1EC9 /* PSWebSocketServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketServer.h; path = PocketSocket/PSWebSocketServer.h; sourceTree = "<group>"; };
+		E0AF51ED07F638E90EDE4CCD9F77B7BC /* PSWebSocketUTF8Decoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketUTF8Decoder.h; path = PocketSocket/PSWebSocketUTF8Decoder.h; sourceTree = "<group>"; };
+		E138AA61C82DA174620B0BFFC10B0410 /* Crashlytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crashlytics.h; path = OSX/Crashlytics.framework/Versions/A/Headers/Crashlytics.h; sourceTree = "<group>"; };
 		E2A4981A190E9258763FDDDAA17A944C /* Pods-iTunesify Remote.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-iTunesify Remote.modulemap"; sourceTree = "<group>"; };
-		E50195FDB00ADC7CC90F7A2ED04F55B4 /* PSWebSocketServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketServer.h; path = PocketSocket/PSWebSocketServer.h; sourceTree = "<group>"; };
-		E611CD2312EA77E725BB3F3941B3D95F /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = OSX/Answers.framework/Versions/A/Headers/Answers.h; sourceTree = "<group>"; };
+		E675E7EAB7B7DB32F559D98C0FEBB0E5 /* PSWebSocketInflater.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketInflater.h; path = PocketSocket/PSWebSocketInflater.h; sourceTree = "<group>"; };
+		E7AFAB1636CC7DD00770541A54B21D78 /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = OSX/Crashlytics.framework/Versions/A/Headers/CLSLogging.h; sourceTree = "<group>"; };
 		E94A314E6661383C78A0599AA191B0B9 /* Pods-iTunesify Remote-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iTunesify Remote-frameworks.sh"; sourceTree = "<group>"; };
-		F0C473F53F8176946D45ACDF86A6B0CC /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = OSX/Answers.framework/Versions/A/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
+		ED8E2CF6BC64FA3C1386272D764D13AD /* PSWebSocketNetworkThread.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PSWebSocketNetworkThread.m; path = PocketSocket/PSWebSocketNetworkThread.m; sourceTree = "<group>"; };
+		F51C7196627799FFB169CB4A483ECB33 /* PSWebSocketInternal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PSWebSocketInternal.h; path = PocketSocket/PSWebSocketInternal.h; sourceTree = "<group>"; };
+		F708152D9F6459C90123847303FF2E81 /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = OSX/Crashlytics.framework/Versions/A/Headers/CLSAttributes.h; sourceTree = "<group>"; };
+		F7B11A8221C50B8246DEDD0EDB1180E2 /* PocketSocket-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PocketSocket-umbrella.h"; sourceTree = "<group>"; };
+		F9238F0F628D0035E774DF36ACDA3720 /* CLSStackFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSStackFrame.h; path = OSX/Crashlytics.framework/Versions/A/Headers/CLSStackFrame.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +122,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07D7D189BC9873F87F2E26C738D6AAAF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				CFB2919024FCBF30AAEF6AA6B40ED941 /* Info.plist */,
+				3D64C10B8E8C182D62F6AECEF7282F06 /* PocketSocket.modulemap */,
+				403B238B1D7C38B63867379FF0188196 /* PocketSocket.xcconfig */,
+				C4B66EF07BC5166BA4D09373F2A02C8C /* PocketSocket-dummy.m */,
+				39A2EA0738A55E60EE69AF2F95430FD6 /* PocketSocket-prefix.pch */,
+				F7B11A8221C50B8246DEDD0EDB1180E2 /* PocketSocket-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/PocketSocket";
+			sourceTree = "<group>";
+		};
+		10112B19998D4EA04977FA8959246F23 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				8B5621379A51E0A949558F5F7CDBAECF /* PSWebSocket.h */,
+				6D610667BB634150FD226F41B1148E19 /* PSWebSocket.m */,
+				A7A2D2C80556DB778F76CDBA6282B63D /* PSWebSocketNetworkThread.h */,
+				ED8E2CF6BC64FA3C1386272D764D13AD /* PSWebSocketNetworkThread.m */,
+			);
+			name = Client;
+			sourceTree = "<group>";
+		};
+		1FABA8A05646F20E6092898B8CB0C329 /* PocketSocket */ = {
+			isa = PBXGroup;
+			children = (
+				10112B19998D4EA04977FA8959246F23 /* Client */,
+				457DB2F1E6A2AC9FF32AAD044D57CEDD /* Core */,
+				6F685E14276F3CAB3AB5E209B9DDF91B /* Server */,
+				07D7D189BC9873F87F2E26C738D6AAAF /* Support Files */,
+			);
+			path = PocketSocket;
+			sourceTree = "<group>";
+		};
 		344FD3C3E65FA586077470CCF44F93FA /* Pods-iTunesify Remote */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,32 +176,23 @@
 			path = "Target Support Files/Pods-iTunesify Remote";
 			sourceTree = "<group>";
 		};
-		38BDB0C170E3166A828FB5AA8B10BF11 /* Answers */ = {
+		457DB2F1E6A2AC9FF32AAD044D57CEDD /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				F0C473F53F8176946D45ACDF86A6B0CC /* ANSCompatibility.h */,
-				E611CD2312EA77E725BB3F3941B3D95F /* Answers.h */,
-				B119055BE321BB44D4FB03BB8207EFAE /* Frameworks */,
+				A1BA11249869CA540D8B2BD67AD22543 /* PSWebSocketBuffer.h */,
+				209E87A1DE5DFF949FF969C1F97D804C /* PSWebSocketBuffer.m */,
+				5DEDFEC93D3E6F1CC4A6926545E551BD /* PSWebSocketDeflater.h */,
+				0F8253E11C51BB9F88028A5AB24A3571 /* PSWebSocketDeflater.m */,
+				83265F1C75C893658E334D3C6BE71878 /* PSWebSocketDriver.h */,
+				97004190CA4698AB6B7A4CBE12B3B6D8 /* PSWebSocketDriver.m */,
+				E675E7EAB7B7DB32F559D98C0FEBB0E5 /* PSWebSocketInflater.h */,
+				D2942D7118E91A1505DE42A0D22ADE2F /* PSWebSocketInflater.m */,
+				F51C7196627799FFB169CB4A483ECB33 /* PSWebSocketInternal.h */,
+				B16C43E667738E305C71E8204B0E9EB6 /* PSWebSocketTypes.h */,
+				E0AF51ED07F638E90EDE4CCD9F77B7BC /* PSWebSocketUTF8Decoder.h */,
+				428C063D3F1CE6B7BB49CC6DCF4832B3 /* PSWebSocketUTF8Decoder.m */,
 			);
-			path = Answers;
-			sourceTree = "<group>";
-		};
-		3CF5BAC21F7604AF49521EE7C2D43663 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				38BDB0C170E3166A828FB5AA8B10BF11 /* Answers */,
-				7EB0898EC7C1349E55EFB5134D6EA4CA /* Fabric */,
-				BD7DB5D99A80C616D8CE4330EACBAC41 /* PocketSocket */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		4B4087560E6E1E2E03CDB30EC83490C4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				53A8A0A1255734B83197CD9E0DAC8AE8 /* Fabric.framework */,
-			);
-			name = Frameworks;
+			name = Core;
 			sourceTree = "<group>";
 		};
 		6D2BB1C636F1B63FAA402FECCAE37D34 /* Targets Support Files */ = {
@@ -171,12 +203,21 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		6F685E14276F3CAB3AB5E209B9DDF91B /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				DA80D79B35DF4C6ED09934512F6C1EC9 /* PSWebSocketServer.h */,
+				9870888626727278A378C713D09507FF /* PSWebSocketServer.m */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				CD75D5B60FCA72FBF7F9C770460B2C26 /* Frameworks */,
-				3CF5BAC21F7604AF49521EE7C2D43663 /* Pods */,
+				9A8555BCE25E28B2A6D53AF9CA8F68D3 /* Pods */,
 				9DB9D8FE49B2315663C88C18AE2776EF /* Products */,
 				6D2BB1C636F1B63FAA402FECCAE37D34 /* Targets Support Files */,
 			);
@@ -193,51 +234,14 @@
 			name = "OS X";
 			sourceTree = "<group>";
 		};
-		7EB0898EC7C1349E55EFB5134D6EA4CA /* Fabric */ = {
+		9A8555BCE25E28B2A6D53AF9CA8F68D3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4B4087560E6E1E2E03CDB30EC83490C4 /* Frameworks */,
+				E8B9EB37E58100C427AECE34FF94118A /* Crashlytics */,
+				DB769D48C19DCBFC5481FB46A2B9EDA5 /* Fabric */,
+				1FABA8A05646F20E6092898B8CB0C329 /* PocketSocket */,
 			);
-			path = Fabric;
-			sourceTree = "<group>";
-		};
-		83628BA74FC896105DF22B27F4DFC2B7 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				E03A2D37AD6C02CB7959FD79E366642B /* PSWebSocketBuffer.h */,
-				3729A19A7143D0AF3E0D9C2E5BB7CAC4 /* PSWebSocketBuffer.m */,
-				D1A55D6F3578954544D384F3035899BF /* PSWebSocketDeflater.h */,
-				45C7C27BF2A994DBC5B32781BFBFDF2D /* PSWebSocketDeflater.m */,
-				8C9B7EAB956D5213501ED535D7C74C68 /* PSWebSocketDriver.h */,
-				DF985D1DB6826D994FF76D0525FD27FA /* PSWebSocketDriver.m */,
-				B7A187883A5AF91F0B7F87D5E1D57854 /* PSWebSocketInflater.h */,
-				C96916DCCB520F06D5E9EB2C7977845A /* PSWebSocketInflater.m */,
-				5DFCF3C8236CA3D78973A5EE2A816EAF /* PSWebSocketInternal.h */,
-				49ACA35B657B2199A87D9A448609BACC /* PSWebSocketTypes.h */,
-				8E56CF5CD851A7704208117A6C8FFBA2 /* PSWebSocketUTF8Decoder.h */,
-				DA856AAF37FE9847E441640EF40FCF0C /* PSWebSocketUTF8Decoder.m */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
-		8B3AB24F5EEAC98FEE8505CF78E3DD5A /* Client */ = {
-			isa = PBXGroup;
-			children = (
-				2CEAAB8CF37538A708F309F205A61EFB /* PSWebSocket.h */,
-				AA37978C6378D7CF6F156B6770B7DC1D /* PSWebSocket.m */,
-				18A7BC928FA883CF5EBCE76F388BFD75 /* PSWebSocketNetworkThread.h */,
-				50500F7765445FD414065AFD5EC660E2 /* PSWebSocketNetworkThread.m */,
-			);
-			name = Client;
-			sourceTree = "<group>";
-		};
-		966D881EDDAF9225441EDBC42E7BB8C9 /* Server */ = {
-			isa = PBXGroup;
-			children = (
-				E50195FDB00ADC7CC90F7A2ED04F55B4 /* PSWebSocketServer.h */,
-				1F5975B5EB2A4273A8B4025C64B64C81 /* PSWebSocketServer.m */,
-			);
-			name = Server;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		9DB9D8FE49B2315663C88C18AE2776EF /* Products */ = {
@@ -249,37 +253,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B119055BE321BB44D4FB03BB8207EFAE /* Frameworks */ = {
+		A55D5EA02E4B39D86349F145D23A9161 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				79EE8C9F7333C1CDBFB5CD6848C21DDB /* Answers.framework */,
+				86961D83DFC3DC4BD6D46EE1FB7E9628 /* Crashlytics.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BD7DB5D99A80C616D8CE4330EACBAC41 /* PocketSocket */ = {
-			isa = PBXGroup;
-			children = (
-				8B3AB24F5EEAC98FEE8505CF78E3DD5A /* Client */,
-				83628BA74FC896105DF22B27F4DFC2B7 /* Core */,
-				966D881EDDAF9225441EDBC42E7BB8C9 /* Server */,
-				CA0C49AB1C24434B9C3192ECC533D21B /* Support Files */,
-			);
-			path = PocketSocket;
-			sourceTree = "<group>";
-		};
-		CA0C49AB1C24434B9C3192ECC533D21B /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				8202703E8096C63C8193C99AF7AB18A0 /* Info.plist */,
-				B0A94B994DF5C478396EF9C1ED90C216 /* PocketSocket.modulemap */,
-				6DACD220A04FCAB10B4A0B8FE63E566E /* PocketSocket.xcconfig */,
-				D695E8515F15BA3921899269798B125D /* PocketSocket-dummy.m */,
-				212E6850F90D13CF705CFC0AE418C912 /* PocketSocket-prefix.pch */,
-				9C1F2E84F23122DF17EB01F6A8932CA0 /* PocketSocket-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/PocketSocket";
 			sourceTree = "<group>";
 		};
 		CD75D5B60FCA72FBF7F9C770460B2C26 /* Frameworks */ = {
@@ -288,6 +267,37 @@
 				7E4AA75D1841363CE287667389DB0DE9 /* OS X */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB769D48C19DCBFC5481FB46A2B9EDA5 /* Fabric */ = {
+			isa = PBXGroup;
+			children = (
+				E68494D252DA0FCE16405536C4BF07FC /* Frameworks */,
+			);
+			path = Fabric;
+			sourceTree = "<group>";
+		};
+		E68494D252DA0FCE16405536C4BF07FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0464D8DCF82C82C6F8C8E5617CA91712 /* Fabric.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E8B9EB37E58100C427AECE34FF94118A /* Crashlytics */ = {
+			isa = PBXGroup;
+			children = (
+				222D046EF7DC3A53AD28D450F0453D4E /* ANSCompatibility.h */,
+				32986628B7BA9C71A216F91F4B34B6FA /* Answers.h */,
+				F708152D9F6459C90123847303FF2E81 /* CLSAttributes.h */,
+				E7AFAB1636CC7DD00770541A54B21D78 /* CLSLogging.h */,
+				9B7922FCF3142BCE22AF191D98FD90F7 /* CLSReport.h */,
+				F9238F0F628D0035E774DF36ACDA3720 /* CLSStackFrame.h */,
+				E138AA61C82DA174620B0BFFC10B0410 /* Crashlytics.h */,
+				A55D5EA02E4B39D86349F145D23A9161 /* Frameworks */,
+			);
+			path = Crashlytics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,7 +468,7 @@
 		};
 		5C9EC1E9B931CA7FDC6530462F316EC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6DACD220A04FCAB10B4A0B8FE63E566E /* PocketSocket.xcconfig */;
+			baseConfigurationReference = 403B238B1D7C38B63867379FF0188196 /* PocketSocket.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -530,7 +540,7 @@
 		};
 		A04395236155AD2D97D237EF628A78CB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6DACD220A04FCAB10B4A0B8FE63E566E /* PocketSocket.xcconfig */;
+			baseConfigurationReference = 403B238B1D7C38B63867379FF0188196 /* PocketSocket.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
