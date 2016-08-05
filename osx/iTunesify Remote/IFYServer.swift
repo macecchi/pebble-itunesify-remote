@@ -100,7 +100,8 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
     func server(_ server: PSWebSocketServer!, webSocket: PSWebSocket!, didReceiveMessage messageObject: AnyObject!) {
         print("Received message: \(messageObject!)")
         
-        if let messageString = messageObject as? String, let message = fromJSON(json: messageString) {
+        if let messageString = messageObject as? String,
+            message = fromJSON(json: messageString) {
             if let action = message["action"] as? String {
                 let command = action.IFYCommand()
                 delegate?.receivedCommand(command: command)
