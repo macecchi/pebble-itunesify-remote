@@ -1,0 +1,8 @@
+default_platform :mac
+
+platform :mac do
+  lane :deploy do
+    gym(scheme: "iTunesify Remote")
+    deliver
+  end
+end

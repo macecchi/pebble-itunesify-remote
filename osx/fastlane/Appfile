@@ -3,5 +3,8 @@ apple_id "macecchi@gmail.com" # Your Apple email address
 
 team_id "5JHLCV2DBL"  # Developer Portal Team ID
 
+itc_team_name "Mario A C Raduan"
+itc_team_id "118108962"
+
 # you can even provide different app identifiers, Apple IDs and team names per lane:
 # More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md
