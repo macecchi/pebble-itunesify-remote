@@ -1,6 +1,7 @@
 import Cocoa
 import Fabric
 import Crashlytics
+import ServiceManagement
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate,
@@ -18,6 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate,
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         UserDefaults.standard.set(true, forKey: "NSApplicationCrashOnExceptions")
         Fabric.with([Answers.self, Crashlytics.self])
+        
+        if !SMLoginItemSetEnabled("xyz.meriw.itunesify.helper", true) {
+            print("Error setting login item")
+        }
 
         let selectedPlayer = preferences.string(forKey: PreferenceKeys.player.rawValue) ?? "itunes"
         controlSystemVolume = preferences.object(forKey: PreferenceKeys.systemVolume.rawValue) as? Bool ?? true

@@ -77,6 +77,5 @@
                 <outlet property="versionMenu" destination="AgR-iH-kHz" id="uhR-at-WZv"/>
             </connections>
         </customObject>
-        <customObject id="uz3-uM-44h" customClass="AppDelegate" customModule="iTunesify_Remote" customModuleProvider="target"/>
     </objects>
 </document>
