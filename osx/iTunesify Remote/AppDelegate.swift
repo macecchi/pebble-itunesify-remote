@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
         UserDefaults.standard.set(true, forKey: "NSApplicationCrashOnExceptions")
         Fabric.with([Answers.self, Crashlytics.self])
         
-        if !SMLoginItemSetEnabled("xyz.meriw.itunesify.helper", true) {
+        if !SMLoginItemSetEnabled("xyz.meriw.itunesify.helper" as CFString, true) {
             print("Error setting login item")
         }
 

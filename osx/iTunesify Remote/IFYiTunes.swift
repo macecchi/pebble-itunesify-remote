@@ -10,7 +10,7 @@ class IFYiTunes: IFYPlayer {
     func subscribeForUpdates() {
         notificationCenter.addObserver(self,
                                        selector: #selector(didReceivePlayerInfo),
-                                       name: "com.apple.iTunes.playerInfo" as NSNotification.Name,
+                                       name: NSNotification.Name("com.apple.iTunes.playerInfo"),
                                        object: nil)
     }
     

@@ -1,9 +1,9 @@
 extension Bundle {
     var appVersion: String {
-        return self.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+        return self.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
     }
     
     var appName: String {
-        return self.objectForInfoDictionaryKey("CFBundleName") as? String ?? ""
+        return self.object(forInfoDictionaryKey: "CFBundleName") as? String ?? ""
     }
 }

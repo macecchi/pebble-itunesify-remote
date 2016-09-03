@@ -1,6 +1,6 @@
 import PocketSocket
 
-typealias IFYMessage = [String: AnyObject]
+typealias IFYMessage = [String: Any]
 typealias IFYClient = PSWebSocket
 
 func toJSON(message: IFYMessage) -> String? {
@@ -81,7 +81,7 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
         print("Server stopped")
     }
     
-    func server(_ server: PSWebSocketServer!, didFailWithError error: NSError!) {
+    func server(_ server: PSWebSocketServer!, didFailWithError error: Error!) {
         print("Server failed with error", error)
     }
     
@@ -97,11 +97,11 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
         forget(socket: webSocket)
     }
     
-    func server(_ server: PSWebSocketServer!, webSocket: PSWebSocket!, didReceiveMessage messageObject: AnyObject!) {
+    func server(_ server: PSWebSocketServer!, webSocket: PSWebSocket!, didReceiveMessage messageObject: Any!) {
         print("Received message: \(messageObject!)")
         
         if let messageString = messageObject as? String,
-            message = fromJSON(json: messageString) {
+            let message = fromJSON(json: messageString) {
             if let action = message["action"] as? String {
                 let command = action.IFYCommand()
                 delegate?.receivedCommand(command: command)
@@ -109,7 +109,7 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
         }
     }
     
-    func server(_ server: PSWebSocketServer!, webSocket: PSWebSocket!, didFailWithError error: NSError!) {
+    func server(_ server: PSWebSocketServer!, webSocket: PSWebSocket!, didFailWithError error: Error!) {
         print("Socket failed with error:", error)
         forget(socket: webSocket)
 

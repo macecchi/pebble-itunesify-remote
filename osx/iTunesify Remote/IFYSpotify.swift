@@ -8,7 +8,7 @@ class IFYSpotify: IFYPlayer {
     private var spotify: SpotifyBridge! = SpotifyBridge.sharedInstance()
     
     func subscribeForUpdates() {
-        notificationCenter.addObserver(self, selector: #selector(didReceivePlayerInfo), name: "com.spotify.client.PlaybackStateChanged" as NSNotification.Name, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(didReceivePlayerInfo), name: NSNotification.Name("com.spotify.client.PlaybackStateChanged"), object: nil)
     }
     
     func unsubscribe() {
