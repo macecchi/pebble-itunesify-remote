@@ -29,6 +29,7 @@ void ui_update_artist(char *text);
 void ui_update_name(char *text);
 void ui_update_layers();
 void ui_update_player(AppPlayer player);
+void ui_hide_player();
 void ui_update_buttons(AppMode mode);
 
 void window_load(Window *window);

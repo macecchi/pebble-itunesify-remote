@@ -43,6 +43,10 @@ void ui_update_player(AppPlayer player) {
   #endif
 }
 
+void ui_hide_player() {
+	bitmap_layer_set_bitmap(player_layer, NULL);
+}
+
 void ui_update_buttons(AppMode mode) {
   if (mode == APP_MODE_VOLUME) {
     action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT, action_icon_ellipsis);

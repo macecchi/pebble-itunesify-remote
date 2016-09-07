@@ -59,6 +59,8 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 		} else if (strcmp(alertType, "errored") == 0) {
 			ui_display_error_msg("Trying to connect...");
 		}
+
+		ui_hide_player();
 	}
 
 	// Player message
