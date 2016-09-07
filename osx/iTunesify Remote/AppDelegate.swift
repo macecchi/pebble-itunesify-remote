@@ -69,6 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
         }
     }
     
+    
     // MARK: IFYServerDelegate
     
     func clientConnected(client: IFYClient) {

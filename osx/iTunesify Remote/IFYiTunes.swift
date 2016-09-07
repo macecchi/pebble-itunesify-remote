@@ -6,6 +6,7 @@ class IFYiTunes: IFYPlayer {
     
     private lazy var notificationCenter = DistributedNotificationCenter.default()
     private var iTunes: iTunesBridge! = iTunesBridge.sharedInstance()
+    private var alternateTrackInfo: IFYTrack?
     
     func subscribeForUpdates() {
         notificationCenter.addObserver(self,
@@ -23,6 +24,13 @@ class IFYiTunes: IFYPlayer {
     }
     
     @objc func didReceivePlayerInfo(notification: NSNotification!) {
+        // Store track info received from notification in case currentTrack fails (e.g.: when playing from Beats 1)
+        if let userInfo = notification.userInfo,
+            let displayLine0 = userInfo["Display Line 0"] as? String,
+            let displayLine1 = userInfo["Display Line 1"] as? String {
+            alternateTrackInfo = IFYTrack(name: displayLine0, artist: displayLine1)
+        }
+        
         delegate?.didUpdatePlayerInfo()
     }
     
@@ -38,11 +46,11 @@ class IFYiTunes: IFYPlayer {
     }
     
     var track: IFYTrack? {
-        if let track = iTunes.currentTrack {
+        if let track = iTunes.currentTrack, track.name != "Beats 1" {
             return IFYTrack(name: track.name, artist: track.artist)
         }
         
-        return nil
+        return alternateTrackInfo
     }
     
     var state: IFYPlayerState {

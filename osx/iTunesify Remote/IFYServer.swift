@@ -112,7 +112,6 @@ class IFYServer: NSObject, PSWebSocketServerDelegate {
     func server(_ server: PSWebSocketServer!, webSocket: PSWebSocket!, didFailWithError error: Error!) {
         print("Socket failed with error:", error)
         forget(socket: webSocket)
-
     }
     
     
