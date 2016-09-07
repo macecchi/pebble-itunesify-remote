@@ -435,12 +435,48 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		43CC63A51C37EB4569373481E131D6A5 /* Debug */ = {
+		13F051D9C963956B5D644EBEC84D70B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39C0821C23554DFA1A78A1637C6F6D94 /* PocketSocket.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/PocketSocket/PocketSocket-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PocketSocket/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = "Target Support Files/PocketSocket/PocketSocket.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = PocketSocket;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		198A5CD4C940352A54BC5B2478625D3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 88D5B6809889D6B0514BF3DEA76A30AC /* Pods-iTunesify Remote.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -465,38 +501,6 @@
 				PRODUCT_NAME = Pods_iTunesify_Remote;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		5C9EC1E9B931CA7FDC6530462F316EC4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39C0821C23554DFA1A78A1637C6F6D94 /* PocketSocket.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_VERSION = A;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/PocketSocket/PocketSocket-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PocketSocket/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				MODULEMAP_FILE = "Target Support Files/PocketSocket/PocketSocket.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = PocketSocket;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -542,12 +546,14 @@
 			};
 			name = Release;
 		};
-		A04395236155AD2D97D237EF628A78CB /* Release */ = {
+		9D550EF95B2329401B2052AEE49FF8BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 39C0821C23554DFA1A78A1637C6F6D94 /* PocketSocket.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -574,12 +580,14 @@
 			};
 			name = Release;
 		};
-		C626D3398FB8B206FB3C5972E4561A0D /* Release */ = {
+		B8444F1CAB00E1048B74C2BDB0B63DCB /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A26930137232D9AE71F189C72C57A6B /* Pods-iTunesify Remote.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -659,8 +667,8 @@
 		067FDF9FC387B7AF4529C7DCD457AEDB /* Build configuration list for PBXNativeTarget "Pods-iTunesify Remote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				43CC63A51C37EB4569373481E131D6A5 /* Debug */,
-				C626D3398FB8B206FB3C5972E4561A0D /* Release */,
+				198A5CD4C940352A54BC5B2478625D3C /* Debug */,
+				B8444F1CAB00E1048B74C2BDB0B63DCB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -677,8 +685,8 @@
 		F82F5DD1AE520A3AA14E774421325A3F /* Build configuration list for PBXNativeTarget "PocketSocket" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5C9EC1E9B931CA7FDC6530462F316EC4 /* Debug */,
-				A04395236155AD2D97D237EF628A78CB /* Release */,
+				13F051D9C963956B5D644EBEC84D70B2 /* Debug */,
+				9D550EF95B2329401B2052AEE49FF8BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
