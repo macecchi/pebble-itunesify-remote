@@ -1,0 +1,87 @@
+{
+  "version": "2.0.0",
+  "author": "Mario Cecchi",
+  "private": true,
+  "dependencies": {},
+  "keywords": [
+    "pebble-app"
+  ],
+  "pebble": {
+    "sdkVersion": "3",
+    "resources": {
+      "media": [
+        {
+          "menuIcon": true,
+          "type": "png",
+          "name": "MENU_ICON",
+          "file": "images/icon.png"
+        },
+        {
+          "type": "png",
+          "name": "ICON_NEXT",
+          "file": "images/actionbar_next.png"
+        },
+        {
+          "type": "png",
+          "name": "ICON_PLAYPAUSE",
+          "file": "images/actionbar_playpause.png"
+        },
+        {
+          "type": "png",
+          "name": "ICON_PREVIOUS",
+          "file": "images/actionbar_previous.png"
+        },
+        {
+          "type": "png",
+          "name": "ICON_ELLIPSIS",
+          "file": "images/music_icon_ellipsis.png"
+        },
+        {
+          "type": "png",
+          "name": "ICON_VOLUME_UP",
+          "file": "images/music_icon_volume_up.png"
+        },
+        {
+          "type": "png",
+          "name": "ICON_VOLUME_DOWN",
+          "file": "images/music_icon_volume_down.png"
+        },
+        {
+          "type": "png",
+          "name": "ITUNES_FACE",
+          "file": "images/sp-itunes_logo.png"
+        },
+        {
+          "type": "png",
+          "name": "SPOTIFY_FACE",
+          "file": "images/sp-spotify_logo.png"
+        }
+      ]
+    },
+    "projectType": "native",
+    "uuid": "da6a6eac-4aa3-44f3-91be-6f4682a8b48b",
+    "messageKeys": {
+      "action": 0,
+      "player": 1,
+      "trackArtist": 3,
+      "trackName": 2,
+      "alert": 4
+    },
+    "enableMultiJS": true,
+    "displayName": "iTunesify",
+    "watchapp": {
+      "onlyShownOnCommunication": false,
+      "hiddenApp": false,
+      "watchface": false
+    },
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk"
+    ],
+    "capabilities": [
+      "configurable"
+    ]
+  },
+  "name": "iTunesify Remote"
+}
