@@ -3,5 +3,5 @@ target 'iTunesify Remote' do
   use_frameworks!
 
   pod 'PocketSocket', '~> 1.0.1'
-  pod 'Crashlytics', '~> 3.8.0  '
+  pod 'Crashlytics', '~> 3.8.0'
 end

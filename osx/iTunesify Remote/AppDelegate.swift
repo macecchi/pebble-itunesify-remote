@@ -10,7 +10,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 
     @IBOutlet weak var menuController: StatusMenuController!
     
-    lazy var server = IFYServer.sharedInstance
+    lazy var server = IFYPocketSocketServer.sharedInstance
     var player: IFYPlayer!
     let systemVolume = IFYSystemVolume.sharedInstance
     let preferences = UserDefaults.standard
@@ -55,7 +55,6 @@ class AppDelegate: NSObject, NSApplicationDelegate,
         player.delegate = self
         player.subscribeForUpdates()
         didUpdatePlayerInfo()
-        
     }
     
     func fadeVolumeBy(amount: Int) {
@@ -98,8 +97,6 @@ class AppDelegate: NSObject, NSApplicationDelegate,
         case .playerSpotify:
             startPlayer(player: "spotify")
             menuController.setSelected(player: "spotify")
-        default:
-            print("Unhandled command received")
         }
     }
     
