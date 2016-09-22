@@ -26,12 +26,9 @@ GBitmap *action_icon_playpause;
 GBitmap *action_icon_ellipsis;
 GBitmap *action_icon_volume_up;
 GBitmap *action_icon_volume_down;
-
-#ifdef PBL_COLOR
-	StatusBarLayer *status_bar;
-	ActionMenu *s_action_menu;
-	ActionMenuLevel *s_root_level;
-#endif
+StatusBarLayer *status_bar;
+ActionMenu *s_action_menu;
+ActionMenuLevel *s_root_level;
 
 static void send_message(char* message) {
 	DictionaryIterator *iter;
@@ -122,7 +119,6 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 	if (appMode == APP_MODE_PLAYBACK) {
 		send_message("playpause");
 	} else {
-		#ifdef PBL_COLOR
 		// Configure the ActionMenu Window about to be shown
 		ActionMenuConfig config = (ActionMenuConfig) {
 		  .root_level = s_root_level,
@@ -135,12 +131,6 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 
 		// Show the ActionMenu
 		s_action_menu = action_menu_open(&config);
-		#else
-		appMode = APP_MODE_PLAYBACK;
-		action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT, action_icon_playpause);
-		action_bar_layer_set_icon(action_bar, BUTTON_ID_UP, action_icon_previous);
-		action_bar_layer_set_icon(action_bar, BUTTON_ID_DOWN, action_icon_next);
-		#endif
 	}
 }
 
@@ -161,7 +151,6 @@ void click_config_provider(void *context) {
 	window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 }
 
-#ifdef PBL_COLOR
 void action_performed_callback(ActionMenu *action_menu, const ActionMenuItem *action, void *action_data) {
 	AppPlayer player = (AppPlayer)action_menu_item_get_action_data(action);
 
@@ -174,16 +163,8 @@ void action_performed_callback(ActionMenu *action_menu, const ActionMenuItem *ac
 		send_message("control_spotify");
 	}
 }
-#endif
 
 static void init(void) {
-	action_icon_previous = gbitmap_create_with_resource(RESOURCE_ID_ICON_PREVIOUS);
-	action_icon_next = gbitmap_create_with_resource(RESOURCE_ID_ICON_NEXT);
-	action_icon_playpause = gbitmap_create_with_resource(RESOURCE_ID_ICON_PLAYPAUSE);
-	action_icon_ellipsis = gbitmap_create_with_resource(RESOURCE_ID_ICON_ELLIPSIS);
-	action_icon_volume_up = gbitmap_create_with_resource(RESOURCE_ID_ICON_VOLUME_UP);
-	action_icon_volume_down = gbitmap_create_with_resource(RESOURCE_ID_ICON_VOLUME_DOWN);
-
 	window = window_create();
 	window_set_click_config_provider(window, click_config_provider);
 	window_set_window_handlers(window, (WindowHandlers) {
@@ -199,6 +180,9 @@ static void init(void) {
 	connection_service_subscribe((ConnectionHandlers) {
 	  .pebble_app_connection_handler = app_connection_handler,
 	});
+
+	ui_init();
+	ui_update_buttons(appMode);
 
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "Done initializing, pushed window: %p", window);
 }

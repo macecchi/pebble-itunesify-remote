@@ -17,13 +17,11 @@ extern GBitmap *action_icon_playpause;
 extern GBitmap *action_icon_ellipsis;
 extern GBitmap *action_icon_volume_up;
 extern GBitmap *action_icon_volume_down;
+extern StatusBarLayer *status_bar;
+extern ActionMenu *s_action_menu;
+extern ActionMenuLevel *s_root_level;
 
-#ifdef PBL_COLOR
-	extern StatusBarLayer *status_bar;
-	extern ActionMenu *s_action_menu;
-	extern ActionMenuLevel *s_root_level;
-#endif
-
+void ui_init();
 void ui_display_error_msg(char* message);
 void ui_update_artist(char *text);
 void ui_update_name(char *text);
