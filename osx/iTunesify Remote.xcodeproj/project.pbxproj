@@ -54,7 +54,6 @@
 		3071F4A5A4EDC6FAC25B36E9 /* Pods_iTunesify_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTunesify_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		838F5BC0D35CCE53E353FB4C /* Pods-iTunesify Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunesify Remote.release.xcconfig"; path = "Pods/Target Support Files/Pods-iTunesify Remote/Pods-iTunesify Remote.release.xcconfig"; sourceTree = "<group>"; };
 		A30D39431D5A96FE00F2295C /* iTunesify Remote Helper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "iTunesify Remote Helper.entitlements"; sourceTree = "<group>"; };
-		A35A5B791D863072004934AA /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		A35A6FD51D863575004934AA /* IFYMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYMessage.swift; sourceTree = "<group>"; };
 		A35A6FD71D863599004934AA /* IFYPocketSocketServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYPocketSocketServer.swift; sourceTree = "<group>"; };
 		A35A6FDF1D863F7A004934AA /* IFYClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFYClient.swift; sourceTree = "<group>"; };
@@ -204,7 +203,6 @@
 		A3F3D47C1D2EA88700BE9D01 = {
 			isa = PBXGroup;
 			children = (
-				A35A5B791D863072004934AA /* Package.swift */,
 				A3F3D4871D2EA88700BE9D01 /* iTunesify Remote */,
 				A3A078141D543C890040745B /* iTunesify Remote Helper */,
 				A3F3D4861D2EA88700BE9D01 /* Products */,

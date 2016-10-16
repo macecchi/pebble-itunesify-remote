@@ -1,0 +1,51 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "78B8A7A039B4BDA09A73A9B5203B3EEF4FD09CD2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8193123FDD91141594A2A03D04B2A90AC1927B03" : 9223372036854775807,
+    "6F1260245BD69EFA9A05D126763C86280510C6E1" : 9223372036854775807,
+    "C4127C9B9C8FDF608B532AD72407863CE2797629" : 9223372036854775807,
+    "78B8A7A039B4BDA09A73A9B5203B3EEF4FD09CD2" : 9223372036854775807,
+    "9197B75B1BC29921D6E3B1CCDC2B258350009F3A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "751D683B-728D-44CE-8B65-195D3B53D496",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8193123FDD91141594A2A03D04B2A90AC1927B03" : "pebble-itunesify-remote-native\/osx\/Packages\/PerfectWebSockets-2.0.0\/",
+    "6F1260245BD69EFA9A05D126763C86280510C6E1" : "pebble-itunesify-remote-native\/osx\/Packages\/PerfectNet-2.0.0\/",
+    "C4127C9B9C8FDF608B532AD72407863CE2797629" : "pebble-itunesify-remote-native\/osx\/Packages\/PerfectHTTPServer-2.0.0\/",
+    "78B8A7A039B4BDA09A73A9B5203B3EEF4FD09CD2" : "pebble-itunesify-remote-native\/",
+    "9197B75B1BC29921D6E3B1CCDC2B258350009F3A" : "pebble-itunesify-remote-native\/osx\/Packages\/PerfectHTTP-2.0.0\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "iTunesify Remote",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "osx\/iTunesify Remote.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/PerfectlySoft\/Perfect-Net.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6F1260245BD69EFA9A05D126763C86280510C6E1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/macecchi\/pebble-itunesify-remote.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "78B8A7A039B4BDA09A73A9B5203B3EEF4FD09CD2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/PerfectlySoft\/Perfect-WebSockets.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8193123FDD91141594A2A03D04B2A90AC1927B03"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/PerfectlySoft\/Perfect-HTTP.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9197B75B1BC29921D6E3B1CCDC2B258350009F3A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/PerfectlySoft\/Perfect-HTTPServer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C4127C9B9C8FDF608B532AD72407863CE2797629"
+    }
+  ]
+}
