@@ -121,7 +121,7 @@ Pebble.addEventListener("webviewclosed", function(e) {
 		console.log("iTunesify Server: " + configuration.server);
 		localStorage.setItem("server", configuration.server);
 
-		iTunesify.server = configuration.server;
+		iTunesify.host = configuration.server;
 
 		iTunesify.connect();
 	}
